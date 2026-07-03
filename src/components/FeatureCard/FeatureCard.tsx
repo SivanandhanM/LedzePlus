@@ -139,7 +139,7 @@ export default function FeatureCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
-      style={{ transform: cardY, scale: cardScale, willChange: 'transform, opacity' } as React.CSSProperties}
+      style={{ y: cardY, scale: cardScale, willChange: 'transform, opacity' }}
       className={`group relative flex flex-col h-full ${path ? 'cursor-pointer' : ''} ${className}`}
     >
       {/* ── Animated gradient border ring ── */}

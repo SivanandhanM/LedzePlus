@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/images/logo.png';
 
 interface HeroProps {
   title: string;

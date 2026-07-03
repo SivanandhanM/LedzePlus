@@ -1,13 +1,12 @@
-import { Moon, Sun, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SpotlightSearch from '../SpotlightSearch/SpotlightSearch';
-import logoImg from '../../assets/logo.png';
-import navanalaLogo from '../../assets/logo_nn.png';
+import logoImg from '../../assets/images/logo.png';
+import navanalaLogo from '../../assets/images/logo_nn.png';
 
 export default function Navbar() {
-  const [isDark, setIsDark] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -17,11 +16,6 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
-  };
 
   return (
     <motion.nav 
