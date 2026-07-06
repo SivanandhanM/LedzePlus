@@ -8,29 +8,34 @@ import { ShoppingCart, CheckCircle2, Factory, ClipboardCheck, ArrowRightLeft, Fi
 import purchaseImg from '../../assets/images/purchase.jpeg';
 
 const workflowSteps = [
-  { title: 'Quotation / Indent', description: 'Internal request for materials.' },
-  { title: 'RFQ', description: 'Request For Quotation sent to vendors.' },
-  { title: 'PO', description: 'Purchase Order created based on quotations.' },
-  { title: 'Goods Receipt', description: 'Materials received and logged into inventory.' },
-  { title: 'Invoice', description: 'Vendor invoice recorded against receipt.' },
-  { title: 'Payment', description: 'Payment processed and matched.' }
+  { title: 'Requirement', description: 'Internal material shortage identified.' },
+  { title: 'Purchase Requisition', description: 'Departmental indent raised and approved.' },
+  { title: 'RFQ Generation', description: 'Request for Quotation sent to multiple vendors.' },
+  { title: 'Vendor Comparison', description: 'Quotations evaluated and optimal vendor selected.' },
+  { title: 'Purchase Order', description: 'Formal PO issued to the chosen vendor.' },
+  { title: 'Goods Receipt', description: 'Materials received, inspected, and GRN created.' },
+  { title: 'Invoice & Payment', description: 'Invoice matched against GRN and payment processed.' }
 ];
 
 const features = [
-  { title: 'Vendor Portal', desc: 'A dedicated self-service gateway for suppliers to securely submit their quotations, upload e-invoices, and monitor real-time payment statuses without manual intervention.', icon: <Factory /> },
-  { title: 'Purchase Requisition', desc: 'Streamline departmental material indents through automated, multi-level approval hierarchies based on budget thresholds and departmental limits.', icon: <ClipboardCheck /> },
-  { title: 'Debit Note', desc: 'Instantly generate debit notes linked to the original Purchase Order for short shipments, damaged goods, or rate differences discovered during Goods Receipt.', icon: <ArrowRightLeft /> },
-  { title: 'Purchase Order', desc: 'Generate comprehensive Purchase Orders supporting multi-currency transactions, complex tax structures (GST), and multi-warehouse delivery schedules.', icon: <FileSpreadsheet /> },
-  { title: 'Vendor Comparison', desc: 'Intelligently analyze side-by-side vendor quotations to evaluate landed costs, delivery timelines, and quality ratings for optimal sourcing decisions.', icon: <Scale /> },
-  { title: 'Landed Cost', desc: 'Accurately apportion freight, insurance, customs duty, and other overheads to determine the exact item valuation in inventory.', icon: <Wallet /> },
-  { title: 'Payment Follow-up', desc: 'Trigger automated email and SMS reminders for pending vendor payments, ensuring strong supplier relationships and timely fulfillment.', icon: <BadgeAlert /> }
+  { title: 'Procurement Lifecycle Management', desc: 'End-to-end orchestration of the purchasing process, transforming internal requirements into fulfilled orders with complete traceability.', icon: <ClipboardCheck /> },
+  { title: 'Vendor Management Portal', desc: 'A dedicated self-service gateway for suppliers to securely submit quotations, acknowledge orders, and monitor payment statuses.', icon: <Factory /> },
+  { title: 'Automated RFQ & Vendor Comparison', desc: 'Intelligently analyze side-by-side vendor quotations to evaluate landed costs, delivery timelines, and quality ratings.', icon: <Scale /> },
+  { title: 'Multi-level Purchase Approvals', desc: 'Enforce strict financial controls with dynamic, hierarchy-based approval workflows tied to budget limits and department thresholds.', icon: <FileSpreadsheet /> },
+  { title: 'Purchase Returns & Debit Notes', desc: 'Instantly generate debit notes linked to the original Purchase Order for short shipments, damaged goods, or rate differences.', icon: <ArrowRightLeft /> },
+  { title: 'Spend Analytics & Landed Cost', desc: 'Accurately apportion freight, insurance, and taxes to determine exact valuation, while dashboard analytics provide insights into spending patterns.', icon: <Wallet /> },
+  { title: 'Integration & Compliance', desc: 'Seamlessly interacts with Inventory for stock updates, Accounting for ledger entries, and ensures full GST/Tax compliance on all transactions.', icon: <BadgeAlert /> }
 ];
 
-const businessRules = [
-  'Purchase Order cannot exceed the approved indent quantity.',
-  'Goods Receipt Note (GRN) requires a valid Purchase Order.',
-  'Vendor invoice total must match the GRN value.',
-  'Payments require Level 2 approval if exceeding $10,000.'
+const capabilitiesAndBenefits = [
+  'Centralized Vendor Master and automated rating system.',
+  'Comprehensive RFQ management and automated quote parsing.',
+  'Multi-currency and multi-warehouse Purchase Order support.',
+  'Strict 3-way matching (PO, GRN, Invoice) to prevent overbilling.',
+  'Real-time spend analytics and departmental budget tracking.',
+  'Seamless integration with Inventory, Accounting, and GST modules.',
+  'Reduced manual data entry and accelerated procurement cycles.',
+  'Complete audit trail for all procurement activities and approvals.'
 ];
 
 export default function Purchase() {
@@ -38,27 +43,27 @@ export default function Purchase() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Purchase Module"
-          subtitle="Procurement & Sourcing"
-          description="Manage the complete procurement lifecycle from indent creation to final vendor payment with strict business rule enforcement."
+          title="Purchase Management"
+          subtitle="Enterprise Procurement & Sourcing"
+          description="The Purchase Management module streamlines the entire procure-to-pay lifecycle, ensuring organizations acquire goods and services efficiently and cost-effectively. Designed to enforce strict financial controls and business rules, this module exists to optimize vendor relationships, prevent unauthorized spending, and automate routine purchasing tasks. It delivers immense enterprise value by providing real-time spend analytics, ensuring compliance through multi-level approvals, and integrating seamlessly with inventory and financial accounting systems."
           icon={<ShoppingCart className="w-10 h-10" />}
         />
       </div>
 
       {/* 1. Workflow */}
-      <Section title="Procurement Workflow">
+      <Section title="Business Workflow">
         <Timeline steps={workflowSteps} />
       </Section>
 
       {/* 2. Image */}
-      <Section title="Workflow Diagram">
+      <Section title="Procurement Architecture">
         <ImageCard src={purchaseImg} alt="Purchase Workflow Diagram" caption="End-to-End Procurement Workflow" />
       </Section>
 
       {/* 3. Features + Business Rules */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
         <div className="xl:col-span-2">
-          <Section title="Core Features">
+          <Section title="Key Functionalities">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {features.map((feat, idx) => (
                 <FeatureCard key={idx} title={feat.title} description={feat.desc} icon={feat.icon} delay={idx * 0.1} />
@@ -68,9 +73,9 @@ export default function Purchase() {
         </div>
 
         <div className="xl:col-span-1">
-          <Section title="Business Rules">
+          <Section title="Core Capabilities & Benefits">
             <div className="space-y-4">
-              {businessRules.map((rule, idx) => (
+              {capabilitiesAndBenefits.map((rule, idx) => (
                 <GlassCard key={idx} delay={idx * 0.1} className="flex items-start gap-4 p-5">
                   <div className="mt-0.5 w-6 h-6 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center flex-shrink-0">
                     <CheckCircle2 className="w-4 h-4" />

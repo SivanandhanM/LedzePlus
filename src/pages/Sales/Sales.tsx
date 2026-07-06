@@ -9,32 +9,42 @@ import { TrendingUp, Truck, FileSpreadsheet, BadgePercent, AlertTriangle, ListCh
 import salesImg from '../../assets/images/sales.jpeg';
 
 const workflowSteps = [
-  { title: 'Quotation', description: 'Sales offer to customer.' },
-  { title: 'Sales Order', description: 'Confirmed order from customer.' },
-  { title: 'Dispatch', description: 'Goods shipped to customer.' },
-  { title: 'Invoice', description: 'Sales invoice generated.' },
-  { title: 'Payment', description: 'Payment received from customer.' }
+  { title: 'Inquiry & Quotation', description: 'Customer request received and formal quotation sent.' },
+  { title: 'Sales Order', description: 'Confirmed order logged with approved pricing and terms.' },
+  { title: 'Order Fulfillment', description: 'Inventory reserved and picking lists generated.' },
+  { title: 'Dispatch & Gate Pass', description: 'Goods shipped out with automated Gate Pass creation.' },
+  { title: 'Invoicing & GST', description: 'Tax-compliant invoice and E-Way bill generated.' },
+  { title: 'Payment Collection', description: 'Payment recorded and Accounts Receivable updated.' }
 ];
 
 const features = [
-  { title: 'Sales Funnel', desc: 'Visualize and track sales pipelines from raw inquiry and qualified lead stages all the way to closed-won deals and revenue generation.', icon: <TrendingUp /> },
-  { title: 'Dispatch Management', desc: 'Intelligently plan dispatch routes, assign fleet vehicles, generate delivery challans, and track real-time logistics movements to customers.', icon: <Truck /> },
-  { title: 'Quotation Management', desc: 'Create, revise, and track professional multi-currency sales quotations with built-in version control and margin analysis capabilities.', icon: <FileSpreadsheet /> },
-  { title: 'Scheme & Discounts', desc: 'Configure dynamic promotional schemes, volume-based discounts, and seasonal offers that automatically apply to eligible sales orders.', icon: <BadgePercent /> },
-  { title: 'Credit Blocking', desc: 'Automatically halt sales order processing and dispatch if a customer exceeds their pre-approved credit limits or has overdue invoices.', icon: <AlertTriangle /> }
+  { title: 'Order-to-Cash Automation', desc: 'Seamlessly convert quotations to sales orders, dispatch notes, and invoices without redundant data entry.', icon: <TrendingUp /> },
+  { title: 'Intelligent Credit Control', desc: 'Automatically halt sales order processing if a customer exceeds their pre-approved credit limits or has overdue outstanding.', icon: <AlertTriangle /> },
+  { title: 'Dispatch & Delivery Routing', desc: 'Plan dispatch routes, assign vehicles, and generate delivery challans with real-time logistics tracking.', icon: <Truck /> },
+  { title: 'Pricing & Scheme Management', desc: 'Configure dynamic promotional schemes, volume-based discounts, and complex pricing matrices automatically.', icon: <BadgePercent /> },
+  { title: 'Barcode Verification', desc: 'Ensure 100% dispatch accuracy by validating outgoing shipments against the Sales Order using barcode scanners.', icon: <ListChecks /> },
+  { title: 'GST & E-Way Bill Automation', desc: 'Generate fully compliant tax invoices and E-Way bills directly from the sales dispatch module in one click.', icon: <FileSpreadsheet /> }
 ];
 
-const limits = [
-  ['Max Sales Orders/Day', 'Unlimited (Scalable)', 'Capped based on tier'],
-  ['Simultaneous Users', '10,000+', 'Often restricted'],
-  ['Data Storage Limit', 'Dynamic (Cloud/On-Prem)', 'Fixed Quotas'],
-  ['Approval Matrix Levels', 'Up to 15 levels', '3 to 5 levels'],
+const capabilities = [
+  'End-to-End Order-to-Cash Lifecycle Management',
+  'Centralized Customer Management & Profiling',
+  'Dynamic Credit Control & Outstanding Monitoring',
+  'Automated Gate Pass & Vehicle Outward Logging',
+  'Advanced Sales Dashboard & Revenue Analytics',
+  'Multi-currency and Multi-branch Sales Support',
+  'Integrated Barcode & QR Code Scanning',
+  'Automated E-Invoice and E-Way Bill Generation'
 ];
 
-const businessRules = [
-  'Dispatch cannot exceed Sales Order quantity.',
-  'Sales Invoice must reference a valid Dispatch note.',
-  'Credit block override requires Level-3 approval.',
+const integrationsAndBenefits = [
+  ['Inventory Integration', 'Real-time stock reservation and depletion upon dispatch.'],
+  ['Accounting & Finance', 'Automated ledger entries for Accounts Receivable and Revenue.'],
+  ['Gate Management', 'Synchronized outbound logistics and vehicle exit approvals.'],
+  ['Reduced Manual Work', 'Elimination of redundant data entry from quote to cash.'],
+  ['Better Compliance', 'Automated GST, E-Invoice, and E-Way Bill generation ensures strict compliance.'],
+  ['Complete Traceability', 'Track the entire sales lifecycle from initial inquiry to final payment receipt.'],
+  ['Improved Productivity', 'Accelerated order fulfillment cycles and reduced dispatch errors.']
 ];
 
 export default function Sales() {
@@ -42,27 +52,27 @@ export default function Sales() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Sales & CRM Module"
-          subtitle="Revenue Operations"
-          description="Accelerate revenue with end-to-end sales lifecycle management, intelligent credit blocking, and seamless dispatch logistics."
+          title="Sales Management Module"
+          subtitle="Enterprise Revenue Operations"
+          description="The Sales Management module orchestrates the complete Order-to-Cash lifecycle, driving enterprise revenue generation and customer satisfaction. Designed to handle complex pricing matrices and high-volume dispatch logistics, this module exists to streamline order fulfillment while enforcing strict credit controls. It delivers substantial business value by automating tax compliance, ensuring accurate dispatch through barcode verification, and providing executive dashboards for real-time revenue analytics."
           icon={<TrendingUp className="w-10 h-10" />}
         />
       </div>
 
       {/* 1. Workflow */}
-      <Section title="Sales Pipeline Workflow">
+      <Section title="Business Workflow">
         <Timeline steps={workflowSteps} />
       </Section>
 
       {/* 2. Image */}
-      <Section title="Workflow Diagram">
+      <Section title="Sales Architecture">
         <ImageCard src={salesImg} alt="Sales Workflow Diagram" caption="Comprehensive Sales & Fulfillment Workflow" />
       </Section>
 
-      {/* 3. Features + Business Rules */}
+      {/* 3. Features + Capabilities */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-12">
         <div className="xl:col-span-2">
-          <Section title="Features & Capabilities">
+          <Section title="Key Functionalities">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {features.map((feat, idx) => (
                 <FeatureCard key={idx} title={feat.title} description={feat.desc} icon={feat.icon} delay={idx * 0.1} />
@@ -72,9 +82,9 @@ export default function Sales() {
         </div>
 
         <div className="xl:col-span-1">
-          <Section title="Business Rules">
+          <Section title="Core Capabilities">
             <div className="space-y-4">
-              {businessRules.map((rule, idx) => (
+              {capabilities.map((rule, idx) => (
                 <GlassCard key={idx} delay={idx * 0.1} className="flex items-start gap-4 p-5 border-emerald-500/30">
                   <div className="mt-0.5 w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
                     <ListChecks className="w-4 h-4" />
@@ -87,8 +97,8 @@ export default function Sales() {
         </div>
       </div>
 
-      <Section title="System Architecture Comparison">
-        <Table headers={['System Limits', 'LEDZE Plus ERP', 'Other ERPs']} rows={limits} />
+      <Section title="Module Integrations & Business Benefits">
+        <Table headers={['Integration / Benefit', 'Description']} rows={integrationsAndBenefits} />
       </Section>
     </div>
   );

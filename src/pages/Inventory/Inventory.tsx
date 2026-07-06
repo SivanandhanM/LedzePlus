@@ -9,31 +9,35 @@ import { Package, Search, BarChart2, Server, Key, TrendingUp, Target, ShieldChec
 import inventoryImg from '../../assets/images/inventory.jpeg';
 
 const workflowSteps = [
-  { title: 'Purchase Requisition', description: 'Material indent raised by department.' },
-  { title: 'RFQ & PO', description: 'Vendor quotation and Purchase Order.' },
-  { title: 'Goods Receipt', description: 'Items received and quality checked.' },
-  { title: 'Stock Update', description: 'Inventory levels updated in warehouse.' },
-  { title: 'Stock Transfer', description: 'Items moved between branches or bins.' },
-  { title: 'Dispatch / Issue', description: 'Stock issued for production or sales.' }
+  { title: 'Requirement', description: 'Initial identification of material shortage or production demand.' },
+  { title: 'Purchase Requisition', description: 'Internal material indent raised by authorized department personnel.' },
+  { title: 'Approval & PO', description: 'Multi-level approval followed by Purchase Order generation.' },
+  { title: 'Vendor & Delivery', description: 'Vendor fulfills the order and dispatches the consignment.' },
+  { title: 'Goods Receipt', description: 'Items received, quality checked, and Goods Receipt Note (GRN) created.' },
+  { title: 'Inventory Update', description: 'Real-time stock ledger update and valuation adjustment.' }
 ];
 
 const functionalities = [
-  { title: 'Purchasing Engine', desc: 'End-to-end tracking of the procurement lifecycle, from initial Purchase Requisitions to RFQs, PO generation, and final Goods Receipt Notes (GRN).', icon: <Search /> },
-  { title: 'Sales Fulfillment', desc: 'Seamless integration with CRM modules to ensure Quote-to-Order-to-Delivery fulfillment runs smoothly with accurate stock availability checks.', icon: <TrendingUp /> },
-  { title: 'Warehouse Operations', desc: 'Granular control over internal logistics including stock transfers between branches, physical inventory adjustments, and scrap or damage handling.', icon: <Server /> },
-  { title: 'Unified Master Data', desc: 'Centralized management for Item Masters, Hierarchical Categories, multiple Units of Measure (UOM), and Multi-Warehouse mapping.', icon: <Key /> },
-  { title: 'Intelligent Dashboard', desc: 'Real-time operational metrics, low-stock alerts, and predictive health scoring to prevent stockouts and minimize dead inventory.', icon: <BarChart2 /> }
+  { title: 'Item Master Management', desc: 'Centralized repository for all inventory items with comprehensive attributes, hierarchical categorization, multiple Units of Measure (UOM), and variant management.', icon: <Search /> },
+  { title: 'Multi-Warehouse Control', desc: 'Granular tracking across multiple physical branches, zones, aisles, and bins, ensuring complete visibility of stock distribution.', icon: <Server /> },
+  { title: 'Stock Movement & Transfers', desc: 'Seamless orchestration of internal stock transfers, material issues for production, and inter-branch transit tracking.', icon: <TrendingUp /> },
+  { title: 'Batch & Serial Tracking', desc: 'End-to-end traceability of perishable or high-value items using automated batch numbers, expiry dates, and unique serial identification.', icon: <Key /> },
+  { title: 'Inventory Analytics & Alerts', desc: 'Real-time dashboards providing operational metrics, automated low-stock alerts, and predictive health scoring to prevent stockouts.', icon: <BarChart2 /> }
 ];
 
-const roadmap = [
-  ['AI Dashboard', 'Predictive Inventory Health Scores, automated reorder suggestions.'],
-  ['Advanced Tracking', 'Barcode scanning, QR codes, RFID tags, Batch & Serial tracking.'],
-  ['Multi-level Warehousing', 'Complex hierarchical models supporting Zones, Aisles, Racks, Bins.'],
-  ['Smart Sourcing', 'Automated RFQ generation, side-by-side Vendor Comparison.'],
-  ['Dynamic Workflows', 'Visual Approval Engine with conditional logic.'],
-  ['Deep Analytics', 'Automated ABC (Value), XYZ (Volatility), and FSN classification.'],
-  ['Inventory Center', 'Machine Learning forecasting models to optimize purchase quantities.'],
-  ['Enterprise Security', 'Complete end-to-end Item Traceability, granular Audit Logs.']
+const integrations = [
+  ['Sales Management', 'Real-time stock availability checks during order creation.'],
+  ['Purchase Management', 'Automated purchase triggers based on reorder levels.'],
+  ['Accounting & Finance', 'Immediate ledger updates for inventory valuation and cost of goods sold (COGS).'],
+  ['Manufacturing', 'Raw material issuance and finished goods receipt automation.']
+];
+
+const benefits = [
+  ['Faster Processing', 'Accelerated inward and outward material movements with barcoding and automated workflows.'],
+  ['Reduced Manual Work', 'Elimination of redundant data entry through seamless module integration.'],
+  ['Complete Traceability', 'Audit-ready logs tracking every stock movement by user, time, and location.'],
+  ['Real-time Reporting', 'Instant visibility into current stock valuations, slow-moving items, and reorder alerts.'],
+  ['Better Decision Making', 'Data-driven insights to optimize holding costs and improve working capital management.']
 ];
 
 export default function Inventory() {
@@ -43,13 +47,13 @@ export default function Inventory() {
         <Hero 
           title="Inventory Core Module"
           subtitle="Enterprise Edition"
-          description="Empowering Modern Enterprises with Intelligent Warehouse, Procurement, and Sales Analytics."
+          description="The Inventory Management module is the transactional backbone of supply chain operations, providing real-time visibility into stock levels, movements, and valuations. Designed for enterprise scalability, this module exists to optimize inventory holding costs, prevent stockouts, and ensure seamless material availability. It delivers immense business value by driving accuracy in stock valuation, minimizing dead stock, and empowering organizations with complete traceability and control."
           icon={<Package className="w-10 h-10" />}
         />
       </div>
 
       {/* 1. Workflow */}
-      <Section title="Inventory Workflow">
+      <Section title="Business Workflow">
         <Timeline steps={workflowSteps} />
       </Section>
 
@@ -58,31 +62,39 @@ export default function Inventory() {
         <ImageCard src={inventoryImg} alt="Inventory Overview Diagram" caption="Inventory Core Architecture" />
       </Section>
 
-      {/* 3. Mission & Objective */}
+      {/* 3. Core Capabilities */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         <GlassCard hoverEffect={false} className="border-l-4 border-l-primary">
           <div className="flex items-center gap-3 mb-4">
             <Target className="w-6 h-6 text-primary" />
-            <h4 className="font-bold text-xl text-slate-800 dark:text-white">The Mission</h4>
+            <h4 className="font-bold text-xl text-slate-800 dark:text-white">Core Capabilities I</h4>
           </div>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-            Build a scalable, manufacturing-focused, enterprise-grade inventory platform that breaks free from legacy constraints.
-          </p>
+          <ul className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium list-disc list-inside">
+            <li>Item & Variant Management</li>
+            <li>Multi-location & Warehouse Control</li>
+            <li>Batch, Serial, and Expiry Tracking</li>
+            <li>Automated Reorder Level Management</li>
+            <li>Physical Stock Adjustments & Reconciliation</li>
+          </ul>
         </GlassCard>
         
         <GlassCard hoverEffect={false} className="border-l-4 border-l-skyblue">
           <div className="flex items-center gap-3 mb-4">
             <ShieldCheck className="w-6 h-6 text-skyblue" />
-            <h4 className="font-bold text-xl text-slate-800 dark:text-white">The Objective</h4>
+            <h4 className="font-bold text-xl text-slate-800 dark:text-white">Core Capabilities II</h4>
           </div>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-            Establish the Inventory Core as the unshakeable transactional engine that will seamlessly power future ERP modules including Production Planning, Quality Assurance, Financials, CRM, and HRMS.
-          </p>
+          <ul className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium list-disc list-inside">
+            <li>Multi-level Approval Workflows</li>
+            <li>Advanced Inventory Valuation (FIFO, Moving Average)</li>
+            <li>Real-time Dashboard Analytics</li>
+            <li>Comprehensive Audit Trail</li>
+            <li>Barcode & QR Code Integration</li>
+          </ul>
         </GlassCard>
       </div>
 
       {/* 4. Features */}
-      <Section title="Architecture & Functionalities">
+      <Section title="Key Functionalities">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {functionalities.map((func, idx) => (
             <FeatureCard key={idx} title={func.title} description={func.desc} icon={func.icon} delay={idx * 0.1} />
@@ -90,19 +102,20 @@ export default function Inventory() {
         </div>
       </Section>
 
-      <Section title="Strategic Rollout">
+      <Section title="Module Integrations">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {['Phase 1: The Core (Inventory, Purchasing, Sales)', 'Phase 2: Expansion (Manufacturing, Quality)', 'Phase 3: Integration (Finance, HRMS, CRM)', 'Phase 4: Intelligence (AI, Analytics)'].map((phase, idx) => (
+          {integrations.map((integration, idx) => (
             <GlassCard key={idx} delay={idx * 0.1} className="flex flex-col justify-center items-center text-center p-6">
               <span className="text-3xl font-black text-slate-200 dark:text-slate-800 mb-2">0{idx + 1}</span>
-              <p className="text-sm font-bold text-slate-700 dark:text-slate-300">{phase}</p>
+              <h5 className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-2">{integration[0]}</h5>
+              <p className="text-xs font-medium text-slate-600 dark:text-slate-400">{integration[1]}</p>
             </GlassCard>
           ))}
         </div>
       </Section>
 
-      <Section title="Enhancement Roadmap">
-        <Table headers={['Future Enhancement', 'Description']} rows={roadmap} />
+      <Section title="Business Benefits">
+        <Table headers={['Benefit', 'Description']} rows={benefits} />
       </Section>
     </div>
   );

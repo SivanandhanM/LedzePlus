@@ -3,27 +3,48 @@ import Section from '../../components/Section/Section';
 import Timeline from '../../components/Timeline/Timeline';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import ImageCard from '../../components/ImageCard/ImageCard';
+import Table from '../../components/Table/Table';
 import GlassCard from '../../components/GlassCard/GlassCard';
-import { ShieldCheck, UserCog, Shield, LayoutDashboard, Clock, History, Truck, Car, Info } from 'lucide-react';
+import { ShieldCheck, UserCog, Shield, LayoutDashboard, Clock, History, Truck, ListChecks } from 'lucide-react';
 import gateImg from '../../assets/images/gate.jpeg';
 
 const workflowSteps = [
-  { title: 'Gate Pass Request', description: 'Vendor or internal user raises a gate pass request.' },
-  { title: 'Authorization', description: 'Purchase/Sales team approves the gate pass.' },
-  { title: 'Entry Logging', description: 'Security records vehicle and material entry.' },
-  { title: 'Loading/Unloading', description: 'Material is loaded or unloaded at the dock.' },
-  { title: 'Verification', description: 'Quantity and quality check against the pass.' },
-  { title: 'Exit Clearance', description: 'Security confirms exit and closes the gate pass.' }
+  { title: 'Gate Pass Request', description: 'Internal user or vendor raises an inward/outward request.' },
+  { title: 'Security Verification', description: 'Vehicle, driver, and documents verified at the gate.' },
+  { title: 'Inward / Outward Logging', description: 'Material entry/exit recorded against authorized pass.' },
+  { title: 'Weighbridge Sync', description: 'Automated gross/tare weight capture.' },
+  { title: 'Dock Assignment', description: 'Vehicle directed to the designated loading/unloading bay.' },
+  { title: 'Exit Clearance', description: 'Final security check and gate pass closure.' }
 ];
 
 const features = [
-  { title: 'Admin Controls', desc: 'Centralized administration dashboard for configuring stringent gate policies, defining operational hours, and managing security personnel access rights.', icon: <UserCog /> },
-  { title: 'Security Interface', desc: 'An intuitive, fast-response interface designed specifically for security guards to rapidly log inward and outward movement without bottlenecks.', icon: <Shield /> },
-  { title: 'Live Dashboard', desc: 'Real-time overview displaying all vehicles, vendors, and visitors currently on premises, complete with entry timestamps and authorized durations.', icon: <LayoutDashboard /> },
-  { title: 'Pending Pass Queue', desc: 'A live queue of generated passes waiting for material loading or unloading, ensuring the logistics team is always prepared for incoming freight.', icon: <Clock /> },
-  { title: 'History & Audit Logs', desc: 'Complete historical logs of all gate activities for security audits, cross-referencing past vendor entries and resolving dispute claims.', icon: <History /> },
-  { title: 'Vehicle Tracking', desc: 'Live monitoring of transport vehicles within the facility, ensuring they reach the correct docking stations and do not overstay their permitted times.', icon: <Truck /> },
-  { title: 'Fleet Management', desc: 'Dedicated tracking and authorization management for internal company fleet movement, linking driver IDs to specific corporate vehicles.', icon: <Car /> }
+  { title: 'Vehicle Entry & Exit', desc: 'Securely manage all incoming and outgoing logistics vehicles with automated number plate recognition (ANPR) and driver verification.', icon: <Truck /> },
+  { title: 'Visitor Management', desc: 'Digitize front-desk operations with visitor pre-registration, photo capture, and automated host notifications via SMS/Email.', icon: <UserCog /> },
+  { title: 'Material Inward & Outward', desc: 'Strictly monitor material movement by linking physical entry/exit to approved Purchase Orders or Sales Dispatch Notes.', icon: <Shield /> },
+  { title: 'Security Approval Workflows', desc: 'Implement multi-level security checks for hazardous materials, scrap disposal, and high-value outbound shipments.', icon: <LayoutDashboard /> },
+  { title: 'Pending Pass Queue', desc: 'Provide logistics and warehouse teams with a live queue of authorized vehicles waiting at the gate for loading/unloading.', icon: <Clock /> },
+  { title: 'Audit Trail & History', desc: 'Maintain an immutable log of all facility movements for security audits, cross-referencing past vendor entries and resolving disputes.', icon: <History /> }
+];
+
+const capabilities = [
+  'Centralized administration for all security gates and access points.',
+  'Real-time synchronization with weighbridge hardware.',
+  'Automated Returnable Gate Pass (RGP) tracking and alerts.',
+  'Non-Returnable Gate Pass (NRGP) generation for scrap and waste.',
+  'Live dashboard displaying all vehicles/visitors currently on-premises.',
+  'Dedicated authorization management for internal company fleet (Cars/Buses).',
+  'QR-code based rapid entry scanning for recurring vendors.',
+  'Strict enforcement of facility operating hours and blackout windows.'
+];
+
+const integrationsAndBenefits = [
+  ['Sales Integration', 'Outward gate pass requires an approved Sales Dispatch Note.'],
+  ['Purchase Integration', 'Inward gate pass linked directly to Purchase Orders/GRN.'],
+  ['Inventory Integration', 'Triggers real-time stock deductions upon vehicle exit.'],
+  ['Enhanced Security', 'Ensures no unauthorized material enters or leaves the premises.'],
+  ['Reduced Wait Times', 'Pre-authorized passes speed up security clearance at the gate.'],
+  ['Dispute Resolution', 'Immutable audit logs protect against vendor delivery claims.'],
+  ['Operational Visibility', 'Live dashboards prevent dock congestion and optimize logistics.']
 ];
 
 export default function GateManagement() {
@@ -31,9 +52,9 @@ export default function GateManagement() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Gate Management"
-          subtitle="Security & Access"
-          description="Controls and monitors the movement of materials, vehicles, and visitors in and out of the facility."
+          title="Gate Management Module"
+          subtitle="Enterprise Security & Access Control"
+          description="The Gate Management module is the frontline security engine for the enterprise facility. It rigorously controls and monitors the movement of all materials, vehicles, and visitors entering or exiting the premises. Designed to prevent inventory pilferage and unauthorized access, this module delivers immense business value by integrating seamlessly with Sales and Purchase workflows. It ensures that every logistical movement is backed by valid systemic authorization, providing complete operational transparency and an airtight audit trail."
           icon={<ShieldCheck className="w-10 h-10" />}
         />
       </div>
@@ -44,27 +65,40 @@ export default function GateManagement() {
       </Section>
 
       {/* 2. Image */}
-      <Section title="Workflow Diagram">
-        <ImageCard src={gateImg} alt="Gate Management Workflow" caption="Inward and Outward Gate Pass Workflow" />
+      <Section title="Security Architecture">
+        <ImageCard src={gateImg} alt="Gate Management Workflow" caption="Inward and Outward Gate Pass Architecture" />
       </Section>
 
-      {/* Overview info */}
-      <GlassCard hoverEffect={false} className="mb-10 flex items-start gap-4 p-6 border-skyblue/30">
-        <div className="mt-1 w-8 h-8 rounded-full bg-skyblue/20 text-skyblue flex items-center justify-center flex-shrink-0">
-          <Info className="w-5 h-5" />
+      {/* 3. Features + Capabilities */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-12 mt-8">
+        <div className="xl:col-span-2">
+          <Section title="Key Functionalities">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {features.map((feat, idx) => (
+                <FeatureCard key={idx} title={feat.title} description={feat.desc} icon={feat.icon} delay={idx * 0.1} />
+              ))}
+            </div>
+          </Section>
         </div>
-        <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg font-medium">
-          The Gate Management module is deeply integrated with Sales and Purchase. It ensures that no material leaves or enters the premises without valid authorization, linking gate passes directly to Delivery Challans and Goods Receipts.
-        </p>
-      </GlassCard>
 
-      {/* 3. Features */}
-      <Section title="Features & Capabilities">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feat, idx) => (
-            <FeatureCard key={idx} title={feat.title} description={feat.desc} icon={feat.icon} delay={idx * 0.1} />
-          ))}
+        <div className="xl:col-span-1">
+          <Section title="Core Capabilities">
+            <div className="space-y-4">
+              {capabilities.map((rule, idx) => (
+                <GlassCard key={idx} delay={idx * 0.1} className="flex items-start gap-4 p-5 border-sky-500/30">
+                  <div className="mt-0.5 w-6 h-6 rounded-full bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 flex items-center justify-center flex-shrink-0">
+                    <ListChecks className="w-4 h-4" />
+                  </div>
+                  <span className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">{rule}</span>
+                </GlassCard>
+              ))}
+            </div>
+          </Section>
         </div>
+      </div>
+
+      <Section title="Module Integrations & Business Benefits">
+        <Table headers={['Integration / Benefit', 'Description']} rows={integrationsAndBenefits} />
       </Section>
     </div>
   );

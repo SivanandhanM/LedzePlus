@@ -8,33 +8,40 @@ import { Building2, CheckCircle2, Star, Landmark, ArrowLeftRight, RefreshCw, Boo
 import bankingImg from '../../assets/images/banking.jpeg';
 
 const workflowSteps = [
-  { title: 'Customer Receipt', description: 'Incoming payment recording' },
-  { title: 'Vendor Payment', description: 'Outgoing payment processing' },
-  { title: 'Bank Transfer', description: 'Inter-bank or internal transfers' },
-  { title: 'Bank Reconciliation', description: 'Matching book balance with bank statements' },
-  { title: 'Cash Book', description: 'Daily cash transaction monitoring' }
+  { title: 'Receipt / Payment Entry', description: 'Incoming receipt or outgoing vendor payment recorded.' },
+  { title: 'Multi-level Approval', description: 'Financial approval workflow triggered based on thresholds.' },
+  { title: 'Ledger Allocation', description: 'Transaction mapped to specific invoices or cost centers.' },
+  { title: 'Fund Transfer', description: 'Actual fund transfer executed via bank or cash.' },
+  { title: 'Bank Reconciliation', description: 'Automated statement matching and reconciliation.' },
+  { title: 'Cash Flow Update', description: 'Real-time updating of enterprise liquidity dashboards.' }
 ];
 
 const features = [
-  { title: 'Customer Receipts', desc: 'Record and allocate incoming customer payments against specific open invoices, supporting partial payments and advance deposits.', icon: <Wallet /> },
-  { title: 'Vendor Payments', desc: 'Process outgoing payments to vendors with full linkage to approved invoices and POs, supporting NEFT, RTGS, cheque, and cash modes.', icon: <Landmark /> },
-  { title: 'Bank Transfers', desc: 'Manage inter-bank and inter-branch fund movements with full audit trails and multi-currency support.', icon: <ArrowLeftRight /> },
-  { title: 'Bank Reconciliation', desc: 'Automated statement import and matching engine that reconciles book balances with bank statements, flagging unmatched transactions.', icon: <RefreshCw /> },
-  { title: 'Cash Book', desc: 'Comprehensive daily cash monitoring covering petty cash, counter receipts, and cash disbursements with approval workflows.', icon: <BookOpenCheck /> }
+  { title: 'Customer Receipts', desc: 'Securely record and allocate incoming payments against specific open invoices, supporting partial payments, advance deposits, and bulk allocations.', icon: <Wallet /> },
+  { title: 'Vendor Payments', desc: 'Process outgoing payments to vendors with full linkage to approved invoices, supporting NEFT, RTGS, cheque, and multi-currency modes.', icon: <Landmark /> },
+  { title: 'Fund Transfers', desc: 'Manage complex inter-bank and inter-branch fund movements with full audit trails, strict approval limits, and multi-bank support.', icon: <ArrowLeftRight /> },
+  { title: 'Bank Reconciliation', desc: 'Automated statement import and matching engine that intelligently reconciles book balances with bank statements, highlighting discrepancies.', icon: <RefreshCw /> },
+  { title: 'Cash Management', desc: 'Comprehensive daily cash monitoring covering petty cash, counter receipts, and strict cash disbursements with integrated approval workflows.', icon: <BookOpenCheck /> }
 ];
 
-const businessRules = [
-  'All vendor payments must be linked to approved invoices.',
-  'Bank reconciliation is mandatory at period end.',
-  'Post-dated cheques require separate clearance workflows.',
-  'Daily cash limits must not be exceeded without override.'
+const capabilitiesAndIntegrations = [
+  'Centralized Multi-bank Support & Treasury Management.',
+  'Automated BRS (Bank Reconciliation Statement) Matching Engine.',
+  'Strict controls over outgoing payments and cash handling limits.',
+  'Advanced Post-Dated Cheque (PDC) lifecycle management.',
+  'Integration with Accounting for instant GL ledger posting.',
+  'Integration with Sales & Billing for invoice payment allocation.',
+  'Integration with Purchase for vendor payment settlements.',
+  'Integration with Payroll for direct salary bank transfers.'
 ];
 
 const benefits = [
-  'Real-time visibility into cash flow and liquidity.',
-  'Automated reconciliation saves time and reduces errors.',
-  'Strict controls over outgoing payments and cash handling.',
-  'Seamless integration with Accounts and Sales/Purchase modules.'
+  'Real-time visibility into enterprise cash flow and overall liquidity.',
+  'Accelerated financial closing with automated bank reconciliation.',
+  'Prevention of financial fraud through multi-level payment approvals.',
+  'Elimination of manual entry via direct statement imports.',
+  'Complete traceability of every single receipt and payment.',
+  'Better working capital management and accurate cash flow forecasting.'
 ];
 
 export default function Banking() {
@@ -42,25 +49,25 @@ export default function Banking() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Banking Management"
-          subtitle="Cash & Bank Operations"
-          description="Streamlines all cash and bank transactions including receipts, payments, transfers, and automated reconciliations."
+          title="Banking Management Module"
+          subtitle="Enterprise Cash & Treasury Operations"
+          description="The Banking Management module is the central hub for enterprise liquidity, orchestrating all cash, bank, and treasury operations. Designed to provide real-time visibility into fund flows, this module exists to automate complex receipts, outgoing payments, and multi-currency bank reconciliations. It delivers immense business value by enforcing strict financial controls, mitigating fraud risks, and ensuring that working capital metrics are consistently accurate and audit-ready."
           icon={<Building2 className="w-10 h-10" />}
         />
       </div>
 
       {/* 1. Workflow */}
-      <Section title="Transaction Workflow">
+      <Section title="Treasury Workflow">
         <Timeline steps={workflowSteps} />
       </Section>
 
       {/* 2. Image */}
-      <Section title="Workflow Diagram">
-        <ImageCard src={bankingImg} alt="Banking Workflow" caption="Banking and Cash Management Workflow" />
+      <Section title="Banking Architecture">
+        <ImageCard src={bankingImg} alt="Banking Workflow" caption="Comprehensive Banking and Treasury Workflow" />
       </Section>
 
       {/* 3. Features */}
-      <Section title="Core Features">
+      <Section title="Key Functionalities">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feat, idx) => (
             <FeatureCard key={idx} title={feat.title} description={feat.desc} icon={feat.icon} delay={idx * 0.1} />
@@ -68,11 +75,11 @@ export default function Banking() {
         </div>
       </Section>
 
-      {/* 4. Business Rules + Benefits */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Section title="Business Rules">
+      {/* 4. Capabilities & Benefits */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+        <Section title="Core Capabilities & Integrations">
           <div className="space-y-4">
-            {businessRules.map((rule, idx) => (
+            {capabilitiesAndIntegrations.map((rule, idx) => (
               <GlassCard key={idx} delay={idx * 0.1} className="flex items-start gap-4 p-5 border-blue-500/30">
                 <div className="mt-0.5 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
                   <CheckCircle2 className="w-4 h-4" />
@@ -83,7 +90,7 @@ export default function Banking() {
           </div>
         </Section>
 
-        <Section title="Key Benefits">
+        <Section title="Business Benefits">
           <div className="space-y-4">
             {benefits.map((benefit, idx) => (
               <GlassCard key={idx} delay={idx * 0.1} className="flex items-start gap-4 p-5 border-amber-500/30">
