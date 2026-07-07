@@ -45,7 +45,7 @@ export default function Accounting() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Accounting & Finance Module"
+          title="LEDZE+ Accounting"
           subtitle="Enterprise Financial Management"
           description="The Accounting & Finance module is the central nervous system of the ERP, designed to securely record, process, and report all financial transactions across the enterprise. It delivers immense business value by automating ledger entries, enforcing strict period-closing validations, and providing real-time visibility into the company's financial health. Integrated seamlessly with Sales, Purchase, and Payroll, this module ensures absolute compliance, audit readiness, and accurate financial reporting at all times."
           icon={<BookOpen className="w-10 h-10" />}

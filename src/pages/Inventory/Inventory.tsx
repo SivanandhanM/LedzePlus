@@ -48,7 +48,7 @@ export default function Inventory() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Inventory Core Module"
+          title="LEDZE+ Inventory"
           subtitle="Enterprise Edition"
           description="The Inventory Management module is the transactional backbone of supply chain operations, providing real-time visibility into stock levels, movements, and valuations. Designed for enterprise scalability, this module exists to optimize inventory holding costs, prevent stockouts, and ensure seamless material availability. It delivers immense business value by driving accuracy in stock valuation, minimizing dead stock, and empowering organizations with complete traceability and control."
           icon={<Package className="w-10 h-10" />}

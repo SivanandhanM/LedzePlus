@@ -52,7 +52,7 @@ export default function Banking() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Banking Management Module"
+          title="LEDZE+ Banking"
           subtitle="Enterprise Cash & Treasury Operations"
           description="The Banking Management module is the central hub for enterprise liquidity, orchestrating all cash, bank, and treasury operations. Designed to provide real-time visibility into fund flows, this module exists to automate complex receipts, outgoing payments, and multi-currency bank reconciliations. It delivers immense business value by enforcing strict financial controls, mitigating fraud risks, and ensuring that working capital metrics are consistently accurate and audit-ready."
           icon={<Building2 className="w-10 h-10" />}

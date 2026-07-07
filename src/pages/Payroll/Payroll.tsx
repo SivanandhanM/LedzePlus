@@ -55,7 +55,7 @@ export default function Payroll() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Payroll & HRMS Module"
+          title="LEDZE+ Payroll"
           subtitle="Enterprise Human Capital Management"
           description="The Payroll & HRMS module is a comprehensive human capital management engine designed to streamline the entire employee lifecycle. From seamless onboarding and automated biometric attendance to complex salary computations and statutory deductions, this module exists to eliminate manual HR administrative overhead. It delivers significant enterprise value by ensuring 100% compliance with labor laws (PF, ESI, TDS), preventing payroll leakage, and providing executive-level workforce analytics."
           icon={<Users className="w-10 h-10" />}

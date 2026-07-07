@@ -55,7 +55,7 @@ export default function GST() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="GST & Taxation Module"
+          title="LEDZE+ GST"
           subtitle="Enterprise Tax Compliance"
           description="The GST & Taxation module acts as the definitive compliance engine, ensuring every financial transaction adheres to stringent government tax regulations. Designed for maximum automation, this module exists to seamlessly compute multi-state taxes, generate real-time E-Invoices, and file statutory GSTR reports directly via government APIs. It delivers tremendous enterprise value by maximizing Input Tax Credit (ITC) claims, eliminating compliance penalties, and drastically reducing manual workload for the finance department."
           icon={<FileText className="w-10 h-10" />}

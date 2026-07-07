@@ -55,7 +55,7 @@ export default function GateManagement() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Gate Management Module"
+          title="LEDZE+ Gate Management"
           subtitle="Enterprise Security & Access Control"
           description="The Gate Management module is the frontline security engine for the enterprise facility. It rigorously controls and monitors the movement of all materials, vehicles, and visitors entering or exiting the premises. Designed to prevent inventory pilferage and unauthorized access, this module delivers immense business value by integrating seamlessly with Sales and Purchase workflows. It ensures that every logistical movement is backed by valid systemic authorization, providing complete operational transparency and an airtight audit trail."
           icon={<ShieldCheck className="w-10 h-10" />}

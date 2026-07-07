@@ -55,7 +55,7 @@ export default function Sales() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Sales Management Module"
+          title="LEDZE+ Sales"
           subtitle="Enterprise Revenue Operations"
           description="The Sales Management module orchestrates the complete Order-to-Cash lifecycle, driving enterprise revenue generation and customer satisfaction. Designed to handle complex pricing matrices and high-volume dispatch logistics, this module exists to streamline order fulfillment while enforcing strict credit controls. It delivers substantial business value by automating tax compliance, ensuring accurate dispatch through barcode verification, and providing executive dashboards for real-time revenue analytics."
           icon={<TrendingUp className="w-10 h-10" />}

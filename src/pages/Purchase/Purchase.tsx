@@ -46,7 +46,7 @@ export default function Purchase() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Purchase Management"
+          title="LEDZE+ Purchase"
           subtitle="Enterprise Procurement & Sourcing"
           description="The Purchase Management module streamlines the entire procure-to-pay lifecycle, ensuring organizations acquire goods and services efficiently and cost-effectively. Designed to enforce strict financial controls and business rules, this module exists to optimize vendor relationships, prevent unauthorized spending, and automate routine purchasing tasks. It delivers immense enterprise value by providing real-time spend analytics, ensuring compliance through multi-level approvals, and integrating seamlessly with inventory and financial accounting systems."
           icon={<ShoppingCart className="w-10 h-10" />}

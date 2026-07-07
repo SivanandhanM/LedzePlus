@@ -16,7 +16,7 @@
 
 body {
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  background: linear-gradient(135deg, #F8FAFF 0%, #EEF4FF 50%, #FFFFFF 100%);
+  background: linear-gradient(135deg, #FCFCFF 0%, #F4F1FF 50%, #EEF5FF 100%);
   color: #1E293B;
   min-height: 100vh;
 }
@@ -61,4 +61,16 @@ body {
   0%   { background-position: 0%   50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0%   50%; }
+}
+
+/* ── Accessibility: Respect prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

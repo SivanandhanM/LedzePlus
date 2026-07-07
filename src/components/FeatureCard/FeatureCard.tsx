@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { useRef, useState, useCallback, useMemo } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { motion, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -9,58 +9,18 @@ const ACCENT_MAP: Record<string, {
   color: string; glow: string; border: string;
   iconBg: string; badgeBg: string; badgeText: string; shadow: string;
 }> = {
-  Purchase:       { color: '#10b981', glow: 'rgba(16,185,129,0.25)',  border: '#10b981', iconBg: 'rgba(16,185,129,0.12)',  badgeBg: 'rgba(16,185,129,0.1)',  badgeText: '#059669', shadow: 'rgba(16,185,129,0.22)'  },
-  Sales:          { color: '#f97316', glow: 'rgba(249,115,22,0.25)',   border: '#f97316', iconBg: 'rgba(249,115,22,0.12)',   badgeBg: 'rgba(249,115,22,0.1)',   badgeText: '#ea580c', shadow: 'rgba(249,115,22,0.22)'   },
-  Billing:        { color: '#a855f7', glow: 'rgba(168,85,247,0.25)',   border: '#a855f7', iconBg: 'rgba(168,85,247,0.12)',   badgeBg: 'rgba(168,85,247,0.1)',   badgeText: '#9333ea', shadow: 'rgba(168,85,247,0.22)'   },
-  Inventory:      { color: '#3b82f6', glow: 'rgba(59,130,246,0.25)',   border: '#3b82f6', iconBg: 'rgba(59,130,246,0.12)',   badgeBg: 'rgba(59,130,246,0.1)',   badgeText: '#2563eb', shadow: 'rgba(59,130,246,0.22)'   },
-  Accounting:     { color: '#22c55e', glow: 'rgba(34,197,94,0.25)',    border: '#22c55e', iconBg: 'rgba(34,197,94,0.12)',    badgeBg: 'rgba(34,197,94,0.1)',    badgeText: '#16a34a', shadow: 'rgba(34,197,94,0.22)'    },
-  Payroll:        { color: '#14b8a6', glow: 'rgba(20,184,166,0.25)',   border: '#14b8a6', iconBg: 'rgba(20,184,166,0.12)',   badgeBg: 'rgba(20,184,166,0.1)',   badgeText: '#0d9488', shadow: 'rgba(20,184,166,0.22)'   },
-  Banking:        { color: '#06b6d4', glow: 'rgba(6,182,212,0.25)',    border: '#06b6d4', iconBg: 'rgba(6,182,212,0.12)',    badgeBg: 'rgba(6,182,212,0.1)',    badgeText: '#0891b2', shadow: 'rgba(6,182,212,0.22)'    },
-  'Gate Management': { color: '#f59e0b', glow: 'rgba(245,158,11,0.25)', border: '#f59e0b', iconBg: 'rgba(245,158,11,0.12)', badgeBg: 'rgba(245,158,11,0.1)', badgeText: '#d97706', shadow: 'rgba(245,158,11,0.22)' },
-  GST:            { color: '#ef4444', glow: 'rgba(239,68,68,0.25)',    border: '#ef4444', iconBg: 'rgba(239,68,68,0.12)',    badgeBg: 'rgba(239,68,68,0.1)',    badgeText: '#dc2626', shadow: 'rgba(239,68,68,0.22)'    },
+  'LEDZE+ Purchase':       { color: '#10b981', glow: 'rgba(16,185,129,0.25)',  border: '#10b981', iconBg: 'rgba(16,185,129,0.12)',  badgeBg: 'rgba(16,185,129,0.1)',  badgeText: '#059669', shadow: 'rgba(16,185,129,0.22)'  },
+  'LEDZE+ Sales':          { color: '#f97316', glow: 'rgba(249,115,22,0.25)',   border: '#f97316', iconBg: 'rgba(249,115,22,0.12)',   badgeBg: 'rgba(249,115,22,0.1)',   badgeText: '#ea580c', shadow: 'rgba(249,115,22,0.22)'   },
+  'LEDZE+ Billing':        { color: '#a855f7', glow: 'rgba(168,85,247,0.25)',   border: '#a855f7', iconBg: 'rgba(168,85,247,0.12)',   badgeBg: 'rgba(168,85,247,0.1)',   badgeText: '#9333ea', shadow: 'rgba(168,85,247,0.22)'   },
+  'LEDZE+ Inventory':      { color: '#3b82f6', glow: 'rgba(59,130,246,0.25)',   border: '#3b82f6', iconBg: 'rgba(59,130,246,0.12)',   badgeBg: 'rgba(59,130,246,0.1)',   badgeText: '#2563eb', shadow: 'rgba(59,130,246,0.22)'   },
+  'LEDZE+ Accounting':     { color: '#22c55e', glow: 'rgba(34,197,94,0.25)',    border: '#22c55e', iconBg: 'rgba(34,197,94,0.12)',    badgeBg: 'rgba(34,197,94,0.1)',    badgeText: '#16a34a', shadow: 'rgba(34,197,94,0.22)'    },
+  'LEDZE+ Payroll':        { color: '#14b8a6', glow: 'rgba(20,184,166,0.25)',   border: '#14b8a6', iconBg: 'rgba(20,184,166,0.12)',   badgeBg: 'rgba(20,184,166,0.1)',   badgeText: '#0d9488', shadow: 'rgba(20,184,166,0.22)'   },
+  'LEDZE+ Banking':        { color: '#06b6d4', glow: 'rgba(6,182,212,0.25)',    border: '#06b6d4', iconBg: 'rgba(6,182,212,0.12)',    badgeBg: 'rgba(6,182,212,0.1)',    badgeText: '#0891b2', shadow: 'rgba(6,182,212,0.22)'    },
+  'LEDZE+ Gate Management': { color: '#f59e0b', glow: 'rgba(245,158,11,0.25)', border: '#f59e0b', iconBg: 'rgba(245,158,11,0.12)', badgeBg: 'rgba(245,158,11,0.1)', badgeText: '#d97706', shadow: 'rgba(245,158,11,0.22)' },
+  'LEDZE+ GST':            { color: '#ef4444', glow: 'rgba(239,68,68,0.25)',    border: '#ef4444', iconBg: 'rgba(239,68,68,0.12)',    badgeBg: 'rgba(239,68,68,0.1)',    badgeText: '#dc2626', shadow: 'rgba(239,68,68,0.22)'    },
 };
 
 const DEFAULT_ACCENT = { color: '#6366f1', glow: 'rgba(99,102,241,0.25)', border: '#6366f1', iconBg: 'rgba(99,102,241,0.12)', badgeBg: 'rgba(99,102,241,0.1)', badgeText: '#4f46e5', shadow: 'rgba(99,102,241,0.22)' };
-
-// ─── Floating Particles ──────────────────────────────────────────────────────
-interface Particle { id: number; x: number; size: number; duration: number; delay: number; }
-
-function FloatingParticles({ color, isVisible }: { color: string; isVisible: boolean }) {
-  const particles: Particle[] = useMemo(() => (
-    Array.from({ length: 8 }, (_, i) => ({
-      id: i,
-      x: 10 + Math.random() * 80,
-      size: 2 + Math.random() * 3,
-      duration: 1.5 + Math.random() * 1.5,
-      delay: Math.random() * 0.6,
-    }))
-  ), []);
-
-  return (
-    <AnimatePresence>
-      {isVisible && (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[2rem]" aria-hidden="true">
-          {particles.map((p) => (
-            <motion.div
-              key={p.id}
-              initial={{ opacity: 0, y: 0, x: `${p.x}%` }}
-              animate={{ opacity: [0, 0.8, 0], y: -60 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'easeOut' }}
-              className="absolute bottom-4"
-              style={{
-                width: p.size, height: p.size,
-                borderRadius: '50%',
-                background: color,
-                boxShadow: `0 0 ${p.size * 3}px ${color}`,
-              }}
-            />
-          ))}
-        </div>
-      )}
-    </AnimatePresence>
-  );
-}
 
 // ─── Spring config ────────────────────────────────────────────────────────────
 const springCfg = { stiffness: 250, damping: 20, mass: 0.8 };
@@ -85,17 +45,19 @@ export default function FeatureCard({
 
   const [hovered, setHovered] = useState(false);
   const [spotlight, setSpotlight] = useState({ x: 50, y: 50 });
+  const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
+  const [clicking, setClicking] = useState(false);
 
   const accent = ACCENT_MAP[title] ?? DEFAULT_ACCENT;
 
   // Spring-based card transforms
-  const rawY   = useSpring(0,  springCfg);
-  const rawS   = useSpring(1,  springCfg);
-  const rawGO  = useSpring(0,  springCfg); // glow opacity
-  const rawBO  = useSpring(0,  springCfg); // border opacity
+  const rawY  = useSpring(0, springCfg);
+  const rawS  = useSpring(1, springCfg);
+  const rawGO = useSpring(0, springCfg);
+  const rawBO = useSpring(0, springCfg);
 
-  const cardY      = useTransform(rawY,  (v) => `translateY(${v}px)`);
-  const cardScale  = useTransform(rawS,  (v) => `scale(${v})`);
+  const cardY     = useTransform(rawY, (v) => `translateY(${v}px)`);
+  const cardScale = useTransform(rawS, (v) => `scale(${v})`);
 
   const handleMouseEnter = useCallback(() => {
     setHovered(true);
@@ -119,9 +81,34 @@ export default function FeatureCard({
     const rect = cardRef.current.getBoundingClientRect();
     setSpotlight({
       x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top)  / rect.height) * 100,
+      y: ((e.clientY - rect.top) / rect.height) * 100,
     });
   }, []);
+
+  const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!path) return;
+
+    // Calculate ripple origin relative to card
+    const rect = cardRef.current?.getBoundingClientRect();
+    const x = rect ? ((e.clientX - rect.left) / rect.width) * 100 : 50;
+    const y = rect ? ((e.clientY - rect.top) / rect.height) * 100 : 50;
+
+    const id = Date.now();
+    setRipples(prev => [...prev, { id, x, y }]);
+    setClicking(true);
+
+    // Scale peek before navigating
+    rawS.set(1.06);
+    rawY.set(-20);
+
+    setTimeout(() => {
+      rawS.set(1);
+      rawY.set(0);
+      setClicking(false);
+      setRipples([]);
+      navigate(path);
+    }, 320);
+  }, [path, navigate, rawS, rawY]);
 
   // ── Render ────────────────────────────────────────────────────────────────
   const boxShadow = hovered
@@ -131,7 +118,7 @@ export default function FeatureCard({
   return (
     <motion.div
       ref={cardRef}
-      onClick={() => path && navigate(path)}
+      onClick={handleClick}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -166,9 +153,7 @@ export default function FeatureCard({
       <motion.div
         className="relative z-10 flex flex-col h-full rounded-[2rem] overflow-hidden"
         style={{
-          background: hovered
-            ? 'rgba(255,255,255,0.97)'
-            : 'rgba(255,255,255,1)',
+          background: hovered ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,1)',
           backdropFilter: hovered ? 'blur(24px) saturate(180%)' : 'none',
           boxShadow,
           border: hovered
@@ -177,6 +162,67 @@ export default function FeatureCard({
           transition: 'background 0.35s ease, box-shadow 0.45s cubic-bezier(0.22,1,0.36,1), border 0.35s ease',
         }}
       >
+        {/* Click ripples */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[2rem]" aria-hidden>
+          <AnimatePresence>
+            {ripples.map(r => (
+              <motion.div
+                key={r.id}
+                className="absolute rounded-full"
+                style={{
+                  left: `${r.x}%`,
+                  top: `${r.y}%`,
+                  translateX: '-50%',
+                  translateY: '-50%',
+                  background: `radial-gradient(circle, ${accent.glow} 0%, transparent 70%)`,
+                }}
+                initial={{ width: 0, height: 0, opacity: 0.8 }}
+                animate={{ width: 400, height: 400, opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              />
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* Click peak glow */}
+        {clicking && (
+          <div
+            className="absolute inset-0 pointer-events-none rounded-[2rem] z-20"
+            style={{
+              background: `radial-gradient(circle at ${spotlight.x}% ${spotlight.y}%, ${accent.glow} 0%, transparent 60%)`,
+            }}
+            aria-hidden
+          />
+        )}
+
+        {/* Ambient Breathing Glow */}
+        <div 
+          className="absolute -inset-10 pointer-events-none z-0 transition-all duration-700 ease-out"
+          style={{
+            opacity: hovered ? 0.8 : 0.65,
+            transform: hovered ? `translate(${(spotlight.x - 50) * 0.4}px, ${(spotlight.y - 50) * 0.4}px)` : 'translate(0px, 0px)',
+          }}
+          aria-hidden
+        >
+          <motion.div
+            className="w-full h-full"
+            animate={{
+              x: [-15, 25, -10, 15, -15],
+              y: [-25, 10, -15, 25, -25],
+              scale: [1, 1.15, 0.95, 1.05, 1],
+            }}
+            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+            style={{
+              background: `
+                radial-gradient(circle at 25% 75%, ${accent.glow} 0%, transparent 50%),
+                radial-gradient(circle at 75% 25%, ${accent.glow} 0%, transparent 50%)
+              `,
+              filter: 'blur(30px)',
+            }}
+          />
+        </div>
+
         {/* Mouse spotlight */}
         <div
           className="absolute inset-0 pointer-events-none z-0 rounded-[2rem] transition-opacity duration-300"
@@ -186,9 +232,6 @@ export default function FeatureCard({
           }}
           aria-hidden
         />
-
-        {/* Floating particles */}
-        <FloatingParticles color={accent.color} isVisible={hovered} />
 
         {/* Card content */}
         <div className="relative z-10 flex flex-col h-full p-8">
@@ -241,36 +284,37 @@ export default function FeatureCard({
           <motion.p
             animate={hovered ? { opacity: 1, y: -3 } : { opacity: 0.75, y: 0 }}
             transition={{ ...springCfg, type: 'spring', delay: 0.1 }}
-            className="text-[15px] leading-relaxed font-medium mb-8 flex-1"
+            className={`text-[15px] leading-relaxed font-medium flex-1 ${path ? 'mb-8' : 'mb-0'}`}
             style={{ color: '#475569' }}
           >
             {description}
           </motion.p>
 
           {/* CTA */}
-          <motion.div
-            animate={hovered ? { x: 6 } : { x: 0 }}
-            transition={{ ...springCfg, type: 'spring', delay: 0.15 }}
-            className="flex items-center gap-2 text-[13px] font-bold mt-auto relative"
-            style={{ color: hovered ? accent.color : '#6366f1' }}
-          >
-            <span className="relative">
-              {path ? 'Explore Module' : 'Explore Solution'}
-              {/* Underline reveal */}
-              <motion.span
-                className="absolute left-0 -bottom-0.5 h-[1.5px] rounded-full"
-                animate={{ width: hovered ? '100%' : '0%' }}
-                transition={{ duration: 0.3, ease: 'easeOut', delay: 0.1 }}
-                style={{ background: accent.color }}
-              />
-            </span>
-            <motion.span
+          {path && (
+            <motion.div
               animate={hovered ? { x: 6 } : { x: 0 }}
-              transition={{ ...springCfg, type: 'spring', delay: 0.18 }}
+              transition={{ ...springCfg, type: 'spring', delay: 0.15 }}
+              className="flex items-center gap-2 text-[13px] font-bold mt-auto relative"
+              style={{ color: hovered ? accent.color : '#6366f1' }}
             >
-              <ArrowRight className="w-4 h-4" />
-            </motion.span>
-          </motion.div>
+              <span className="relative">
+                Explore Module
+                <motion.span
+                  className="absolute left-0 -bottom-0.5 h-[1.5px] rounded-full"
+                  animate={{ width: hovered ? '100%' : '0%' }}
+                  transition={{ duration: 0.3, ease: 'easeOut', delay: 0.1 }}
+                  style={{ background: accent.color }}
+                />
+              </span>
+              <motion.span
+                animate={hovered ? { x: 6 } : { x: 0 }}
+                transition={{ ...springCfg, type: 'spring', delay: 0.18 }}
+              >
+                <ArrowRight className="w-4 h-4" />
+              </motion.span>
+            </motion.div>
+          )}
 
         </div>
       </motion.div>

@@ -55,7 +55,7 @@ export default function Billing() {
     <div className="pb-12">
       <div className="py-8">
         <Hero 
-          title="Billing Management Module"
+          title="LEDZE+ Billing"
           subtitle="Enterprise Invoicing & Receivables"
           description="The Billing Management module is the financial engine that drives the cash conversion cycle. Designed to handle high-volume transactions with absolute precision, this module exists to automate the entire invoicing process, track receivables, and ensure regulatory tax compliance. It delivers immense enterprise value by accelerating cash flows, reducing manual reconciliation errors, and providing executives with real-time revenue analytics and customer outstanding reports."
           icon={<Receipt className="w-10 h-10" />}
