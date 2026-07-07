@@ -1,3 +1,4 @@
+import { useScrollToContent } from '../../hooks/useScrollToContent';
 import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import Timeline from '../../components/Timeline/Timeline';
@@ -48,6 +49,8 @@ const integrationsAndBenefits = [
 ];
 
 export default function GST() {
+  const contentRef = useScrollToContent();
+
   return (
     <div className="pb-12">
       <div className="py-8">
@@ -58,6 +61,8 @@ export default function GST() {
           icon={<FileText className="w-10 h-10" />}
         />
       </div>
+      <div ref={contentRef} className="scroll-mt-6"></div>
+
 
       {/* 1. Workflow */}
       <Section title="Compliance & Filing Workflow">
