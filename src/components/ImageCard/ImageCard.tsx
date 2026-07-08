@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Maximize2, X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
+import { Maximize2 } from 'lucide-react';
 
 interface ImageCardProps {
   src: string;
@@ -24,21 +24,7 @@ export default function ImageCard({ src, alt, caption }: ImageCardProps) {
     setIsFullscreen(false);
   }, []);
 
-  const handleZoomIn = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setZoom(z => Math.min(z + 0.5, 4));
-  };
 
-  const handleZoomOut = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setZoom(z => Math.max(z - 0.5, 0.5));
-  };
-
-  const handleReset = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setZoom(1);
-    setPosition({ x: 0, y: 0 });
-  };
 
   return (
     <>
@@ -95,58 +81,9 @@ export default function ImageCard({ src, alt, caption }: ImageCardProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center"
-            style={{ background: 'rgba(2,6,23,0.92)', backdropFilter: 'blur(20px)' }}
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-slate-500/10 dark:bg-slate-900/40 backdrop-blur-md"
             onClick={closeLightbox}
           >
-            {/* Controls bar */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="absolute top-5 right-5 flex items-center gap-2 z-10"
-              onClick={e => e.stopPropagation()}
-            >
-              {/* Zoom controls */}
-              <div className="flex items-center gap-1 bg-white/10 backdrop-blur-sm rounded-xl px-2 py-1 border border-white/20">
-                <motion.button
-                  whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.15)' }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={handleZoomOut}
-                  className="p-2 rounded-lg text-white/80 hover:text-white transition-colors"
-                >
-                  <ZoomOut className="w-4 h-4" />
-                </motion.button>
-                <span className="text-white/60 text-xs font-mono w-10 text-center">{Math.round(zoom * 100)}%</span>
-                <motion.button
-                  whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.15)' }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={handleZoomIn}
-                  className="p-2 rounded-lg text-white/80 hover:text-white transition-colors"
-                >
-                  <ZoomIn className="w-4 h-4" />
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.15)' }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={handleReset}
-                  className="p-2 rounded-lg text-white/80 hover:text-white transition-colors"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                </motion.button>
-              </div>
-
-              {/* Close button */}
-              <motion.button
-                whileHover={{ scale: 1.1, backgroundColor: 'rgba(239,68,68,0.25)' }}
-                whileTap={{ scale: 0.9 }}
-                onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
-                className="p-2.5 rounded-xl bg-white/10 backdrop-blur-sm text-white border border-white/20 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </motion.button>
-            </motion.div>
 
             {/* Image */}
             <motion.div
@@ -172,29 +109,7 @@ export default function ImageCard({ src, alt, caption }: ImageCardProps) {
               />
             </motion.div>
 
-            {/* Caption */}
-            {caption && (
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 16 }}
-                transition={{ delay: 0.2, duration: 0.3 }}
-                className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 text-sm font-medium px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/15"
-              >
-                {caption}
-              </motion.div>
-            )}
 
-            {/* ESC hint */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: 0.5 }}
-              className="absolute bottom-6 right-6 text-white/30 text-xs font-mono"
-            >
-              Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded border border-white/20">Esc</kbd> to close
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
