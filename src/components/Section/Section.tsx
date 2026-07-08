@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
 interface SectionProps {
@@ -9,7 +10,7 @@ interface SectionProps {
   id?: string;
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -20,7 +21,7 @@ const containerVariants = {
   },
 };
 
-const titleVariants = {
+const titleVariants: Variants = {
   hidden: { opacity: 0, y: 24, filter: 'blur(6px)' },
   visible: {
     opacity: 1,
@@ -30,7 +31,7 @@ const titleVariants = {
   },
 };
 
-const contentVariants = {
+const contentVariants: Variants = {
   hidden: { opacity: 0, y: 20, scale: 0.97, filter: 'blur(4px)' },
   visible: {
     opacity: 1,

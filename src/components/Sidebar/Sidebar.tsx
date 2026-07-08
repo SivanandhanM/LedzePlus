@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 
 const menuItems = [
   { title: 'Home', path: '/', icon: Home },
@@ -20,7 +21,7 @@ const menuItems = [
   { title: 'GST', path: '/gst', icon: FileText },
 ];
 
-const sidebarVariants = {
+const sidebarVariants: Variants = {
   hidden: { opacity: 0, x: -20 },
   visible: {
     opacity: 1,
@@ -29,7 +30,7 @@ const sidebarVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, x: -12 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } },
 };

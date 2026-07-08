@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import ScrollProgress from '../components/ScrollProgress/ScrollProgress';
@@ -11,7 +12,7 @@ import RouteLoader from '../components/RouteLoader/RouteLoader';
 
 const LOADER_DURATION = 3900; // Total loader lifecycle
 
-const pageVariants = {
+const pageVariants: Variants = {
   initial: { opacity: 0, y: 20, filter: 'blur(4px)' },
   animate: {
     opacity: 1,

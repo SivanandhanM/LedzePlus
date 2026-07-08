@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useState, useMemo, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import logoImg from '../../assets/images/logo.png';
@@ -12,7 +13,7 @@ interface HeroProps {
   icon?: ReactNode;
 }
 
-const wordVariants = {
+const wordVariants: Variants = {
   hidden: { opacity: 0, y: 20, filter: 'blur(6px)' },
   visible: {
     opacity: 1,

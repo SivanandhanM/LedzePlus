@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 
 interface TimelineStep {
@@ -10,14 +11,14 @@ interface TimelineProps {
   steps: TimelineStep[];
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: { staggerChildren: 0.15, delayChildren: 0.1 },
   },
 };
 
-const stepVariants = {
+const stepVariants: Variants = {
   hidden: { opacity: 0, y: 20, scale: 0.92, filter: 'blur(4px)' },
   visible: {
     opacity: 1,
@@ -28,7 +29,7 @@ const stepVariants = {
   },
 };
 
-const connectorVariants = {
+const connectorVariants: Variants = {
   hidden: { scaleX: 0, opacity: 0 },
   visible: {
     scaleX: 1,

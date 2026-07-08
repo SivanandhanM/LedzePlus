@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, ChevronRight, ArrowRight } from 'lucide-react';
+import type { Variants } from 'framer-motion';
+import { Search, X, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const searchLinks = [
@@ -15,12 +16,12 @@ const searchLinks = [
   { name: 'GST & Compliance', path: '/gst', category: 'TAX & GST' },
 ];
 
-const listVariants = {
+const listVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.04 } },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, x: -8 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.2, ease: 'easeOut' } },
 };
