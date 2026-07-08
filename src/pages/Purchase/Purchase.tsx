@@ -6,7 +6,7 @@ import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import ImageCard from '../../components/ImageCard/ImageCard';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import { ShoppingCart, CheckCircle2, Factory, ClipboardCheck, ArrowRightLeft, FileSpreadsheet, Scale, BadgeAlert, Wallet } from 'lucide-react';
-import purchaseImg from '../../assets/images/purchase.jpeg';
+import purchaseImg from '../../assets/images/purchase.webp';
 
 const workflowSteps = [
   { title: 'Requirement', description: 'Internal material shortage identified.' },

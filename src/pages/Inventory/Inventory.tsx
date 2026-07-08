@@ -7,7 +7,7 @@ import ImageCard from '../../components/ImageCard/ImageCard';
 import Table from '../../components/Table/Table';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import { Package, Search, BarChart2, Server, Key, TrendingUp, Target, ShieldCheck } from 'lucide-react';
-import inventoryImg from '../../assets/images/inventory.jpeg';
+import inventoryImg from '../../assets/images/inventory.webp';
 
 const workflowSteps = [
   { title: 'Requirement', description: 'Initial identification of material shortage or production demand.' },

@@ -2,16 +2,18 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import MainLayout from './layouts/MainLayout';
 
-import Home from './pages/Home/Home';
-import Purchase from './pages/Purchase/Purchase';
-import Sales from './pages/Sales/Sales';
-import Billing from './pages/Billing/Billing';
-import Inventory from './pages/Inventory/Inventory';
-import Accounting from './pages/Accounting/Accounting';
-import Payroll from './pages/Payroll/Payroll';
-import Banking from './pages/Banking/Banking';
-import GateManagement from './pages/GateManagement/GateManagement';
-import GST from './pages/GST/GST';
+import { lazy } from 'react';
+
+const Home = lazy(() => import('./pages/Home/Home'));
+const Purchase = lazy(() => import('./pages/Purchase/Purchase'));
+const Sales = lazy(() => import('./pages/Sales/Sales'));
+const Billing = lazy(() => import('./pages/Billing/Billing'));
+const Inventory = lazy(() => import('./pages/Inventory/Inventory'));
+const Accounting = lazy(() => import('./pages/Accounting/Accounting'));
+const Payroll = lazy(() => import('./pages/Payroll/Payroll'));
+const Banking = lazy(() => import('./pages/Banking/Banking'));
+const GateManagement = lazy(() => import('./pages/GateManagement/GateManagement'));
+const GST = lazy(() => import('./pages/GST/GST'));
 
 function App() {
   return (

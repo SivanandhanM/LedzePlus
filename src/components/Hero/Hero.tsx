@@ -4,7 +4,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import type { Variants } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import logoImg from '../../assets/images/logo.png';
+import logoImg from '../../assets/images/logo.webp';
 
 interface HeroProps {
   title: string;

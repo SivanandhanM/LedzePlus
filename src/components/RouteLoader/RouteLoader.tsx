@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, TrendingUp, Receipt, Package, BookOpen, Users, Building2, FileText, ShieldCheck } from 'lucide-react';
-import logoImg from '../../assets/images/logo.png';
+import logoImg from '../../assets/images/logo.webp';
 
 const icons = [
   { Icon: ShoppingCart, color: '#10b981' }, 

@@ -7,7 +7,7 @@ import ImageCard from '../../components/ImageCard/ImageCard';
 import Table from '../../components/Table/Table';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import { Users, UserCheck, Clock, CreditCard, FileText, Building2, Briefcase, ListChecks } from 'lucide-react';
-import payrollImg from '../../assets/images/Payroll.png';
+import payrollImg from '../../assets/images/Payroll.webp';
 
 const workflowSteps = [
   { title: 'Employee Onboarding', description: 'Master data creation and policy assignment.' },

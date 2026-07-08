@@ -7,7 +7,7 @@ import ImageCard from '../../components/ImageCard/ImageCard';
 import Table from '../../components/Table/Table';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import { ShieldCheck, UserCog, Shield, LayoutDashboard, Clock, History, Truck, ListChecks } from 'lucide-react';
-import gateImg from '../../assets/images/gate.jpeg';
+import gateImg from '../../assets/images/gate.webp';
 
 const workflowSteps = [
   { title: 'Gate Pass Request', description: 'Internal user or vendor raises an inward/outward request.' },

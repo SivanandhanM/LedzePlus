@@ -7,7 +7,7 @@ import ImageCard from '../../components/ImageCard/ImageCard';
 import Table from '../../components/Table/Table';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import { TrendingUp, Truck, FileSpreadsheet, BadgePercent, AlertTriangle, ListChecks } from 'lucide-react';
-import salesImg from '../../assets/images/sales.jpeg';
+import salesImg from '../../assets/images/sales.webp';
 
 const workflowSteps = [
   { title: 'Inquiry & Quotation', description: 'Customer request received and formal quotation sent.' },

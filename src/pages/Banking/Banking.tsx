@@ -6,7 +6,7 @@ import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import ImageCard from '../../components/ImageCard/ImageCard';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import { Building2, CheckCircle2, Star, Landmark, ArrowLeftRight, RefreshCw, BookOpenCheck, Wallet } from 'lucide-react';
-import bankingImg from '../../assets/images/banking.jpeg';
+import bankingImg from '../../assets/images/banking.webp';
 
 const workflowSteps = [
   { title: 'Receipt / Payment Entry', description: 'Incoming receipt or outgoing vendor payment recorded.' },

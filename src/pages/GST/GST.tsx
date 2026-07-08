@@ -7,7 +7,7 @@ import ImageCard from '../../components/ImageCard/ImageCard';
 import Table from '../../components/Table/Table';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import { FileText, FileSpreadsheet, Receipt, Truck, Calculator, ShieldCheck, ListChecks } from 'lucide-react';
-import gstImg from '../../assets/images/gst.jpeg';
+import gstImg from '../../assets/images/gst.webp';
 
 const workflowSteps = [
   { title: 'Transaction Logging', description: 'Sales, Purchase, or Journal entry recorded with taxes.' },

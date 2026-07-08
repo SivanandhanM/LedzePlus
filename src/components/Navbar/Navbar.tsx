@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SpotlightSearch from '../SpotlightSearch/SpotlightSearch';
-import logoImg from '../../assets/images/logo.png';
-import navanalaLogo from '../../assets/images/logo_nn.png';
+import logoImg from '../../assets/images/logo.webp';
+import navanalaLogo from '../../assets/images/logo_nn.webp';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);

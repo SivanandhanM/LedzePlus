@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
+import { Suspense, useState, useEffect, useRef, useCallback } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import ScrollProgress from '../components/ScrollProgress/ScrollProgress';
 import BackToTop from '../components/BackToTop/BackToTop';
@@ -10,7 +10,13 @@ import BackgroundEffects from '../components/BackgroundEffects/BackgroundEffects
 import FloatingERPBackground from '../components/FloatingERPBackground/FloatingERPBackground';
 import RouteLoader from '../components/RouteLoader/RouteLoader';
 
-const LOADER_DURATION = 3900; // Total loader lifecycle
+function PageReadyNotifier({ onReady }: { onReady: () => void }) {
+  useEffect(() => {
+    const timer = setTimeout(() => onReady(), 100);
+    return () => clearTimeout(timer);
+  }, [onReady]);
+  return null;
+}
 
 const pageVariants: Variants = {
   initial: { opacity: 0, y: 20, filter: 'blur(4px)' },
@@ -18,8 +24,8 @@ const pageVariants: Variants = {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    // Delay page entrance until the loader finishes its cinematic animation
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 3.5 },
+    // Removed artificial delay
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 },
   },
   exit: {
     opacity: 0,
@@ -34,31 +40,21 @@ export default function MainLayout() {
 
   const [isLoading, setIsLoading] = useState(true);
   const prevKeyRef = useRef(location.key);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const loadedModules = useRef<Set<string>>(new Set([location.pathname]));
 
-  const showLoader = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setIsLoading(true);
-    timerRef.current = setTimeout(() => {
-      setIsLoading(false);
-      timerRef.current = null;
-    }, LOADER_DURATION);
-  };
-
-  useEffect(() => {
-    showLoader();
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handlePageReady = useCallback(() => {
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
     if (location.key === prevKeyRef.current) return;
     prevKeyRef.current = location.key;
-    showLoader();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.key]);
+    
+    if (!loadedModules.current.has(location.pathname)) {
+      setIsLoading(true);
+      loadedModules.current.add(location.pathname);
+    }
+  }, [location.key, location.pathname]);
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden text-slate-900 dark:text-slate-100">
@@ -79,7 +75,10 @@ export default function MainLayout() {
                 exit="exit"
                 style={{ willChange: 'transform, opacity, filter' }}
               >
-                <Outlet />
+                <Suspense fallback={null}>
+                  <Outlet />
+                  <PageReadyNotifier onReady={handlePageReady} />
+                </Suspense>
                 <Footer />
               </motion.div>
             </AnimatePresence>

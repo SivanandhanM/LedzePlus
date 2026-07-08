@@ -6,7 +6,7 @@ import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import ImageCard from '../../components/ImageCard/ImageCard';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import { BookOpen, FileText, BarChart, DollarSign, Target, AlignLeft, Calendar, ShieldAlert } from 'lucide-react';
-import accountingImg from '../../assets/images/accounting.jpeg';
+import accountingImg from '../../assets/images/accounting.webp';
 
 const workflowSteps = [
   { title: 'Sub-ledger Posting', description: 'Automated entries from Sales, Purchase, and Payroll modules.' },

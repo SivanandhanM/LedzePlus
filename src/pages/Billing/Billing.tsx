@@ -7,7 +7,7 @@ import ImageCard from '../../components/ImageCard/ImageCard';
 import Table from '../../components/Table/Table';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import { Receipt, LayoutDashboard, Clock, AlertOctagon, BarChart3, ShieldAlert, ListChecks } from 'lucide-react';
-import billingImg from '../../assets/images/billing.jpeg';
+import billingImg from '../../assets/images/billing.webp';
 
 const workflowSteps = [
   { title: 'Dispatch Validation', description: 'System verifies dispatch note for billing eligibility.' },
