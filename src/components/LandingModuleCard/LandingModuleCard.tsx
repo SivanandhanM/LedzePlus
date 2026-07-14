@@ -140,15 +140,12 @@ export default function LandingModuleCard({
     <motion.div
       ref={cardRef}
       onClick={handleClick}
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true }}
       transition={{ duration: 0.4, delay, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
       style={{ y: cardY, scale: cardScale, willChange: 'transform, opacity' }}
-      className={`group relative flex flex-col h-[220px] w-full ${path ? 'cursor-pointer' : ''} ${className}`}
+      className={`group relative flex flex-col h-[220px] min-h-[220px] w-full ${path ? 'cursor-pointer' : ''} ${className}`}
     >
       {/* ── Animated gradient border ring ── */}
       <AnimatePresence>
@@ -267,10 +264,10 @@ export default function LandingModuleCard({
         </div>
 
         {/* Card content */}
-        <div className="relative z-20 flex flex-col h-full p-6 text-white">
+        <div className="relative z-20 flex flex-col justify-between h-full p-6 text-white">
           
           {/* Top row: icon + badge */}
-          <div className="flex justify-between items-start mb-auto">
+          <div className="flex justify-between items-start">
             {/* Icon */}
             <motion.div
               animate={hovered
@@ -305,11 +302,11 @@ export default function LandingModuleCard({
           </div>
 
           {/* Bottom text content */}
-          <div className="mt-4">
+          <div>
             <motion.h3
               animate={hovered ? { y: -1 } : { y: 0 }}
               transition={{ ...springCfg, type: 'spring', delay: 0.05 }}
-              className="text-[28px] font-bold leading-tight mb-1 transition-colors duration-300 truncate drop-shadow-sm"
+              className="text-[18px] font-bold leading-tight mb-1 transition-colors duration-300 truncate drop-shadow-sm"
               style={{ color: '#ffffff' }}
             >
               {title}
