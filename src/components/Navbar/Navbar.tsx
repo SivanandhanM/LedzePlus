@@ -25,7 +25,7 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? 'glass-panel border-b border-white/20 dark:border-white/10 shadow-sm py-3'
+          ? 'bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 shadow-md py-3'
           : 'bg-transparent py-5'
       }`}
     >
