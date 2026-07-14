@@ -53,7 +53,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left w-full max-w-[260px] shrink-0"
+            className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left w-full max-w-[320px] shrink-0"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center">
@@ -93,7 +93,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="order-3 lg:order-3 flex flex-col items-center lg:items-start text-center lg:text-left w-full max-w-[260px] shrink-0"
+            className="order-3 lg:order-3 flex flex-col items-center lg:items-start text-center lg:text-left w-full max-w-[320px] shrink-0"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-8 h-8 rounded-full bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 flex items-center justify-center">
