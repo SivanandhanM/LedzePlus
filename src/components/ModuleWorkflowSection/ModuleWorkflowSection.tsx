@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, AlertCircle, CheckCircle2 } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
-import type { ModuleWorkflowConfig, ModuleStep, ExtraFeature, Benefit } from '../../workflows/moduleWorkflowTypes';
+import type { ModuleWorkflowConfig, ModuleStep, ExtraFeature } from '../../workflows/moduleWorkflowTypes';
 
 /* ─────────────────────────────────────────────────────────────────────────────
    ICON RENDERER
@@ -380,7 +380,7 @@ interface ModuleWorkflowSectionProps {
 }
 
 export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionProps) {
-  const { steps, extraFeatures, benefits, moduleName, moduleLabel, subtitle, stepCountLabel, bannerGradient } = config;
+  const { steps, extraFeatures, benefits, moduleName: _moduleName, moduleLabel, subtitle, stepCountLabel, bannerGradient } = config;
 
   const [activeStepId, setActiveStepId] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
