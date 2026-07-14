@@ -57,7 +57,7 @@ export default function MainLayout() {
   }, [location.key, location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden text-slate-900 dark:text-slate-100">
+    <div className="h-screen flex flex-col relative overflow-hidden text-slate-900 dark:text-slate-100">
       <GlobalBackground />
       <FloatingERPBackground />
       <RouteLoader isLoading={isLoading} />
