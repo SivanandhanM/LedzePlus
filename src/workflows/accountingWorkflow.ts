@@ -3,12 +3,12 @@ import type { ModuleWorkflowConfig } from './moduleWorkflowTypes';
 
 export const accountingWorkflow: WorkflowData = {
   nodes: [
-    { id: 'subledger', label: 'Sub-ledger Posting', icon: 'Database', x: 20, y: 20, color: 'text-slate-500', tooltip: { purpose: 'Automated entries from Sales, Purchase, and Payroll modules.' } },
-    { id: 'journal', label: 'Journal Entry', icon: 'Edit3', x: 50, y: 20, color: 'text-blue-500', tooltip: { purpose: 'Manual adjustments and accruals posted to the General Ledger.' } },
-    { id: 'tb', label: 'Trial Balance', icon: 'Scale', x: 80, y: 20, color: 'text-indigo-500', tooltip: { purpose: 'Generation of pre-close Trial Balance to ensure debits equal credits.' } },
-    { id: 'recon', label: 'Reconciliation', icon: 'CheckSquare', x: 80, y: 80, color: 'text-emerald-500', tooltip: { purpose: 'Bank, Inventory, and Inter-company accounts reconciled.' } },
-    { id: 'reports', label: 'Financial Reports', icon: 'PieChart', x: 50, y: 80, color: 'text-purple-500', tooltip: { purpose: 'P&L, Balance Sheet, and Cash Flow statements finalized.' } },
-    { id: 'close', label: 'Period Closing', icon: 'Lock', x: 20, y: 80, color: 'text-rose-500', tooltip: { purpose: 'Accounting period hard-closed to prevent further postings.' } }
+    { id: 'subledger', label: 'Sub-ledger Posting', icon: 'Database', x: 20, y: 28, color: 'text-slate-500', tooltip: { purpose: 'Automated entries from Sales, Purchase, and Payroll modules.' } },
+    { id: 'journal', label: 'Journal Entry', icon: 'Edit3', x: 50, y: 28, color: 'text-blue-500', tooltip: { purpose: 'Manual adjustments and accruals posted to the General Ledger.' } },
+    { id: 'tb', label: 'Trial Balance', icon: 'Scale', x: 80, y: 28, color: 'text-indigo-500', tooltip: { purpose: 'Generation of pre-close Trial Balance to ensure debits equal credits.' } },
+    { id: 'recon', label: 'Reconciliation', icon: 'CheckSquare', x: 80, y: 72, color: 'text-emerald-500', tooltip: { purpose: 'Bank, Inventory, and Inter-company accounts reconciled.' } },
+    { id: 'reports', label: 'Financial Reports', icon: 'PieChart', x: 50, y: 72, color: 'text-purple-500', tooltip: { purpose: 'P&L, Balance Sheet, and Cash Flow statements finalized.' } },
+    { id: 'close', label: 'Period Closing', icon: 'Lock', x: 20, y: 72, color: 'text-rose-500', tooltip: { purpose: 'Accounting period hard-closed to prevent further postings.' } }
   ],
   edges: [
     { id: 'e1', source: 'subledger', target: 'journal' },

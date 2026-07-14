@@ -1,5 +1,5 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
-import Hero from '../../components/Hero/Hero';
+import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import Table from '../../components/Table/Table';
@@ -52,7 +52,8 @@ export default function Billing() {
           subtitle="Enterprise Invoicing & Receivables"
           description="The Billing & Invoicing module acts as the financial culmination of the sales process, ensuring accurate revenue realization and absolute tax compliance. Built to handle complex enterprise pricing structures, it seamlessly generates proforma and tax invoices while integrating directly with government portals for E-Way Bills and E-Invoices. It significantly reduces Days Sales Outstanding (DSO) by automating payment follow-ups and providing real-time visibility into outstanding receivables."
           icon={<Receipt className="w-10 h-10" />}
-          workflowPreview={<AnimatedWorkflowPreview workflow={billingWorkflow} accentColor="blue" />}
+          workflowPreview={<AnimatedWorkflowPreview workflow={billingWorkflow} accentColor="purple" />}
+          theme={MODULE_THEMES.billing}
         />
       </div>
       <div ref={contentRef} className="scroll-mt-6"></div>

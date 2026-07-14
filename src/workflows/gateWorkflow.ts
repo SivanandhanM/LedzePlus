@@ -3,12 +3,12 @@ import type { ModuleWorkflowConfig } from './moduleWorkflowTypes';
 
 export const gateWorkflow: WorkflowData = {
   nodes: [
-    { id: 'request', label: 'Gate Pass Request', icon: 'FilePlus', x: 20, y: 20, color: 'text-blue-500', tooltip: { purpose: 'Internal user or vendor raises an inward/outward request.' } },
-    { id: 'security', label: 'Security Verification', icon: 'ShieldCheck', x: 50, y: 20, color: 'text-indigo-500', tooltip: { purpose: 'Vehicle, driver, and documents verified at the gate.' } },
-    { id: 'logging', label: 'Inward / Outward Logging', icon: 'BookOpen', x: 80, y: 20, color: 'text-purple-500', tooltip: { purpose: 'Material entry/exit recorded against authorized pass.' } },
-    { id: 'weigh', label: 'Weighbridge Sync', icon: 'Scale', x: 80, y: 80, color: 'text-orange-500', tooltip: { purpose: 'Automated gross/tare weight capture.' } },
-    { id: 'dock', label: 'Dock Assignment', icon: 'MapPin', x: 50, y: 80, color: 'text-emerald-500', tooltip: { purpose: 'Vehicle directed to the designated loading/unloading bay.' } },
-    { id: 'exit', label: 'Exit Clearance', icon: 'LogOut', x: 20, y: 80, color: 'text-cyan-500', tooltip: { purpose: 'Final security check and gate pass closure.' } }
+    { id: 'request', label: 'Gate Pass Request', icon: 'FilePlus', x: 20, y: 28, color: 'text-blue-500', tooltip: { purpose: 'Internal user or vendor raises an inward/outward request.' } },
+    { id: 'security', label: 'Security Verification', icon: 'ShieldCheck', x: 50, y: 28, color: 'text-indigo-500', tooltip: { purpose: 'Vehicle, driver, and documents verified at the gate.' } },
+    { id: 'logging', label: 'Inward / Outward Logging', icon: 'BookOpen', x: 80, y: 28, color: 'text-purple-500', tooltip: { purpose: 'Material entry/exit recorded against authorized pass.' } },
+    { id: 'weigh', label: 'Weighbridge Sync', icon: 'Scale', x: 80, y: 72, color: 'text-orange-500', tooltip: { purpose: 'Automated gross/tare weight capture.' } },
+    { id: 'dock', label: 'Dock Assignment', icon: 'MapPin', x: 50, y: 72, color: 'text-emerald-500', tooltip: { purpose: 'Vehicle directed to the designated loading/unloading bay.' } },
+    { id: 'exit', label: 'Exit Clearance', icon: 'LogOut', x: 20, y: 72, color: 'text-cyan-500', tooltip: { purpose: 'Final security check and gate pass closure.' } }
   ],
   edges: [
     { id: 'e1', source: 'request', target: 'security' },

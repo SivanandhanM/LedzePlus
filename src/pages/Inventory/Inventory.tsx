@@ -1,5 +1,5 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
-import Hero from '../../components/Hero/Hero';
+import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import GlassCard from '../../components/GlassCard/GlassCard';
@@ -51,6 +51,7 @@ export default function Inventory() {
           description="The Inventory Management module is the transactional backbone of supply chain operations, providing real-time visibility into stock levels, movements, and valuations. Designed for enterprise scalability, this module exists to optimize inventory holding costs, prevent stockouts, and ensure seamless material availability. It delivers immense business value by driving accuracy in stock valuation, minimizing dead stock, and empowering organizations with complete traceability and control."
           icon={<Package className="w-10 h-10" />}
           workflowPreview={<AnimatedWorkflowPreview workflow={inventoryWorkflow} accentColor="emerald" moduleName="INVENTORY" />}
+          theme={MODULE_THEMES.inventory}
         />
       </div>
       <div ref={contentRef} className="scroll-mt-6" />

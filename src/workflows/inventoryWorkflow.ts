@@ -7,7 +7,7 @@ export const inventoryWorkflow: WorkflowData = {
       id: 'req',
       label: 'Requirement',
       icon: 'ClipboardList',
-      x: 20, y: 20,
+      x: 20, y: 28,
       color: 'text-blue-500',
       tooltip: { purpose: 'Initial identification of material shortage or production demand.', outputs: ['Requirement Document'], relatedModules: ['Manufacturing'] }
     },
@@ -15,7 +15,7 @@ export const inventoryWorkflow: WorkflowData = {
       id: 'pr',
       label: 'Purchase Requisition',
       icon: 'FileText',
-      x: 50, y: 20,
+      x: 50, y: 28,
       color: 'text-indigo-500',
       tooltip: { purpose: 'Internal material indent raised by authorized department personnel.', inputs: ['Requirement'], outputs: ['PR Document'], relatedModules: ['Purchase'] }
     },
@@ -23,7 +23,7 @@ export const inventoryWorkflow: WorkflowData = {
       id: 'po',
       label: 'Approval & PO',
       icon: 'CheckCircle2',
-      x: 80, y: 20,
+      x: 80, y: 28,
       color: 'text-purple-500',
       tooltip: { purpose: 'Multi-level approval followed by Purchase Order generation.', inputs: ['Approved PR'], outputs: ['Purchase Order'], relatedModules: ['Purchase'] }
     },
@@ -31,7 +31,7 @@ export const inventoryWorkflow: WorkflowData = {
       id: 'delivery',
       label: 'Vendor Delivery',
       icon: 'Truck',
-      x: 80, y: 80,
+      x: 80, y: 72,
       color: 'text-orange-500',
       tooltip: { purpose: 'Vendor fulfills the order and dispatches the consignment.', inputs: ['Purchase Order'], outputs: ['Delivery Challan'], relatedModules: ['Gate Management'] }
     },
@@ -39,7 +39,7 @@ export const inventoryWorkflow: WorkflowData = {
       id: 'grn',
       label: 'Goods Receipt',
       icon: 'PackageCheck',
-      x: 50, y: 80,
+      x: 50, y: 72,
       color: 'text-emerald-500',
       tooltip: { purpose: 'Items received, quality checked, and Goods Receipt Note (GRN) created.', inputs: ['Delivery Challan'], outputs: ['GRN'], relatedModules: ['Quality Control'] }
     },
@@ -47,7 +47,7 @@ export const inventoryWorkflow: WorkflowData = {
       id: 'update',
       label: 'Inventory Update',
       icon: 'Database',
-      x: 20, y: 80,
+      x: 20, y: 72,
       color: 'text-cyan-500',
       tooltip: { purpose: 'Real-time stock ledger update and valuation adjustment.', inputs: ['GRN'], outputs: ['Updated Stock Ledger'], relatedModules: ['Accounting'] }
     }

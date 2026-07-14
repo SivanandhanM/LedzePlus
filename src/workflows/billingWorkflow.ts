@@ -3,12 +3,12 @@ import type { ModuleWorkflowConfig } from './moduleWorkflowTypes';
 
 export const billingWorkflow: WorkflowData = {
   nodes: [
-    { id: 'dispatch', label: 'Dispatch Validation', icon: 'Truck', x: 20, y: 20, color: 'text-blue-500', tooltip: { purpose: 'System verifies dispatch note for billing eligibility.' } },
-    { id: 'invoice', label: 'Invoice Generation', icon: 'FileText', x: 50, y: 20, color: 'text-indigo-500', tooltip: { purpose: 'Proforma or Tax Invoice generated automatically.' } },
-    { id: 'eway', label: 'E-Way Bill & E-Invoice', icon: 'Globe', x: 80, y: 20, color: 'text-purple-500', tooltip: { purpose: 'Government portal integration for tax compliance.' } },
-    { id: 'delivery', label: 'Customer Delivery', icon: 'Mail', x: 80, y: 80, color: 'text-orange-500', tooltip: { purpose: 'Automated email dispatch of invoice to the customer.' } },
-    { id: 'tracking', label: 'Receivables Tracking', icon: 'Calendar', x: 50, y: 80, color: 'text-emerald-500', tooltip: { purpose: 'System monitors due dates and sends automated reminders.' } },
-    { id: 'collection', label: 'Payment Collection', icon: 'Banknote', x: 20, y: 80, color: 'text-cyan-500', tooltip: { purpose: 'Payment recorded, reconciled, and ledger updated.' } }
+    { id: 'dispatch', label: 'Dispatch Validation', icon: 'Truck', x: 20, y: 28, color: 'text-blue-500', tooltip: { purpose: 'System verifies dispatch note for billing eligibility.' } },
+    { id: 'invoice', label: 'Invoice Generation', icon: 'FileText', x: 50, y: 28, color: 'text-indigo-500', tooltip: { purpose: 'Proforma or Tax Invoice generated automatically.' } },
+    { id: 'eway', label: 'E-Way Bill & E-Invoice', icon: 'Globe', x: 80, y: 28, color: 'text-purple-500', tooltip: { purpose: 'Government portal integration for tax compliance.' } },
+    { id: 'delivery', label: 'Customer Delivery', icon: 'Mail', x: 80, y: 72, color: 'text-orange-500', tooltip: { purpose: 'Automated email dispatch of invoice to the customer.' } },
+    { id: 'tracking', label: 'Receivables Tracking', icon: 'Calendar', x: 50, y: 72, color: 'text-emerald-500', tooltip: { purpose: 'System monitors due dates and sends automated reminders.' } },
+    { id: 'collection', label: 'Payment Collection', icon: 'Banknote', x: 20, y: 72, color: 'text-cyan-500', tooltip: { purpose: 'Payment recorded, reconciled, and ledger updated.' } }
   ],
   edges: [
     { id: 'e1', source: 'dispatch', target: 'invoice' },

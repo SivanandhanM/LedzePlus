@@ -3,12 +3,12 @@ import type { ModuleWorkflowConfig } from './moduleWorkflowTypes';
 
 export const gstWorkflow: WorkflowData = {
   nodes: [
-    { id: 'log', label: 'Transaction Logging', icon: 'Edit', x: 20, y: 20, color: 'text-blue-500', tooltip: { purpose: 'Sales, Purchase, or Journal entry recorded with taxes.' } },
-    { id: 'validate', label: 'Tax Validation', icon: 'CheckCircle2', x: 50, y: 20, color: 'text-indigo-500', tooltip: { purpose: 'System auto-computes GST and verifies HSN/SAC codes.' } },
-    { id: 'einvoice', label: 'E-Invoice Generation', icon: 'FileText', x: 80, y: 20, color: 'text-purple-500', tooltip: { purpose: 'Real-time API push to IRP for Invoice Reference Number.' } },
-    { id: 'eway', label: 'E-Way Bill Creation', icon: 'Truck', x: 80, y: 80, color: 'text-orange-500', tooltip: { purpose: 'Logistics details synced to NIC portal for E-Way bill.' } },
-    { id: 'itc', label: 'ITC Reconciliation', icon: 'RefreshCw', x: 50, y: 80, color: 'text-emerald-500', tooltip: { purpose: 'Automated GSTR-2B matching for Input Tax Credit claims.' } },
-    { id: 'filing', label: 'Government Filing', icon: 'Landmark', x: 20, y: 80, color: 'text-cyan-500', tooltip: { purpose: 'Direct filing of GSTR-1 and GSTR-3B returns via API.' } }
+    { id: 'log', label: 'Transaction Logging', icon: 'Edit', x: 20, y: 28, color: 'text-blue-500', tooltip: { purpose: 'Sales, Purchase, or Journal entry recorded with taxes.' } },
+    { id: 'validate', label: 'Tax Validation', icon: 'CheckCircle2', x: 50, y: 28, color: 'text-indigo-500', tooltip: { purpose: 'System auto-computes GST and verifies HSN/SAC codes.' } },
+    { id: 'einvoice', label: 'E-Invoice Generation', icon: 'FileText', x: 80, y: 28, color: 'text-purple-500', tooltip: { purpose: 'Real-time API push to IRP for Invoice Reference Number.' } },
+    { id: 'eway', label: 'E-Way Bill Creation', icon: 'Truck', x: 80, y: 72, color: 'text-orange-500', tooltip: { purpose: 'Logistics details synced to NIC portal for E-Way bill.' } },
+    { id: 'itc', label: 'ITC Reconciliation', icon: 'RefreshCw', x: 50, y: 72, color: 'text-emerald-500', tooltip: { purpose: 'Automated GSTR-2B matching for Input Tax Credit claims.' } },
+    { id: 'filing', label: 'Government Filing', icon: 'Landmark', x: 20, y: 72, color: 'text-cyan-500', tooltip: { purpose: 'Direct filing of GSTR-1 and GSTR-3B returns via API.' } }
   ],
   edges: [
     { id: 'e1', source: 'log', target: 'validate' },

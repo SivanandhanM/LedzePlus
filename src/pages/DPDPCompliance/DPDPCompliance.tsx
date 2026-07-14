@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import Hero from '../../components/Hero/Hero';
+import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import { Lock } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -92,6 +92,7 @@ export default function DPDPCompliance() {
           subtitle="Data Privacy & Protection"
           description="LEDZE+ ensures complete compliance with the Digital Personal Data Protection (DPDP) Act 2023 across all enterprise modules. We implement strict data governance, secure personal information, and guarantee privacy by design for employees, customers, and vendors."
           icon={<Lock className="w-10 h-10" />}
+          theme={MODULE_THEMES.dpdp}
         />
 
         <Section title="Module-wise DPDP Protection Framework">

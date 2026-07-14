@@ -3,12 +3,12 @@ import type { ModuleWorkflowConfig } from './moduleWorkflowTypes';
 
 export const bankingWorkflow: WorkflowData = {
   nodes: [
-    { id: 'entry', label: 'Receipt / Payment Entry', icon: 'CreditCard', x: 20, y: 20, color: 'text-blue-500', tooltip: { purpose: 'Incoming receipt or outgoing vendor payment recorded.' } },
-    { id: 'approval', label: 'Multi-level Approval', icon: 'CheckSquare', x: 50, y: 20, color: 'text-indigo-500', tooltip: { purpose: 'Financial approval workflow triggered based on thresholds.' } },
-    { id: 'allocation', label: 'Ledger Allocation', icon: 'Database', x: 80, y: 20, color: 'text-purple-500', tooltip: { purpose: 'Transaction mapped to specific invoices or cost centers.' } },
-    { id: 'transfer', label: 'Fund Transfer', icon: 'Send', x: 80, y: 80, color: 'text-orange-500', tooltip: { purpose: 'Actual fund transfer executed via bank or cash.' } },
-    { id: 'recon', label: 'Bank Reconciliation', icon: 'RefreshCcw', x: 50, y: 80, color: 'text-emerald-500', tooltip: { purpose: 'Automated statement matching and reconciliation.' } },
-    { id: 'cashflow', label: 'Cash Flow Update', icon: 'PieChart', x: 20, y: 80, color: 'text-cyan-500', tooltip: { purpose: 'Real-time updating of enterprise liquidity dashboards.' } }
+    { id: 'entry', label: 'Receipt / Payment Entry', icon: 'CreditCard', x: 20, y: 28, color: 'text-blue-500', tooltip: { purpose: 'Incoming receipt or outgoing vendor payment recorded.' } },
+    { id: 'approval', label: 'Multi-level Approval', icon: 'CheckSquare', x: 50, y: 28, color: 'text-indigo-500', tooltip: { purpose: 'Financial approval workflow triggered based on thresholds.' } },
+    { id: 'allocation', label: 'Ledger Allocation', icon: 'Database', x: 80, y: 28, color: 'text-purple-500', tooltip: { purpose: 'Transaction mapped to specific invoices or cost centers.' } },
+    { id: 'transfer', label: 'Fund Transfer', icon: 'Send', x: 80, y: 72, color: 'text-orange-500', tooltip: { purpose: 'Actual fund transfer executed via bank or cash.' } },
+    { id: 'recon', label: 'Bank Reconciliation', icon: 'RefreshCcw', x: 50, y: 72, color: 'text-emerald-500', tooltip: { purpose: 'Automated statement matching and reconciliation.' } },
+    { id: 'cashflow', label: 'Cash Flow Update', icon: 'PieChart', x: 20, y: 72, color: 'text-cyan-500', tooltip: { purpose: 'Real-time updating of enterprise liquidity dashboards.' } }
   ],
   edges: [
     { id: 'e1', source: 'entry', target: 'approval' },

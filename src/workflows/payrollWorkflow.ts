@@ -3,12 +3,12 @@ import type { ModuleWorkflowConfig } from './moduleWorkflowTypes';
 
 export const payrollWorkflow: WorkflowData = {
   nodes: [
-    { id: 'onboard', label: 'Employee Onboarding', icon: 'UserPlus', x: 20, y: 20, color: 'text-blue-500', tooltip: { purpose: 'Master data creation and policy assignment.' } },
-    { id: 'attendance', label: 'Attendance & Leave', icon: 'Calendar', x: 50, y: 20, color: 'text-indigo-500', tooltip: { purpose: 'Monthly attendance processed via biometric sync.' } },
-    { id: 'salary', label: 'Salary Processing', icon: 'Calculator', x: 80, y: 20, color: 'text-purple-500', tooltip: { purpose: 'Gross pay, deductions, and net pay computed.' } },
-    { id: 'statutory', label: 'Statutory Deductions', icon: 'Landmark', x: 80, y: 80, color: 'text-orange-500', tooltip: { purpose: 'PF, ESI, and TDS calculations applied.' } },
-    { id: 'approval', label: 'Approval Workflow', icon: 'CheckSquare', x: 50, y: 80, color: 'text-emerald-500', tooltip: { purpose: 'Management review and payroll lock.' } },
-    { id: 'payslip', label: 'Disbursement & Payslip', icon: 'Banknote', x: 20, y: 80, color: 'text-cyan-500', tooltip: { purpose: 'Bank transfer and automated payslip delivery.' } }
+    { id: 'onboard', label: 'Employee Onboarding', icon: 'UserPlus', x: 20, y: 28, color: 'text-blue-500', tooltip: { purpose: 'Master data creation and policy assignment.' } },
+    { id: 'attendance', label: 'Attendance & Leave', icon: 'Calendar', x: 50, y: 28, color: 'text-indigo-500', tooltip: { purpose: 'Monthly attendance processed via biometric sync.' } },
+    { id: 'salary', label: 'Salary Processing', icon: 'Calculator', x: 80, y: 28, color: 'text-purple-500', tooltip: { purpose: 'Gross pay, deductions, and net pay computed.' } },
+    { id: 'statutory', label: 'Statutory Deductions', icon: 'Landmark', x: 80, y: 72, color: 'text-orange-500', tooltip: { purpose: 'PF, ESI, and TDS calculations applied.' } },
+    { id: 'approval', label: 'Approval Workflow', icon: 'CheckSquare', x: 50, y: 72, color: 'text-emerald-500', tooltip: { purpose: 'Management review and payroll lock.' } },
+    { id: 'payslip', label: 'Disbursement & Payslip', icon: 'Banknote', x: 20, y: 72, color: 'text-cyan-500', tooltip: { purpose: 'Bank transfer and automated payslip delivery.' } }
   ],
   edges: [
     { id: 'e1', source: 'onboard', target: 'attendance' },

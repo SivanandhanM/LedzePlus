@@ -120,7 +120,7 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
 
   return (
     <div 
-      className="relative w-full aspect-video md:aspect-[4/3] lg:aspect-square max-w-[700px] mx-auto rounded-[28px] overflow-hidden bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)] flex items-center justify-center"
+      className="relative w-full aspect-[4/3] max-w-[700px] mx-auto rounded-[28px] overflow-hidden bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)] flex items-center justify-center"
       onMouseLeave={() => setActiveNode(null)}
     >
       
@@ -177,45 +177,20 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
       <AnimatePresence>
         {activeNode && activeNode.tooltip && (
           <motion.div
-            initial={{ opacity: 0, y: activeNode.y < 50 ? 10 : -10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: activeNode.y < 50 ? 10 : -10, scale: 0.95 }}
-            className={`absolute ${activeNode.y < 50 ? 'bottom-4' : 'top-4'} left-4 right-4 z-50 p-4 rounded-2xl bg-white/80 dark:bg-slate-800/80 shadow-2xl border border-white/50 dark:border-white/10 backdrop-blur-3xl`}
+            key={activeNode.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className="absolute bottom-0 left-0 right-0 z-50 px-5 py-3 bg-white/85 dark:bg-slate-800/85 backdrop-blur-xl border-t border-white/40 dark:border-white/10"
           >
-            <h4 className="font-bold text-slate-800 dark:text-white flex items-center gap-2 mb-2">
+            <h4 className="font-bold text-slate-800 dark:text-white flex items-center gap-2 text-sm mb-0.5">
               {renderIcon(activeNode.icon, "w-4 h-4")}
               {activeNode.label}
             </h4>
-            <p className="text-sm text-slate-600 dark:text-slate-300 mb-3 leading-relaxed">
+            <p className="text-[12px] text-slate-600 dark:text-slate-300 leading-snug line-clamp-2">
               {activeNode.tooltip.purpose}
             </p>
-            <div className="grid grid-cols-2 gap-4 text-[11px]">
-              {activeNode.tooltip.inputs && (
-                <div>
-                  <strong className="text-slate-800 dark:text-slate-200 block mb-1 uppercase tracking-wider opacity-70">Inputs</strong>
-                  <ul className="text-slate-500 dark:text-slate-400">{activeNode.tooltip.inputs.map(i => <li key={i}>• {i}</li>)}</ul>
-                </div>
-              )}
-              {activeNode.tooltip.outputs && (
-                <div>
-                  <strong className="text-slate-800 dark:text-slate-200 block mb-1 uppercase tracking-wider opacity-70">Outputs</strong>
-                  <ul className="text-slate-500 dark:text-slate-400">{activeNode.tooltip.outputs.map(i => <li key={i}>• {i}</li>)}</ul>
-                </div>
-              )}
-              {activeNode.tooltip.relatedModules && (
-                <div className="col-span-2">
-                  <strong className="text-slate-800 dark:text-slate-200 block mb-1 uppercase tracking-wider opacity-70">Related Modules</strong>
-                  <div className="flex flex-wrap gap-2 mt-1">
-                    {activeNode.tooltip.relatedModules.map(m => (
-                      <span key={m} className="px-2 py-1 bg-slate-100 dark:bg-slate-700/50 rounded-md text-[10px] font-medium text-slate-600 dark:text-slate-300">
-                        {m}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center text-[10px] uppercase font-bold tracking-wider text-slate-400">
+            <div className="mt-2 pt-2 border-t border-slate-200/60 dark:border-slate-700/60 flex justify-between items-center text-[10px] uppercase font-bold tracking-wider text-slate-400">
                <span>Estimated Process Time</span>
                <span className="text-emerald-500 flex items-center gap-1"><LucideIcons.Zap className="w-3 h-3" /> {activeNode.tooltip.estimatedTime || 'Real-time'}</span>
             </div>

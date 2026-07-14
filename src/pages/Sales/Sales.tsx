@@ -1,5 +1,5 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
-import Hero from '../../components/Hero/Hero';
+import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import CoreCapabilityItem from '../../components/CoreCapabilityItem/CoreCapabilityItem';
@@ -65,7 +65,8 @@ export default function Sales() {
             subtitle="Enterprise Revenue Operations"
             description="The Sales Management module orchestrates the complete order-to-cash process, transforming customer interactions into streamlined revenue pipelines. Built for enterprise scale, it seamlessly handles inquiries, quotations, complex pricing rules, order fulfillment, and automated invoicing. It provides real-time visibility into sales performance, accelerates payment collections, and enhances customer satisfaction through flawless delivery execution."
             icon={<TrendingUp className="w-10 h-10" />}
-            workflowPreview={<AnimatedWorkflowPreview workflow={salesWorkflow} accentColor="indigo" moduleName="SALES" />}
+            workflowPreview={<AnimatedWorkflowPreview workflow={salesWorkflow} accentColor="emerald" moduleName="SALES" />}
+            theme={MODULE_THEMES.sales}
           />
         </div>
         <div ref={contentRef} className="scroll-mt-6" />

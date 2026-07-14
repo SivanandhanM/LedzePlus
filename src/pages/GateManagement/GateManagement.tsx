@@ -1,5 +1,5 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
-import Hero from '../../components/Hero/Hero';
+import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import Table from '../../components/Table/Table';
@@ -52,7 +52,8 @@ export default function GateManagement() {
           subtitle="Enterprise Security & Access Control"
           description="The Gate Management module serves as the primary security checkpoint for the enterprise, meticulously tracking every inward and outward movement of materials, vehicles, and personnel. Designed to eliminate manual logbooks, it ensures absolute visibility into premise operations, preventing unauthorized access and material pilferage. By integrating directly with weighbridges and procurement systems, it accelerates vehicle turnaround times while enforcing strict corporate security protocols."
           icon={<ShieldCheck className="w-10 h-10" />}
-          workflowPreview={<AnimatedWorkflowPreview workflow={gateWorkflow} accentColor="rose" />}
+          workflowPreview={<AnimatedWorkflowPreview workflow={gateWorkflow} accentColor="indigo" />}
+          theme={MODULE_THEMES.gate}
         />
       </div>
       <div ref={contentRef} className="scroll-mt-6"></div>

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useScrollToContent } from '../../hooks/useScrollToContent';
-import Hero from '../../components/Hero/Hero';
+import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import { Book, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -49,6 +49,7 @@ export default function GSTKnowledgeCenter() {
           subtitle="Indirect Tax & Compliance Hub"
           description="Access a comprehensive glossary of Goods and Services Tax (GST) returns, electronic invoicing standards, e-Way bills, and statutory compliance resources designed for enterprise accounting."
           icon={<Book className="w-10 h-10" />}
+          theme={MODULE_THEMES.gst}
         />
 
         <div ref={contentRef} className="scroll-mt-6"></div>

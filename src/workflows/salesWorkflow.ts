@@ -3,11 +3,11 @@ import type { ModuleWorkflowConfig } from './moduleWorkflowTypes';
 
 export const salesWorkflow: WorkflowData = {
   nodes: [
-    { id: 'inq', label: 'Inquiry & Quotation', icon: 'MessageSquare', x: 20, y: 20, color: 'text-blue-500', tooltip: { purpose: 'Customer request received and formal quotation sent.' } },
-    { id: 'so', label: 'Sales Order', icon: 'FileCheck', x: 50, y: 20, color: 'text-indigo-500', tooltip: { purpose: 'Confirmed order logged with approved pricing and terms.' } },
+    { id: 'inq', label: 'Inquiry & Quotation', icon: 'MessageSquare', x: 20, y: 28, color: 'text-blue-500', tooltip: { purpose: 'Customer request received and formal quotation sent.' } },
+    { id: 'so', label: 'Sales Order', icon: 'FileCheck', x: 50, y: 28, color: 'text-indigo-500', tooltip: { purpose: 'Confirmed order logged with approved pricing and terms.' } },
     { id: 'fulfill', label: 'Order Fulfillment', icon: 'PackageSearch', x: 80, y: 50, color: 'text-purple-500', tooltip: { purpose: 'Inventory reserved and picking lists generated.' } },
-    { id: 'dispatch', label: 'Dispatch', icon: 'Truck', x: 50, y: 80, color: 'text-orange-500', tooltip: { purpose: 'Goods shipped out with automated Gate Pass creation.' } },
-    { id: 'inv', label: 'Invoicing & GST', icon: 'Receipt', x: 20, y: 80, color: 'text-emerald-500', tooltip: { purpose: 'Tax-compliant invoice and E-Way bill generated.' } },
+    { id: 'dispatch', label: 'Dispatch', icon: 'Truck', x: 50, y: 72, color: 'text-orange-500', tooltip: { purpose: 'Goods shipped out with automated Gate Pass creation.' } },
+    { id: 'inv', label: 'Invoicing & GST', icon: 'Receipt', x: 20, y: 72, color: 'text-emerald-500', tooltip: { purpose: 'Tax-compliant invoice and E-Way bill generated.' } },
     { id: 'pay', label: 'Payment Collection', icon: 'Banknote', x: 20, y: 50, color: 'text-cyan-500', tooltip: { purpose: 'Payment recorded and Accounts Receivable updated.' } }
   ],
   edges: [
