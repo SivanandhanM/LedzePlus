@@ -41,7 +41,7 @@ export default function HeroModuleCard({ title, desc, icon, colorVar, delay }: H
           borderColor: 'color-mix(in srgb, var(--color-mod) 50%, transparent)'
         }}
         whileTap={{ scale: 0.95 }}
-        className="group relative flex items-center gap-4 w-[240px] h-[100px] text-left p-4 rounded-3xl glass-premium border border-white/40 dark:border-white/10 shadow-xl overflow-hidden transition-all duration-300 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md"
+        className="group relative flex items-center gap-3 w-[220px] h-[90px] text-left p-3 rounded-2xl glass-premium border border-white/40 dark:border-white/10 shadow-xl overflow-hidden transition-all duration-300 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md"
       >
         {/* Soft breathing glow behind the card content */}
         <motion.div 
@@ -59,7 +59,7 @@ export default function HeroModuleCard({ title, desc, icon, colorVar, delay }: H
 
         {/* Icon Container */}
         <div 
-          className="relative flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner transition-transform duration-300 group-hover:scale-110"
+          className="relative flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center shadow-inner transition-transform duration-300 group-hover:scale-110"
           style={{ 
             background: `linear-gradient(135deg, var(--color-mod), color-mix(in srgb, var(--color-mod) 70%, black))`,
             color: 'white'
@@ -70,10 +70,10 @@ export default function HeroModuleCard({ title, desc, icon, colorVar, delay }: H
 
         {/* Text Content */}
         <div className="relative flex flex-col justify-center min-w-0">
-          <h3 className="font-bold text-[15px] text-slate-800 dark:text-slate-100 truncate group-hover:text-[var(--color-mod)] transition-colors duration-300">
+          <h3 className="font-bold text-[14px] text-slate-800 dark:text-slate-100 truncate group-hover:text-[var(--color-mod)] transition-colors duration-300">
             {title}
           </h3>
-          <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight mt-0.5 line-clamp-2">
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight mt-0.5 line-clamp-2">
             {desc}
           </p>
         </div>
