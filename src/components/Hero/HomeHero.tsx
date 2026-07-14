@@ -53,7 +53,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left w-full max-w-[320px] shrink-0"
+            className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left w-full max-w-[320px] shrink-0 p-6 rounded-[24px] bg-white/45 dark:bg-slate-900/30 backdrop-blur-xl border border-white/30 dark:border-white/5 shadow-[0_12px_40px_rgba(31,38,135,0.04)] hover:border-blue-500/30 dark:hover:border-blue-500/30 transition-colors duration-300"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center">
@@ -62,7 +62,7 @@ export default function Hero() {
               <h3 className="text-[18px] font-semibold text-slate-800 dark:text-slate-200">About LEDZE+ ERP</h3>
             </div>
             <div className="w-12 h-[2px] bg-gradient-to-r from-blue-500 to-transparent mb-5" />
-            <p className="text-[15px] leading-[1.8] text-slate-500 dark:text-slate-400 mb-0 font-medium">
+            <p className="text-[14px] leading-[1.8] text-slate-500 dark:text-slate-400 mb-0 font-medium">
               A unified enterprise resource planning platform that seamlessly connects procurement, inventory, finance, HR, taxation, banking, and operations through one intelligent ecosystem designed for modern businesses.
             </p>
           </motion.div>
@@ -93,7 +93,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="order-3 lg:order-3 flex flex-col items-center lg:items-start text-center lg:text-left w-full max-w-[320px] shrink-0"
+            className="order-3 lg:order-3 flex flex-col items-center lg:items-start text-center lg:text-left w-full max-w-[320px] shrink-0 p-6 rounded-[24px] bg-white/45 dark:bg-slate-900/30 backdrop-blur-xl border border-white/30 dark:border-white/5 shadow-[0_12px_40px_rgba(31,38,135,0.04)] hover:border-purple-500/30 dark:hover:border-purple-500/30 transition-colors duration-300"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-8 h-8 rounded-full bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 flex items-center justify-center">
@@ -102,7 +102,7 @@ export default function Hero() {
               <h3 className="text-[18px] font-semibold text-slate-800 dark:text-slate-200">Why LEDZE+ ERP?</h3>
             </div>
             <div className="w-12 h-[2px] bg-gradient-to-r from-purple-500 to-transparent mb-5" />
-            <p className="text-[15px] leading-[1.8] text-slate-500 dark:text-slate-400 mb-0 font-medium">
+            <p className="text-[14px] leading-[1.8] text-slate-500 dark:text-slate-400 mb-0 font-medium">
               Built for growing enterprises with intelligent automation, real-time analytics, enterprise-grade security, and scalable architecture that supports every stage of business growth.
             </p>
           </motion.div>
