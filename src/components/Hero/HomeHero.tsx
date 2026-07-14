@@ -46,7 +46,7 @@ export default function Hero() {
         </div>
 
         {/* Responsive 3-Column Layout */}
-        <div className="flex flex-col lg:flex-row items-center lg:items-stretch justify-center w-full gap-6 lg:gap-8 my-4 relative">
+        <div className="flex flex-col lg:flex-row items-center lg:items-stretch justify-center w-full max-w-[1080px] mx-auto gap-6 lg:gap-8 my-4 relative">
 
           {/* Left Column: About */}
           <motion.div
