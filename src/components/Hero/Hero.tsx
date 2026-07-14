@@ -1,8 +1,7 @@
 // Re-trigger TS Server
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, CheckCircle2, Eye, Network } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { CheckCircle2, Eye, Network } from 'lucide-react';
 
 export interface ModuleTheme {
   primary: string;    // e.g. '#15803D'
@@ -98,8 +97,7 @@ interface HeroProps {
   theme?: ModuleTheme;
 }
 
-export default function Hero({ title, subtitle, description, icon, workflowPreview, backTarget = "modules", backText = "Back to Modules", theme = MODULE_THEMES.gate }: HeroProps) {
-  const dynamicBackTarget = typeof window !== 'undefined' ? (sessionStorage.getItem('sourceSection') || backTarget) : backTarget;
+export default function Hero({ title, subtitle, description, icon, workflowPreview, theme = MODULE_THEMES.gate }: HeroProps) {
 
   return (
     <div className={`relative ${workflowPreview ? 'pt-6 pb-6 min-h-[85vh] flex items-center' : 'pt-16 pb-8'}`}>
@@ -108,16 +106,6 @@ export default function Hero({ title, subtitle, description, icon, workflowPrevi
         {/* Header Content */}
         <div className={`grid gap-8 items-center ${workflowPreview ? 'grid-cols-1 lg:grid-cols-[45%_55%]' : 'grid-cols-1'}`}>
           <div className="flex flex-col">
-            {/* Back Navigation */}
-            <Link
-              to="/"
-              state={{ scrollTo: dynamicBackTarget }}
-              className="self-start inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors font-medium mb-6 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              {backText}
-            </Link>
-
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

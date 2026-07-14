@@ -1,12 +1,13 @@
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowLeft } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import SpotlightSearch from '../SpotlightSearch/SpotlightSearch';
 import logoImg from '../../assets/images/logo.webp';
 import navanalaLogo from '../../assets/images/logo_nn.webp';
 
 export default function Navbar() {
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -83,6 +84,23 @@ export default function Navbar() {
                 LEDZE<span className="text-primary font-black ml-1">+</span>
               </motion.span>
             </Link>
+
+            {location.pathname !== '/' && (
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="ml-4"
+              >
+                <Link
+                  to="/"
+                  state={{ scrollTo: sessionStorage.getItem('sourceSection') || 'modules' }}
+                  className="inline-flex items-center gap-1.5 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors font-bold bg-white/70 hover:bg-white dark:bg-slate-900/60 dark:hover:bg-slate-900/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow text-xs sm:text-sm"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <span>Back to Modules</span>
+                </Link>
+              </motion.div>
+            )}
           </div>
 
           {/* ── Right: Search + Navanala badge ── */}
