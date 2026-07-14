@@ -1,22 +1,14 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
 import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
-import Timeline from '../../components/Timeline/Timeline';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
-import ImageCard from '../../components/ImageCard/ImageCard';
+import CoreCapabilityItem from '../../components/CoreCapabilityItem/CoreCapabilityItem';
 import Table from '../../components/Table/Table';
-import GlassCard from '../../components/GlassCard/GlassCard';
-import { TrendingUp, Truck, FileSpreadsheet, BadgePercent, AlertTriangle, ListChecks } from 'lucide-react';
-import salesImg from '../../assets/images/sales.webp';
-
-const workflowSteps = [
-  { title: 'Inquiry & Quotation', description: 'Customer request received and formal quotation sent.' },
-  { title: 'Sales Order', description: 'Confirmed order logged with approved pricing and terms.' },
-  { title: 'Order Fulfillment', description: 'Inventory reserved and picking lists generated.' },
-  { title: 'Dispatch & Gate Pass', description: 'Goods shipped out with automated Gate Pass creation.' },
-  { title: 'Invoicing & GST', description: 'Tax-compliant invoice and E-Way bill generated.' },
-  { title: 'Payment Collection', description: 'Payment recorded and Accounts Receivable updated.' }
-];
+import AnimatedWorkflowPreview from '../../components/WorkflowPreview/AnimatedWorkflowPreview';
+import ModuleWorkflowSection from '../../components/ModuleWorkflowSection/ModuleWorkflowSection';
+import { salesWorkflow, salesWorkflowConfig } from '../../workflows/salesWorkflow';
+import { TrendingUp, Truck, FileSpreadsheet, BadgePercent, AlertTriangle, ListChecks, Server, Database } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const features = [
   { title: 'Order-to-Cash Automation', desc: 'Seamlessly convert quotations to sales orders, dispatch notes, and invoices without redundant data entry.', icon: <TrendingUp /> },
@@ -24,7 +16,7 @@ const features = [
   { title: 'Dispatch & Delivery Routing', desc: 'Plan dispatch routes, assign vehicles, and generate delivery challans with real-time logistics tracking.', icon: <Truck /> },
   { title: 'Pricing & Scheme Management', desc: 'Configure dynamic promotional schemes, volume-based discounts, and complex pricing matrices automatically.', icon: <BadgePercent /> },
   { title: 'Barcode Verification', desc: 'Ensure 100% dispatch accuracy by validating outgoing shipments against the Sales Order using barcode scanners.', icon: <ListChecks /> },
-  { title: 'GST & E-Way Bill Automation', desc: 'Generate fully compliant tax invoices and E-Way bills directly from the sales dispatch module in one click.', icon: <FileSpreadsheet /> }
+  { title: 'GST & E-Way Bill Automation', desc: 'Generate fully compliant tax invoices and E-Way bills directly from the sales dispatch module in one click.', icon: <FileSpreadsheet /> },
 ];
 
 const capabilities = [
@@ -35,7 +27,7 @@ const capabilities = [
   'Advanced Sales Dashboard & Revenue Analytics',
   'Multi-currency and Multi-branch Sales Support',
   'Integrated Barcode & QR Code Scanning',
-  'Automated E-Invoice and E-Way Bill Generation'
+  'Automated E-Invoice and E-Way Bill Generation',
 ];
 
 const integrationsAndBenefits = [
@@ -45,66 +37,71 @@ const integrationsAndBenefits = [
   ['Reduced Manual Work', 'Elimination of redundant data entry from quote to cash.'],
   ['Better Compliance', 'Automated GST, E-Invoice, and E-Way Bill generation ensures strict compliance.'],
   ['Complete Traceability', 'Track the entire sales lifecycle from initial inquiry to final payment receipt.'],
-  ['Improved Productivity', 'Accelerated order fulfillment cycles and reduced dispatch errors.']
+  ['Improved Productivity', 'Accelerated order fulfillment cycles and reduced dispatch errors.'],
 ];
 
 export default function Sales() {
   const contentRef = useScrollToContent();
 
   return (
-    <div className="pb-12">
-      <div className="py-8">
-        <Hero 
-          title="LEDZE+ Sales"
-          subtitle="Enterprise Revenue Operations"
-          description="The Sales Management module orchestrates the complete Order-to-Cash lifecycle, driving enterprise revenue generation and customer satisfaction. Designed to handle complex pricing matrices and high-volume dispatch logistics, this module exists to streamline order fulfillment while enforcing strict credit controls. It delivers substantial business value by automating tax compliance, ensuring accurate dispatch through barcode verification, and providing executive dashboards for real-time revenue analytics."
-          icon={<TrendingUp className="w-10 h-10" />}
-        />
-      </div>
-      <div ref={contentRef} className="scroll-mt-6"></div>
+    <div className="relative pb-12 overflow-hidden">
 
-
-      {/* 1. Workflow */}
-      <Section title="Business Workflow">
-        <Timeline steps={workflowSteps} />
-      </Section>
-
-      {/* 2. Image */}
-      <Section title="Sales Architecture">
-        <ImageCard src={salesImg} alt="Sales Workflow Diagram" caption="Comprehensive Sales & Fulfillment Workflow" />
-      </Section>
-
-      {/* 3. Features + Capabilities */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-12">
-        <div className="xl:col-span-2">
-          <Section title="Key Functionalities">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {features.map((feat, idx) => (
-                <FeatureCard key={idx} title={feat.title} description={feat.desc} icon={feat.icon} delay={idx * 0.1} />
-              ))}
-            </div>
-          </Section>
-        </div>
-
-        <div className="xl:col-span-1">
-          <Section title="Core Capabilities">
-            <div className="space-y-4">
-              {capabilities.map((rule, idx) => (
-                <GlassCard key={idx} delay={idx * 0.1} className="flex items-start gap-4 p-5 border-emerald-500/30">
-                  <div className="mt-0.5 w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
-                    <ListChecks className="w-4 h-4" />
-                  </div>
-                  <span className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">{rule}</span>
-                </GlassCard>
-              ))}
-            </div>
-          </Section>
-        </div>
+      {/* Enterprise Background Layer */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }} transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }} className="absolute top-[10%] -left-1/4 w-[1000px] h-[1000px] bg-indigo-200/40 dark:bg-indigo-900/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
+        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 2 }} className="absolute top-[40%] -right-1/4 w-[800px] h-[800px] bg-emerald-200/40 dark:bg-emerald-900/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
+        <motion.div animate={{ y: [0, -30, 0], rotate: [0, 10, 0] }} transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }} className="absolute top-[30%] left-[5%] text-slate-300 dark:text-slate-800 opacity-20">
+          <Database size={120} />
+        </motion.div>
+        <motion.div animate={{ y: [0, 40, 0], rotate: [0, -15, 0] }} transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut', delay: 5 }} className="absolute top-[60%] right-[10%] text-slate-300 dark:text-slate-800 opacity-20">
+          <Server size={180} />
+        </motion.div>
       </div>
 
-      <Section title="Module Integrations & Business Benefits">
-        <Table headers={['Integration / Benefit', 'Description']} rows={integrationsAndBenefits} />
-      </Section>
+      <div className="relative z-10">
+        <div className="py-8">
+          <Hero
+            title="LEDZE+ Sales"
+            subtitle="Enterprise Revenue Operations"
+            description="The Sales Management module orchestrates the complete order-to-cash process, transforming customer interactions into streamlined revenue pipelines. Built for enterprise scale, it seamlessly handles inquiries, quotations, complex pricing rules, order fulfillment, and automated invoicing. It provides real-time visibility into sales performance, accelerates payment collections, and enhances customer satisfaction through flawless delivery execution."
+            icon={<TrendingUp className="w-10 h-10" />}
+            workflowPreview={<AnimatedWorkflowPreview workflow={salesWorkflow} accentColor="indigo" moduleName="SALES" />}
+          />
+        </div>
+        <div ref={contentRef} className="scroll-mt-6" />
+
+        {/* Interactive Workflow Section */}
+        <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 mb-16">
+          <ModuleWorkflowSection config={salesWorkflowConfig} />
+        </div>
+
+        {/* Features + Capabilities */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="xl:col-span-2">
+            <Section title="Key Functionalities">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {features.map((feat, idx) => (
+                  <FeatureCard key={idx} title={feat.title} description={feat.desc} icon={feat.icon} delay={idx * 0.1} />
+                ))}
+              </div>
+            </Section>
+          </div>
+
+          <div className="xl:col-span-1">
+            <Section title="Core Capabilities">
+              <div className="space-y-4">
+                {capabilities.map((rule, idx) => (
+                  <CoreCapabilityItem key={idx} text={rule} delay={idx * 0.1} />
+                ))}
+              </div>
+            </Section>
+          </div>
+        </div>
+
+        <Section title="Module Integrations & Business Benefits">
+          <Table headers={['Integration / Benefit', 'Description']} rows={integrationsAndBenefits} />
+        </Section>
+      </div>
     </div>
   );
 }

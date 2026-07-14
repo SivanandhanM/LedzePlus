@@ -11,12 +11,22 @@
   --color-orange: #FB923C;
   --color-emerald: #22C55E;
   
+  --color-mod-inventory: #0D9488;
+  --color-mod-purchase: #2563EB;
+  --color-mod-sales: #059669;
+  --color-mod-billing: #7C3AED;
+  --color-mod-accounting: #EA580C;
+  --color-mod-payroll: #E11D48;
+  --color-mod-banking: #3B82F6;
+  --color-mod-gst: #D97706;
+  --color-mod-gate: #4F46E5;
+  
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
 body {
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  background: linear-gradient(135deg, #FCFCFF 0%, #F4F1FF 50%, #EEF5FF 100%);
+  background: #FAFAFC;
   color: #1E293B;
   min-height: 100vh;
 }
@@ -37,8 +47,22 @@ body {
 }
 
 .dark body {
-  background: linear-gradient(135deg, #020617 0%, #0F172A 50%, #1E293B 100%);
+  background: #09090B;
   color: #F1F5F9;
+}
+
+.glass-premium {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-premium {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 /* Custom Scrollbar */
@@ -72,5 +96,49 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@keyframes ledzeGradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.ledze-heading {
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  background: linear-gradient(
+    90deg,
+    #2563EB 0%,
+    #4F46E5 25%,
+    #7C3AED 50%,
+    #9333EA 75%,
+    #2563EB 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: ledzeGradientFlow 10s ease infinite;
+  transition: filter 0.3s ease, transform 0.3s ease, letter-spacing 0.3s ease, text-shadow 0.3s ease;
+  display: inline-block;
+  padding-bottom: 0.1em; /* Prevent clipping of descenders */
+  margin-bottom: -0.1em;
+}
+
+.ledze-heading:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+  letter-spacing: -0.035em;
+  text-shadow: 0 0 18px rgba(124, 58, 237, 0.12);
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
   }
 }

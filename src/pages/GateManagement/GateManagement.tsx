@@ -1,22 +1,15 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
 import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
-import Timeline from '../../components/Timeline/Timeline';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
-import ImageCard from '../../components/ImageCard/ImageCard';
 import Table from '../../components/Table/Table';
 import GlassCard from '../../components/GlassCard/GlassCard';
+import AnimatedWorkflowPreview from '../../components/WorkflowPreview/AnimatedWorkflowPreview';
+import ModuleWorkflowSection from '../../components/ModuleWorkflowSection/ModuleWorkflowSection';
+import { gateWorkflow, gateWorkflowConfig } from '../../workflows/gateWorkflow';
 import { ShieldCheck, UserCog, Shield, LayoutDashboard, Clock, History, Truck, ListChecks } from 'lucide-react';
-import gateImg from '../../assets/images/gate.webp';
 
-const workflowSteps = [
-  { title: 'Gate Pass Request', description: 'Internal user or vendor raises an inward/outward request.' },
-  { title: 'Security Verification', description: 'Vehicle, driver, and documents verified at the gate.' },
-  { title: 'Inward / Outward Logging', description: 'Material entry/exit recorded against authorized pass.' },
-  { title: 'Weighbridge Sync', description: 'Automated gross/tare weight capture.' },
-  { title: 'Dock Assignment', description: 'Vehicle directed to the designated loading/unloading bay.' },
-  { title: 'Exit Clearance', description: 'Final security check and gate pass closure.' }
-];
+
 
 const features = [
   { title: 'Vehicle Entry & Exit', desc: 'Securely manage all incoming and outgoing logistics vehicles with automated number plate recognition (ANPR) and driver verification.', icon: <Truck /> },
@@ -57,22 +50,19 @@ export default function GateManagement() {
         <Hero 
           title="LEDZE+ Gate Management"
           subtitle="Enterprise Security & Access Control"
-          description="The Gate Management module is the frontline security engine for the enterprise facility. It rigorously controls and monitors the movement of all materials, vehicles, and visitors entering or exiting the premises. Designed to prevent inventory pilferage and unauthorized access, this module delivers immense business value by integrating seamlessly with Sales and Purchase workflows. It ensures that every logistical movement is backed by valid systemic authorization, providing complete operational transparency and an airtight audit trail."
+          description="The Gate Management module serves as the primary security checkpoint for the enterprise, meticulously tracking every inward and outward movement of materials, vehicles, and personnel. Designed to eliminate manual logbooks, it ensures absolute visibility into premise operations, preventing unauthorized access and material pilferage. By integrating directly with weighbridges and procurement systems, it accelerates vehicle turnaround times while enforcing strict corporate security protocols."
           icon={<ShieldCheck className="w-10 h-10" />}
+          workflowPreview={<AnimatedWorkflowPreview workflow={gateWorkflow} accentColor="rose" />}
         />
       </div>
       <div ref={contentRef} className="scroll-mt-6"></div>
 
+      {/* Interactive Workflow Section */}
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 mb-16">
+        <ModuleWorkflowSection config={gateWorkflowConfig} />
+      </div>
 
-      {/* 1. Workflow */}
-      <Section title="Gate Operations Workflow">
-        <Timeline steps={workflowSteps} />
-      </Section>
-
-      {/* 2. Image */}
-      <Section title="Security Architecture">
-        <ImageCard src={gateImg} alt="Gate Management Workflow" caption="Inward and Outward Gate Pass Architecture" />
-      </Section>
+      
 
       {/* 3. Features + Capabilities */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-12 mt-8">

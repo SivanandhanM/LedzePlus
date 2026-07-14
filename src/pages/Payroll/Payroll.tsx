@@ -1,22 +1,15 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
 import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
-import Timeline from '../../components/Timeline/Timeline';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
-import ImageCard from '../../components/ImageCard/ImageCard';
 import Table from '../../components/Table/Table';
 import GlassCard from '../../components/GlassCard/GlassCard';
-import { Users, UserCheck, Clock, CreditCard, FileText, Building2, Briefcase, ListChecks } from 'lucide-react';
-import payrollImg from '../../assets/images/Payroll.webp';
+import AnimatedWorkflowPreview from '../../components/WorkflowPreview/AnimatedWorkflowPreview';
+import ModuleWorkflowSection from '../../components/ModuleWorkflowSection/ModuleWorkflowSection';
+import { payrollWorkflow, payrollWorkflowConfig } from '../../workflows/payrollWorkflow';
+import { Users, UserCheck, Clock, Briefcase, CreditCard, Building2, FileText, ListChecks } from 'lucide-react';
 
-const workflowSteps = [
-  { title: 'Employee Onboarding', description: 'Master data creation and policy assignment.' },
-  { title: 'Attendance & Leave', description: 'Monthly attendance processed via biometric sync.' },
-  { title: 'Salary Processing', description: 'Gross pay, deductions, and net pay computed.' },
-  { title: 'Statutory Deductions', description: 'PF, ESI, and TDS calculations applied.' },
-  { title: 'Approval Workflow', description: 'Management review and payroll lock.' },
-  { title: 'Disbursement & Payslip', description: 'Bank transfer and automated payslip delivery.' }
-];
+
 
 const features = [
   { title: 'Employee Master Data', desc: 'Centralized employee repository covering demographics, job roles, department hierarchies, and statutory identifiers (PAN, Aadhaar).', icon: <UserCheck /> },
@@ -57,22 +50,19 @@ export default function Payroll() {
         <Hero 
           title="LEDZE+ Payroll"
           subtitle="Enterprise Human Capital Management"
-          description="The Payroll & HRMS module is a comprehensive human capital management engine designed to streamline the entire employee lifecycle. From seamless onboarding and automated biometric attendance to complex salary computations and statutory deductions, this module exists to eliminate manual HR administrative overhead. It delivers significant enterprise value by ensuring 100% compliance with labor laws (PF, ESI, TDS), preventing payroll leakage, and providing executive-level workforce analytics."
+          description="The HR & Payroll Management module is the comprehensive command center for all workforce operations. Built for enterprise complexity, it handles everything from onboarding and biometric attendance sync to complex salary structures and statutory compliance (PF, ESI, TDS). It delivers immense value by automating time-consuming payroll cycles, ensuring accurate disbursements, and maintaining a secure, centralized repository of all employee records."
           icon={<Users className="w-10 h-10" />}
+          workflowPreview={<AnimatedWorkflowPreview workflow={payrollWorkflow} accentColor="purple" />}
         />
       </div>
       <div ref={contentRef} className="scroll-mt-6"></div>
 
+      {/* Interactive Workflow Section */}
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 mb-16">
+        <ModuleWorkflowSection config={payrollWorkflowConfig} />
+      </div>
 
-      {/* 1. Workflow */}
-      <Section title="Payroll Processing Workflow">
-        <Timeline steps={workflowSteps} />
-      </Section>
-
-      {/* 2. Image */}
-      <Section title="Payroll Architecture">
-        <ImageCard src={payrollImg} alt="Payroll Workflow" caption="Payroll Management System Architecture" />
-      </Section>
+      
 
       {/* 3. Features + Capabilities */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-12">

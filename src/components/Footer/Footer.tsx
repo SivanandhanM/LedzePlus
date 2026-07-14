@@ -7,7 +7,7 @@ export default function Footer() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="mt-16 py-10 border-t border-slate-200/60 dark:border-slate-800 text-center"
+      className="mt-8 py-10 border-t border-slate-200/60 dark:border-slate-800 text-center"
     >
       {/* Divider glow */}
       <div className="w-24 h-px mx-auto mb-8 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />

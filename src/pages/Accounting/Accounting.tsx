@@ -1,21 +1,14 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
 import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
-import Timeline from '../../components/Timeline/Timeline';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
-import ImageCard from '../../components/ImageCard/ImageCard';
 import GlassCard from '../../components/GlassCard/GlassCard';
+import AnimatedWorkflowPreview from '../../components/WorkflowPreview/AnimatedWorkflowPreview';
+import ModuleWorkflowSection from '../../components/ModuleWorkflowSection/ModuleWorkflowSection';
+import { accountingWorkflow, accountingWorkflowConfig } from '../../workflows/accountingWorkflow';
 import { BookOpen, FileText, BarChart, DollarSign, Target, AlignLeft, Calendar, ShieldAlert } from 'lucide-react';
-import accountingImg from '../../assets/images/accounting.webp';
 
-const workflowSteps = [
-  { title: 'Sub-ledger Posting', description: 'Automated entries from Sales, Purchase, and Payroll modules.' },
-  { title: 'Journal Entry', description: 'Manual adjustments and accruals posted to the General Ledger.' },
-  { title: 'Trial Balance', description: 'Generation of pre-close Trial Balance to ensure debits equal credits.' },
-  { title: 'Reconciliation', description: 'Bank, Inventory, and Inter-company accounts reconciled.' },
-  { title: 'Financial Reports', description: 'P&L, Balance Sheet, and Cash Flow statements finalized.' },
-  { title: 'Period Closing', description: 'Accounting period hard-closed to prevent further postings.' }
-];
+
 
 const featureCards = [
   { title: 'Day Book & Journal', desc: 'Displays a chronological ledger of all vouchers and manual journal entries, ensuring every financial transaction is documented, traceable, and audit-ready.', icon: <Calendar /> },
@@ -47,22 +40,19 @@ export default function Accounting() {
         <Hero 
           title="LEDZE+ Accounting"
           subtitle="Enterprise Financial Management"
-          description="The Accounting & Finance module is the central nervous system of the ERP, designed to securely record, process, and report all financial transactions across the enterprise. It delivers immense business value by automating ledger entries, enforcing strict period-closing validations, and providing real-time visibility into the company's financial health. Integrated seamlessly with Sales, Purchase, and Payroll, this module ensures absolute compliance, audit readiness, and accurate financial reporting at all times."
+          description="The Accounting Management module is the financial nucleus of the ERP, delivering real-time insights, rigid compliance, and seamless multi-module ledger integration. Designed to meet global enterprise standards, it automates journaling, enforces strict period closures, and provides an immaculate audit trail. It transforms raw transactional data into strategic financial intelligence, ensuring absolute precision in trial balances, P&L, and balance sheets."
           icon={<BookOpen className="w-10 h-10" />}
+          workflowPreview={<AnimatedWorkflowPreview workflow={accountingWorkflow} accentColor="emerald" />}
         />
       </div>
       <div ref={contentRef} className="scroll-mt-6"></div>
 
+      {/* Interactive Workflow Section */}
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 mb-16">
+        <ModuleWorkflowSection config={accountingWorkflowConfig} />
+      </div>
 
-      {/* 1. Workflow */}
-      <Section title="Financial Closing Workflow">
-        <Timeline steps={workflowSteps} />
-      </Section>
-
-      {/* 2. Image */}
-      <Section title="Accounting Architecture">
-        <ImageCard src={accountingImg} alt="Accounting Workflow" caption="Comprehensive Accounting Process Workflow" />
-      </Section>
+      
 
       {/* 3. Features + Capabilities */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">

@@ -1,22 +1,15 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
+import AnimatedWorkflowPreview from '../../components/WorkflowPreview/AnimatedWorkflowPreview';
+import { purchaseWorkflow } from '../../workflows/purchaseWorkflow';
 import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
-import Timeline from '../../components/Timeline/Timeline';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
-import ImageCard from '../../components/ImageCard/ImageCard';
 import GlassCard from '../../components/GlassCard/GlassCard';
-import { ShoppingCart, CheckCircle2, Factory, ClipboardCheck, ArrowRightLeft, FileSpreadsheet, Scale, BadgeAlert, Wallet } from 'lucide-react';
-import purchaseImg from '../../assets/images/purchase.webp';
-
-const workflowSteps = [
-  { title: 'Requirement', description: 'Internal material shortage identified.' },
-  { title: 'Purchase Requisition', description: 'Departmental indent raised and approved.' },
-  { title: 'RFQ Generation', description: 'Request for Quotation sent to multiple vendors.' },
-  { title: 'Vendor Comparison', description: 'Quotations evaluated and optimal vendor selected.' },
-  { title: 'Purchase Order', description: 'Formal PO issued to the chosen vendor.' },
-  { title: 'Goods Receipt', description: 'Materials received, inspected, and GRN created.' },
-  { title: 'Invoice & Payment', description: 'Invoice matched against GRN and payment processed.' }
-];
+import PurchaseWorkflowSection from '../../components/PurchaseWorkflowSection/PurchaseWorkflowSection';
+import {
+  ShoppingCart, CheckCircle2, Factory, ClipboardCheck,
+  ArrowRightLeft, FileSpreadsheet, Scale, BadgeAlert, Wallet
+} from 'lucide-react';
 
 const features = [
   { title: 'Procurement Lifecycle Management', desc: 'End-to-end orchestration of the purchasing process, transforming internal requirements into fulfilled orders with complete traceability.', icon: <ClipboardCheck /> },
@@ -25,7 +18,7 @@ const features = [
   { title: 'Multi-level Purchase Approvals', desc: 'Enforce strict financial controls with dynamic, hierarchy-based approval workflows tied to budget limits and department thresholds.', icon: <FileSpreadsheet /> },
   { title: 'Purchase Returns & Debit Notes', desc: 'Instantly generate debit notes linked to the original Purchase Order for short shipments, damaged goods, or rate differences.', icon: <ArrowRightLeft /> },
   { title: 'Spend Analytics & Landed Cost', desc: 'Accurately apportion freight, insurance, and taxes to determine exact valuation, while dashboard analytics provide insights into spending patterns.', icon: <Wallet /> },
-  { title: 'Integration & Compliance', desc: 'Seamlessly interacts with Inventory for stock updates, Accounting for ledger entries, and ensures full GST/Tax compliance on all transactions.', icon: <BadgeAlert /> }
+  { title: 'Integration & Compliance', desc: 'Seamlessly interacts with Inventory for stock updates, Accounting for ledger entries, and ensures full GST/Tax compliance on all transactions.', icon: <BadgeAlert /> },
 ];
 
 const capabilitiesAndBenefits = [
@@ -36,7 +29,7 @@ const capabilitiesAndBenefits = [
   'Real-time spend analytics and departmental budget tracking.',
   'Seamless integration with Inventory, Accounting, and GST modules.',
   'Reduced manual data entry and accelerated procurement cycles.',
-  'Complete audit trail for all procurement activities and approvals.'
+  'Complete audit trail for all procurement activities and approvals.',
 ];
 
 export default function Purchase() {
@@ -45,27 +38,22 @@ export default function Purchase() {
   return (
     <div className="pb-12">
       <div className="py-8">
-        <Hero 
+        <Hero
           title="LEDZE+ Purchase"
           subtitle="Enterprise Procurement & Sourcing"
-          description="The Purchase Management module streamlines the entire procure-to-pay lifecycle, ensuring organizations acquire goods and services efficiently and cost-effectively. Designed to enforce strict financial controls and business rules, this module exists to optimize vendor relationships, prevent unauthorized spending, and automate routine purchasing tasks. It delivers immense enterprise value by providing real-time spend analytics, ensuring compliance through multi-level approvals, and integrating seamlessly with inventory and financial accounting systems."
+          description="The Purchase Management module handles the complete procure-to-pay lifecycle, ensuring transparency, compliance, and cost control across all vendor interactions. Designed for enterprise agility, it streamlines indenting, quotation comparisons, approvals, and order tracking. By digitizing procurement, it eliminates manual bottlenecks, enforces budget controls, and fosters stronger, more reliable supplier relationships."
           icon={<ShoppingCart className="w-10 h-10" />}
+          workflowPreview={<AnimatedWorkflowPreview workflow={purchaseWorkflow} moduleName="Purchase" />}
         />
       </div>
-      <div ref={contentRef} className="scroll-mt-6"></div>
+      <div ref={contentRef} className="scroll-mt-6" />
 
+      {/* 1. Interactive Workflow Section */}
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 mb-16">
+        <PurchaseWorkflowSection />
+      </div>
 
-      {/* 1. Workflow */}
-      <Section title="Business Workflow">
-        <Timeline steps={workflowSteps} />
-      </Section>
-
-      {/* 2. Image */}
-      <Section title="Procurement Architecture">
-        <ImageCard src={purchaseImg} alt="Purchase Workflow Diagram" caption="End-to-End Procurement Workflow" />
-      </Section>
-
-      {/* 3. Features + Business Rules */}
+      {/* 2. Features + Business Rules */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
         <div className="xl:col-span-2">
           <Section title="Key Functionalities">

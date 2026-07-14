@@ -14,6 +14,8 @@ const Payroll = lazy(() => import('./pages/Payroll/Payroll'));
 const Banking = lazy(() => import('./pages/Banking/Banking'));
 const GateManagement = lazy(() => import('./pages/GateManagement/GateManagement'));
 const GST = lazy(() => import('./pages/GST/GST'));
+const DPDPCompliance = lazy(() => import('./pages/DPDPCompliance/DPDPCompliance'));
+const GSTKnowledgeCenter = lazy(() => import('./pages/GSTKnowledgeCenter/GSTKnowledgeCenter'));
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           <Route path="banking" element={<Banking />} />
           <Route path="gate-management" element={<GateManagement />} />
           <Route path="gst" element={<GST />} />
+          <Route path="dpdp-compliance" element={<DPDPCompliance />} />
+          <Route path="gst-knowledge-center" element={<GSTKnowledgeCenter />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>

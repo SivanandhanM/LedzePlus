@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar/Navbar';
 import ScrollProgress from '../components/ScrollProgress/ScrollProgress';
 import BackToTop from '../components/BackToTop/BackToTop';
 import Footer from '../components/Footer/Footer';
-import BackgroundEffects from '../components/BackgroundEffects/BackgroundEffects';
+import GlobalBackground from '../components/GlobalBackground/GlobalBackground';
 import FloatingERPBackground from '../components/FloatingERPBackground/FloatingERPBackground';
 import RouteLoader from '../components/RouteLoader/RouteLoader';
 
@@ -58,14 +58,14 @@ export default function MainLayout() {
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden text-slate-900 dark:text-slate-100">
-      <BackgroundEffects />
+      <GlobalBackground />
       <FloatingERPBackground />
       <RouteLoader isLoading={isLoading} />
       <ScrollProgress />
       <Navbar />
       <div className="flex flex-1 overflow-hidden">
         <main id="scroll-container" className="flex-1 overflow-y-auto p-6 relative">
-          <div className="max-w-6xl mx-auto relative z-10 flex flex-col">
+          <div className="max-w-[1600px] w-[95%] mx-auto relative z-10 flex flex-col">
             <AnimatePresence mode="wait">
               <motion.div
                 key={location.key}

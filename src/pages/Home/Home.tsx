@@ -1,9 +1,12 @@
-import Hero from '../../components/Hero/Hero';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import HomeHero from '../../components/Hero/HomeHero';
 import Section from '../../components/Section/Section';
-import FeatureCard from '../../components/FeatureCard/FeatureCard';
+import LandingModuleCard from '../../components/LandingModuleCard/LandingModuleCard';
+import ResourceCard from '../../components/ResourceCard/ResourceCard';
 import {
   ShoppingCart, TrendingUp, Receipt, Package,
-  BookOpen, Users, Building2, ShieldCheck, FileText
+  BookOpen, Users, Building2, ShieldCheck, FileText, Lock, Book
 } from 'lucide-react';
 
 const modules = [
@@ -19,21 +22,39 @@ const modules = [
 ];
 
 export default function Home() {
-  return (
-    <div className="pb-12">
-      <div className="py-8">
-        <Hero
-          title="Welcome to LEDZE Plus ERP"
-          subtitle="Enterprise Edition"
-          description="A comprehensive suite of business management applications. Navigate through the modules below to explore the functional specifications and workflows."
-          icon={<Package className="w-10 h-10" />}
-        />
-      </div>
+  const location = useLocation();
 
-      <Section title="Explore Modules" id="modules">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      if (location.state.scrollTo === 'top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const element = document.getElementById(location.state.scrollTo);
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
+
+  return (
+    <div className="pb-4">
+      <HomeHero />
+
+      <Section
+        title="Explore Modules"
+        subtitle="Explore a comprehensive suite of integrated ERP modules designed to streamline procurement, inventory, sales, finance, payroll, banking, taxation, and security. Manage every core business function through one intelligent enterprise platform that enhances productivity, ensures operational efficiency, and supports scalable business growth."
+        centerHeader={true}
+        id="modules"
+        className="pt-8 pb-16"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {modules.map((mod, idx) => (
-            <FeatureCard
+            <LandingModuleCard
               key={idx}
               title={mod.title}
               description={mod.desc}
@@ -43,6 +64,35 @@ export default function Home() {
               badge={mod.badge}
             />
           ))}
+        </div>
+      </Section>
+
+      <Section
+        title="DPDP Act & GST Resource Center"
+        subtitle="Everything you need to understand, implement, and comply with the Digital Personal Data Protection (DPDP) Act and Goods & Services Tax (GST)—from legal requirements and compliance checklists to practical implementation guidance."
+        centerHeader={true}
+        id="resources"
+        className="mb-4"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[1240px] mx-auto">
+          <ResourceCard
+            title="DPDP Act Compliance"
+            description="Manage consent, data governance, privacy requests, and Digital Personal Data Protection Act compliance."
+            badge="DATA PRIVACY"
+            icon={<Lock className="w-6 h-6" />}
+            path="/dpdp-compliance"
+            accentColor="#0F766E"
+            delay={0.1}
+          />
+          <ResourceCard
+            title="GST Knowledge Center"
+            description="Access GST rules, tax rates, HSN/SAC codes, e-Way Bills, and statutory compliance resources."
+            badge="INDIRECT TAX"
+            icon={<Book className="w-6 h-6" />}
+            path="/gst-knowledge-center"
+            accentColor="#EA580C"
+            delay={0.2}
+          />
         </div>
       </Section>
     </div>

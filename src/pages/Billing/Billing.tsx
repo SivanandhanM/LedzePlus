@@ -1,22 +1,15 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
 import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
-import Timeline from '../../components/Timeline/Timeline';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
-import ImageCard from '../../components/ImageCard/ImageCard';
 import Table from '../../components/Table/Table';
 import GlassCard from '../../components/GlassCard/GlassCard';
-import { Receipt, LayoutDashboard, Clock, AlertOctagon, BarChart3, ShieldAlert, ListChecks } from 'lucide-react';
-import billingImg from '../../assets/images/billing.webp';
+import AnimatedWorkflowPreview from '../../components/WorkflowPreview/AnimatedWorkflowPreview';
+import ModuleWorkflowSection from '../../components/ModuleWorkflowSection/ModuleWorkflowSection';
+import { billingWorkflow, billingWorkflowConfig } from '../../workflows/billingWorkflow';
+import { Receipt, Clock, LayoutDashboard, AlertOctagon, BarChart3, ShieldAlert, ListChecks } from 'lucide-react';
 
-const workflowSteps = [
-  { title: 'Dispatch Validation', description: 'System verifies dispatch note for billing eligibility.' },
-  { title: 'Invoice Generation', description: 'Proforma or Tax Invoice generated automatically.' },
-  { title: 'E-Way Bill & E-Invoice', description: 'Government portal integration for tax compliance.' },
-  { title: 'Customer Delivery', description: 'Automated email dispatch of invoice to the customer.' },
-  { title: 'Receivables Tracking', description: 'System monitors due dates and sends automated reminders.' },
-  { title: 'Payment Collection', description: 'Payment recorded, reconciled, and ledger updated.' }
-];
+
 
 const features = [
   { title: 'Automated Invoice Generation', desc: 'Seamlessly convert sales orders or dispatch notes into tax-compliant invoices without manual data entry.', icon: <Receipt /> },
@@ -57,22 +50,19 @@ export default function Billing() {
         <Hero 
           title="LEDZE+ Billing"
           subtitle="Enterprise Invoicing & Receivables"
-          description="The Billing Management module is the financial engine that drives the cash conversion cycle. Designed to handle high-volume transactions with absolute precision, this module exists to automate the entire invoicing process, track receivables, and ensure regulatory tax compliance. It delivers immense enterprise value by accelerating cash flows, reducing manual reconciliation errors, and providing executives with real-time revenue analytics and customer outstanding reports."
+          description="The Billing & Invoicing module acts as the financial culmination of the sales process, ensuring accurate revenue realization and absolute tax compliance. Built to handle complex enterprise pricing structures, it seamlessly generates proforma and tax invoices while integrating directly with government portals for E-Way Bills and E-Invoices. It significantly reduces Days Sales Outstanding (DSO) by automating payment follow-ups and providing real-time visibility into outstanding receivables."
           icon={<Receipt className="w-10 h-10" />}
+          workflowPreview={<AnimatedWorkflowPreview workflow={billingWorkflow} accentColor="blue" />}
         />
       </div>
       <div ref={contentRef} className="scroll-mt-6"></div>
 
+      {/* Interactive Workflow Section */}
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 mb-16">
+        <ModuleWorkflowSection config={billingWorkflowConfig} />
+      </div>
 
-      {/* 1. Workflow */}
-      <Section title="Billing Lifecycle Workflow">
-        <Timeline steps={workflowSteps} />
-      </Section>
-
-      {/* 2. Image */}
-      <Section title="Billing Architecture">
-        <ImageCard src={billingImg} alt="Billing Workflow Diagram" caption="Comprehensive Billing and Collections Workflow" />
-      </Section>
+      
 
       {/* 3. Features + Capabilities */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-12">

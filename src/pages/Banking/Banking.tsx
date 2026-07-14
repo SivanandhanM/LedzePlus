@@ -1,21 +1,14 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
 import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
-import Timeline from '../../components/Timeline/Timeline';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
-import ImageCard from '../../components/ImageCard/ImageCard';
 import GlassCard from '../../components/GlassCard/GlassCard';
-import { Building2, CheckCircle2, Star, Landmark, ArrowLeftRight, RefreshCw, BookOpenCheck, Wallet } from 'lucide-react';
-import bankingImg from '../../assets/images/banking.webp';
+import AnimatedWorkflowPreview from '../../components/WorkflowPreview/AnimatedWorkflowPreview';
+import ModuleWorkflowSection from '../../components/ModuleWorkflowSection/ModuleWorkflowSection';
+import { bankingWorkflow, bankingWorkflowConfig } from '../../workflows/bankingWorkflow';
+import { Building2, Wallet, Landmark, ArrowLeftRight, RefreshCw, BookOpenCheck, CheckCircle2, Star } from 'lucide-react';
 
-const workflowSteps = [
-  { title: 'Receipt / Payment Entry', description: 'Incoming receipt or outgoing vendor payment recorded.' },
-  { title: 'Multi-level Approval', description: 'Financial approval workflow triggered based on thresholds.' },
-  { title: 'Ledger Allocation', description: 'Transaction mapped to specific invoices or cost centers.' },
-  { title: 'Fund Transfer', description: 'Actual fund transfer executed via bank or cash.' },
-  { title: 'Bank Reconciliation', description: 'Automated statement matching and reconciliation.' },
-  { title: 'Cash Flow Update', description: 'Real-time updating of enterprise liquidity dashboards.' }
-];
+
 
 const features = [
   { title: 'Customer Receipts', desc: 'Securely record and allocate incoming payments against specific open invoices, supporting partial payments, advance deposits, and bulk allocations.', icon: <Wallet /> },
@@ -54,22 +47,19 @@ export default function Banking() {
         <Hero 
           title="LEDZE+ Banking"
           subtitle="Enterprise Cash & Treasury Operations"
-          description="The Banking Management module is the central hub for enterprise liquidity, orchestrating all cash, bank, and treasury operations. Designed to provide real-time visibility into fund flows, this module exists to automate complex receipts, outgoing payments, and multi-currency bank reconciliations. It delivers immense business value by enforcing strict financial controls, mitigating fraud risks, and ensuring that working capital metrics are consistently accurate and audit-ready."
+          description="The Banking & Cash Management module acts as the financial command center for enterprise liquidity, orchestrating all incoming receipts, outgoing disbursements, and complex multi-bank reconciliations. Designed to eliminate manual banking errors, it ensures absolute transparency across cash flow operations. By automating statement matching and fund transfers, it provides real-time visibility into working capital, empowering CFOs to make data-driven financial decisions."
           icon={<Building2 className="w-10 h-10" />}
+          workflowPreview={<AnimatedWorkflowPreview workflow={bankingWorkflow} accentColor="cyan" />}
         />
       </div>
-      <div ref={contentRef} className="scroll-mt-6"></div>
+        <div ref={contentRef} className="scroll-mt-6"></div>
 
+        {/* Interactive Workflow Section */}
+        <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 mb-16">
+          <ModuleWorkflowSection config={bankingWorkflowConfig} />
+        </div>
 
-      {/* 1. Workflow */}
-      <Section title="Treasury Workflow">
-        <Timeline steps={workflowSteps} />
-      </Section>
-
-      {/* 2. Image */}
-      <Section title="Banking Architecture">
-        <ImageCard src={bankingImg} alt="Banking Workflow" caption="Comprehensive Banking and Treasury Workflow" />
-      </Section>
+      
 
       {/* 3. Features */}
       <Section title="Key Functionalities">

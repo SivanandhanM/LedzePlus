@@ -1,342 +1,128 @@
-import type { ReactNode } from 'react';
-import { useRef, useState, useCallback } from 'react';
-import { motion, useSpring, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import type { ReactNode, MouseEvent } from 'react';
+import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
-// ─── Accent color map per module ────────────────────────────────────────────
-const ACCENT_MAP: Record<string, {
-  color: string; glow: string; border: string;
-  iconBg: string; badgeBg: string; badgeText: string; shadow: string;
-}> = {
-  'LEDZE+ Purchase':       { color: '#10b981', glow: 'rgba(16,185,129,0.25)',  border: '#10b981', iconBg: 'rgba(16,185,129,0.12)',  badgeBg: 'rgba(16,185,129,0.1)',  badgeText: '#059669', shadow: 'rgba(16,185,129,0.22)'  },
-  'LEDZE+ Sales':          { color: '#f97316', glow: 'rgba(249,115,22,0.25)',   border: '#f97316', iconBg: 'rgba(249,115,22,0.12)',   badgeBg: 'rgba(249,115,22,0.1)',   badgeText: '#ea580c', shadow: 'rgba(249,115,22,0.22)'   },
-  'LEDZE+ Billing':        { color: '#a855f7', glow: 'rgba(168,85,247,0.25)',   border: '#a855f7', iconBg: 'rgba(168,85,247,0.12)',   badgeBg: 'rgba(168,85,247,0.1)',   badgeText: '#9333ea', shadow: 'rgba(168,85,247,0.22)'   },
-  'LEDZE+ Inventory':      { color: '#3b82f6', glow: 'rgba(59,130,246,0.25)',   border: '#3b82f6', iconBg: 'rgba(59,130,246,0.12)',   badgeBg: 'rgba(59,130,246,0.1)',   badgeText: '#2563eb', shadow: 'rgba(59,130,246,0.22)'   },
-  'LEDZE+ Accounting':     { color: '#22c55e', glow: 'rgba(34,197,94,0.25)',    border: '#22c55e', iconBg: 'rgba(34,197,94,0.12)',    badgeBg: 'rgba(34,197,94,0.1)',    badgeText: '#16a34a', shadow: 'rgba(34,197,94,0.22)'    },
-  'LEDZE+ Payroll':        { color: '#14b8a6', glow: 'rgba(20,184,166,0.25)',   border: '#14b8a6', iconBg: 'rgba(20,184,166,0.12)',   badgeBg: 'rgba(20,184,166,0.1)',   badgeText: '#0d9488', shadow: 'rgba(20,184,166,0.22)'   },
-  'LEDZE+ Banking':        { color: '#06b6d4', glow: 'rgba(6,182,212,0.25)',    border: '#06b6d4', iconBg: 'rgba(6,182,212,0.12)',    badgeBg: 'rgba(6,182,212,0.1)',    badgeText: '#0891b2', shadow: 'rgba(6,182,212,0.22)'    },
-  'LEDZE+ Gate Management': { color: '#f59e0b', glow: 'rgba(245,158,11,0.25)', border: '#f59e0b', iconBg: 'rgba(245,158,11,0.12)', badgeBg: 'rgba(245,158,11,0.1)', badgeText: '#d97706', shadow: 'rgba(245,158,11,0.22)' },
-  'LEDZE+ GST':            { color: '#ef4444', glow: 'rgba(239,68,68,0.25)',    border: '#ef4444', iconBg: 'rgba(239,68,68,0.12)',    badgeBg: 'rgba(239,68,68,0.1)',    badgeText: '#dc2626', shadow: 'rgba(239,68,68,0.22)'    },
-};
-
-const DEFAULT_ACCENT = { color: '#6366f1', glow: 'rgba(99,102,241,0.25)', border: '#6366f1', iconBg: 'rgba(99,102,241,0.12)', badgeBg: 'rgba(99,102,241,0.1)', badgeText: '#4f46e5', shadow: 'rgba(99,102,241,0.22)' };
-
-// ─── Spring config ────────────────────────────────────────────────────────────
-const springCfg = { stiffness: 250, damping: 20, mass: 0.8 };
-
-// ─── Props ────────────────────────────────────────────────────────────────────
 interface FeatureCardProps {
   title: string;
   description: string;
   icon?: ReactNode;
   delay?: number;
   className?: string;
-  path?: string;
-  badge?: string;
+  colorTheme?: string;
 }
 
-export default function FeatureCard({
-  title, description, icon,
-  delay = 0, className = '', path, badge = 'MODULE',
-}: FeatureCardProps) {
-  const navigate = useNavigate();
-  const cardRef = useRef<HTMLDivElement>(null);
+const themeStyles: Record<string, any> = {
+  blue: { bg: 'from-blue-50 to-blue-100 dark:from-blue-950/40 dark:to-blue-900/40', border: 'border-blue-400 dark:border-blue-800', shadow: 'hover:shadow-[0_20px_40px_rgba(59,130,246,0.18)]', iconBg: 'bg-gradient-to-br from-blue-500 to-blue-600', iconText: 'text-white', glow: 'rgba(59,130,246,0.15)', blob: 'bg-blue-300 dark:bg-blue-800' },
+  indigo: { bg: 'from-indigo-50 to-indigo-100 dark:from-indigo-950/40 dark:to-indigo-900/40', border: 'border-indigo-400 dark:border-indigo-800', shadow: 'hover:shadow-[0_20px_40px_rgba(99,102,241,0.18)]', iconBg: 'bg-gradient-to-br from-indigo-500 to-indigo-600', iconText: 'text-white', glow: 'rgba(99,102,241,0.15)', blob: 'bg-indigo-300 dark:bg-indigo-800' },
+  emerald: { bg: 'from-emerald-50 to-emerald-100 dark:from-emerald-950/40 dark:to-emerald-900/40', border: 'border-emerald-400 dark:border-emerald-800', shadow: 'hover:shadow-[0_20px_40px_rgba(16,185,129,0.18)]', iconBg: 'bg-gradient-to-br from-emerald-500 to-emerald-600', iconText: 'text-white', glow: 'rgba(16,185,129,0.15)', blob: 'bg-emerald-300 dark:bg-emerald-800' },
+  orange: { bg: 'from-orange-50 to-orange-100 dark:from-orange-950/40 dark:to-orange-900/40', border: 'border-orange-400 dark:border-orange-800', shadow: 'hover:shadow-[0_20px_40px_rgba(249,115,22,0.18)]', iconBg: 'bg-gradient-to-br from-orange-500 to-orange-600', iconText: 'text-white', glow: 'rgba(249,115,22,0.15)', blob: 'bg-orange-300 dark:bg-orange-800' },
+  cyan: { bg: 'from-cyan-50 to-cyan-100 dark:from-cyan-950/40 dark:to-cyan-900/40', border: 'border-cyan-400 dark:border-cyan-800', shadow: 'hover:shadow-[0_20px_40px_rgba(6,182,212,0.18)]', iconBg: 'bg-gradient-to-br from-cyan-500 to-cyan-600', iconText: 'text-white', glow: 'rgba(6,182,212,0.15)', blob: 'bg-cyan-300 dark:bg-cyan-800' },
+  purple: { bg: 'from-purple-50 to-purple-100 dark:from-purple-950/40 dark:to-purple-900/40', border: 'border-purple-400 dark:border-purple-800', shadow: 'hover:shadow-[0_20px_40px_rgba(168,85,247,0.18)]', iconBg: 'bg-gradient-to-br from-purple-500 to-purple-600', iconText: 'text-white', glow: 'rgba(168,85,247,0.15)', blob: 'bg-purple-300 dark:bg-purple-800' },
+  violet: { bg: 'from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/40', border: 'border-violet-400 dark:border-violet-800', shadow: 'hover:shadow-[0_20px_40px_rgba(139,92,246,0.18)]', iconBg: 'bg-gradient-to-br from-violet-500 to-violet-600', iconText: 'text-white', glow: 'rgba(139,92,246,0.15)', blob: 'bg-violet-300 dark:bg-violet-800' },
+  fuchsia: { bg: 'from-fuchsia-50 to-fuchsia-100 dark:from-fuchsia-950/40 dark:to-fuchsia-900/40', border: 'border-fuchsia-400 dark:border-fuchsia-800', shadow: 'hover:shadow-[0_20px_40px_rgba(217,70,239,0.18)]', iconBg: 'bg-gradient-to-br from-fuchsia-500 to-fuchsia-600', iconText: 'text-white', glow: 'rgba(217,70,239,0.15)', blob: 'bg-fuchsia-300 dark:bg-fuchsia-800' },
+  pink: { bg: 'from-pink-50 to-pink-100 dark:from-pink-950/40 dark:to-pink-900/40', border: 'border-pink-400 dark:border-pink-800', shadow: 'hover:shadow-[0_20px_40px_rgba(236,72,153,0.18)]', iconBg: 'bg-gradient-to-br from-pink-500 to-pink-600', iconText: 'text-white', glow: 'rgba(236,72,153,0.15)', blob: 'bg-pink-300 dark:bg-pink-800' },
+  rose: { bg: 'from-rose-50 to-rose-100 dark:from-rose-950/40 dark:to-rose-900/40', border: 'border-rose-400 dark:border-rose-800', shadow: 'hover:shadow-[0_20px_40px_rgba(244,63,94,0.18)]', iconBg: 'bg-gradient-to-br from-rose-500 to-rose-600', iconText: 'text-white', glow: 'rgba(244,63,94,0.15)', blob: 'bg-rose-300 dark:bg-rose-800' },
+  teal: { bg: 'from-teal-50 to-teal-100 dark:from-teal-950/40 dark:to-teal-900/40', border: 'border-teal-400 dark:border-teal-800', shadow: 'hover:shadow-[0_20px_40px_rgba(20,184,166,0.18)]', iconBg: 'bg-gradient-to-br from-teal-500 to-teal-600', iconText: 'text-white', glow: 'rgba(20,184,166,0.15)', blob: 'bg-teal-300 dark:bg-teal-800' },
+  sky: { bg: 'from-sky-50 to-sky-100 dark:from-sky-950/40 dark:to-sky-900/40', border: 'border-sky-400 dark:border-sky-800', shadow: 'hover:shadow-[0_20px_40px_rgba(14,165,233,0.18)]', iconBg: 'bg-gradient-to-br from-sky-500 to-sky-600', iconText: 'text-white', glow: 'rgba(14,165,233,0.15)', blob: 'bg-sky-300 dark:bg-sky-800' },
+  amber: { bg: 'from-amber-50 to-amber-100 dark:from-amber-950/40 dark:to-amber-900/40', border: 'border-amber-400 dark:border-amber-800', shadow: 'hover:shadow-[0_20px_40px_rgba(245,158,11,0.18)]', iconBg: 'bg-gradient-to-br from-amber-500 to-amber-600', iconText: 'text-white', glow: 'rgba(245,158,11,0.15)', blob: 'bg-amber-300 dark:bg-amber-800' },
+};
 
-  const [hovered, setHovered] = useState(false);
-  const [spotlight, setSpotlight] = useState({ x: 50, y: 50 });
-  const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
-  const [clicking, setClicking] = useState(false);
+// Module-specific color patterns
+const modulePatterns: Record<string, string[]> = {
+  '/sales': ['indigo', 'violet', 'fuchsia', 'purple', 'pink', 'rose'],
+  '/purchase': ['blue', 'sky', 'cyan', 'teal', 'emerald', 'indigo'],
+  '/inventory': ['emerald', 'teal', 'cyan', 'blue', 'sky', 'emerald'],
+  '/accounting': ['orange', 'amber', 'rose', 'pink', 'fuchsia', 'orange'],
+  '/banking': ['teal', 'emerald', 'cyan', 'sky', 'blue', 'indigo'],
+  '/billing': ['purple', 'fuchsia', 'pink', 'rose', 'violet', 'indigo'],
+  '/payroll': ['pink', 'rose', 'fuchsia', 'purple', 'violet', 'indigo'],
+  '/gate-management': ['sky', 'blue', 'indigo', 'violet', 'purple', 'cyan'],
+  '/gst-knowledge-center': ['orange', 'rose', 'pink', 'fuchsia', 'purple', 'amber'],
+};
 
-  const accent = ACCENT_MAP[title] ?? DEFAULT_ACCENT;
+const fallbackPattern = ['blue', 'indigo', 'emerald', 'orange', 'cyan', 'purple'];
 
-  // Spring-based card transforms
-  const rawY  = useSpring(0, springCfg);
-  const rawS  = useSpring(1, springCfg);
-  const rawGO = useSpring(0, springCfg);
-  const rawBO = useSpring(0, springCfg);
+export default function FeatureCard({ title, description, icon, delay = 0, className = '' }: FeatureCardProps) {
+  const location = useLocation();
+  const pattern = modulePatterns[location.pathname] || fallbackPattern;
+  
+  const inferredIndex = Math.round((delay || 0) * 10);
+  const themeName = pattern[inferredIndex % pattern.length];
+  const theme = themeStyles[themeName] || themeStyles.blue;
 
-  const cardY     = useTransform(rawY, (v) => `translateY(${v}px)`);
-  const cardScale = useTransform(rawS, (v) => `scale(${v})`);
-
-  const handleMouseEnter = useCallback(() => {
-    setHovered(true);
-    rawY.set(-14);
-    rawS.set(1.03);
-    rawGO.set(1);
-    rawBO.set(1);
-  }, [rawY, rawS, rawGO, rawBO]);
-
-  const handleMouseLeave = useCallback(() => {
-    setHovered(false);
-    rawY.set(0);
-    rawS.set(1);
-    rawGO.set(0);
-    rawBO.set(0);
-    setSpotlight({ x: 50, y: 50 });
-  }, [rawY, rawS, rawGO, rawBO]);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setSpotlight({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
-    });
-  }, []);
-
-  const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!path) return;
-
-    // Calculate ripple origin relative to card
-    const rect = cardRef.current?.getBoundingClientRect();
-    const x = rect ? ((e.clientX - rect.left) / rect.width) * 100 : 50;
-    const y = rect ? ((e.clientY - rect.top) / rect.height) * 100 : 50;
-
-    const id = Date.now();
-    setRipples(prev => [...prev, { id, x, y }]);
-    setClicking(true);
-
-    // Scale peek before navigating
-    rawS.set(1.06);
-    rawY.set(-20);
-
-    setTimeout(() => {
-      rawS.set(1);
-      rawY.set(0);
-      setClicking(false);
-      setRipples([]);
-      navigate(path);
-    }, 320);
-  }, [path, navigate, rawS, rawY]);
-
-  // ── Render ────────────────────────────────────────────────────────────────
-  const boxShadow = hovered
-    ? `0 30px 80px ${accent.shadow}, 0 0 40px rgba(59,130,246,0.12), 0 0 100px rgba(14,165,233,0.06)`
-    : '0 8px 24px rgba(0,0,0,0.06)';
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  };
 
   return (
     <motion.div
-      ref={cardRef}
-      onClick={handleClick}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
       onMouseMove={handleMouseMove}
-      style={{ y: cardY, scale: cardScale, willChange: 'transform, opacity' }}
-      className={`group relative flex flex-col h-full ${path ? 'cursor-pointer' : ''} ${className}`}
+      className={`group relative overflow-hidden backdrop-blur-xl border ${theme.border} rounded-[24px] p-7 transition-all duration-300 cursor-pointer shadow-[0_8px_20px_-6px_rgba(0,0,0,0.05)] hover:-translate-y-2 hover:scale-[1.03] ${theme.shadow} ${className}`}
     >
-      {/* ── Animated gradient border ring ── */}
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute -inset-[1.5px] rounded-[2rem] pointer-events-none z-0"
-            style={{
-              background: `linear-gradient(135deg, ${accent.color}, #06b6d4, #a855f7, #f97316, ${accent.color})`,
-              backgroundSize: '300% 300%',
-              animation: 'gradientShift 3s linear infinite',
-              filter: 'blur(0.5px)',
-            }}
-            aria-hidden
-          />
-        )}
-      </AnimatePresence>
+      {/* Base Pastel Gradient Background */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${theme.bg} opacity-100 group-hover:opacity-95 transition-opacity duration-500`} />
+      
+      {/* Very Light Diagonal Abstract Lines */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" 
+        style={{ backgroundImage: 'repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 1px, transparent 16px)' }}
+      />
+      
+      {/* Blurred Floating Color Blobs */}
+      <div className={`absolute -top-10 -right-10 w-40 h-40 rounded-full ${theme.blob} opacity-30 dark:opacity-20 blur-3xl group-hover:scale-150 group-hover:opacity-40 transition-all duration-700 ease-in-out`} />
+      <div className={`absolute -bottom-10 -left-10 w-40 h-40 rounded-full ${theme.blob} opacity-20 dark:opacity-10 blur-3xl group-hover:scale-150 group-hover:opacity-30 transition-all duration-700 ease-in-out`} />
 
-      {/* ── Card body ── */}
-      <motion.div
-        className="relative z-10 flex flex-col h-full rounded-[2rem] overflow-hidden"
-        style={{
-          background: hovered ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,1)',
-          backdropFilter: hovered ? 'blur(24px) saturate(180%)' : 'none',
-          boxShadow,
-          border: hovered
-            ? `1px solid ${accent.border}30`
-            : '1px solid rgba(226,232,240,1)',
-          transition: 'background 0.35s ease, box-shadow 0.45s cubic-bezier(0.22,1,0.36,1), border 0.35s ease',
-        }}
-      >
-        {/* Click ripples */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[2rem]" aria-hidden>
-          <AnimatePresence>
-            {ripples.map(r => (
-              <motion.div
-                key={r.id}
-                className="absolute rounded-full"
-                style={{
-                  left: `${r.x}%`,
-                  top: `${r.y}%`,
-                  translateX: '-50%',
-                  translateY: '-50%',
-                  background: `radial-gradient(circle, ${accent.glow} 0%, transparent 70%)`,
-                }}
-                initial={{ width: 0, height: 0, opacity: 0.8 }}
-                animate={{ width: 400, height: 400, opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              />
-            ))}
-          </AnimatePresence>
-        </div>
+      {/* Light Noise Texture */}
+      <div className="absolute inset-0 opacity-[0.025] mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }} />
 
-        {/* Click peak glow */}
-        {clicking && (
-          <div
-            className="absolute inset-0 pointer-events-none rounded-[2rem] z-20"
-            style={{
-              background: `radial-gradient(circle at ${spotlight.x}% ${spotlight.y}%, ${accent.glow} 0%, transparent 60%)`,
-            }}
-            aria-hidden
-          />
-        )}
+      {/* Mouse Follow Radial Light Effect */}
+      <div 
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500"
+        style={{ background: `radial-gradient(500px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), ${theme.glow}, transparent 50%)` }}
+      />
 
-        {/* Ambient Breathing Glow */}
-        <div 
-          className="absolute -inset-10 pointer-events-none z-0 transition-all duration-700 ease-out"
-          style={{
-            opacity: hovered ? 0.8 : 0.65,
-            transform: hovered ? `translate(${(spotlight.x - 50) * 0.4}px, ${(spotlight.y - 50) * 0.4}px)` : 'translate(0px, 0px)',
-          }}
-          aria-hidden
-        >
-          <motion.div
-            className="w-full h-full"
-            animate={{
-              x: [-15, 25, -10, 15, -15],
-              y: [-25, 10, -15, 25, -25],
-              scale: [1, 1.15, 0.95, 1.05, 1],
-            }}
-            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-            style={{
-              background: `
-                radial-gradient(circle at 25% 75%, ${accent.glow} 0%, transparent 50%),
-                radial-gradient(circle at 75% 25%, ${accent.glow} 0%, transparent 50%)
-              `,
-              filter: 'blur(30px)',
-            }}
-          />
-        </div>
+      {/* Decorative Dots Pattern */}
+      <div className="absolute top-5 right-5 grid grid-cols-3 gap-[3px] opacity-[0.15] dark:opacity-[0.25] group-hover:opacity-[0.35] transition-opacity duration-500">
+        {[...Array(9)].map((_, i) => (
+          <div key={i} className={`w-[3px] h-[3px] rounded-full ${theme.blob} mix-blend-multiply dark:mix-blend-screen`} />
+        ))}
+      </div>
 
-        {/* Mouse spotlight */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0 rounded-[2rem] transition-opacity duration-300"
-          style={{
-            opacity: hovered ? 1 : 0,
-            background: `radial-gradient(circle at ${spotlight.x}% ${spotlight.y}%, ${accent.glow} 0%, transparent 60%)`,
-          }}
-          aria-hidden
+      {/* Top Inner Highlight Overlay */}
+      <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-white/80 dark:via-white/20 to-transparent opacity-60" />
+
+      {/* Icon Container */}
+      <div className="relative mb-6 inline-block z-10">
+        <motion.div 
+          className="absolute inset-0 rounded-2xl bg-current opacity-30 blur-md"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          style={{ color: theme.glow }}
         />
-
-        {/* Card content */}
-        <div className="relative z-10 flex flex-col h-full p-8">
-
-          {/* Top row: icon + badge */}
-          <div className="flex justify-between items-start mb-6">
-
-            {/* Icon */}
-            <motion.div
-              animate={hovered
-                ? { scale: 1.15, rotate: 5, y: -4 }
-                : { scale: 1,    rotate: 0, y: 0  }}
-              transition={{ ...springCfg, type: 'spring', delay: 0 }}
-              className="w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-300"
-              style={{
-                background: hovered ? accent.iconBg : 'rgba(248,250,252,1)',
-                boxShadow: hovered ? `0 0 20px ${accent.glow}` : 'none',
-                color: hovered ? accent.color : '#475569',
-              }}
-            >
-              {icon}
-            </motion.div>
-
-            {/* Badge */}
-            <motion.div
-              animate={hovered ? { scale: 1.08 } : { scale: 1 }}
-              transition={{ ...springCfg, type: 'spring', delay: 0.05 }}
-              className="px-3 py-1 rounded-full text-[10px] font-black tracking-wider uppercase transition-all duration-300"
-              style={{
-                background: hovered ? accent.badgeBg : 'rgba(255,237,213,1)',
-                color:      hovered ? accent.badgeText : '#ea580c',
-                boxShadow:  hovered ? `0 0 12px ${accent.glow}` : 'none',
-              }}
-            >
-              {badge}
-            </motion.div>
+        <div className={`relative w-14 h-14 rounded-[16px] ${theme.iconBg} ${theme.iconText} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 overflow-hidden`}>
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative z-10 w-7 h-7 flex items-center justify-center">
+            {icon}
           </div>
-
-          {/* Title */}
-          <motion.h3
-            animate={hovered ? { y: -2 } : { y: 0 }}
-            transition={{ ...springCfg, type: 'spring', delay: 0.05 }}
-            className="text-[1.35rem] font-bold mb-3 transition-colors duration-300"
-            style={{ color: hovered ? accent.color : '#0f172a' }}
-          >
-            {title}
-          </motion.h3>
-
-          {/* Description */}
-          <motion.p
-            animate={hovered ? { opacity: 1, y: -3 } : { opacity: 0.75, y: 0 }}
-            transition={{ ...springCfg, type: 'spring', delay: 0.1 }}
-            className={`text-[15px] leading-relaxed font-medium flex-1 ${path ? 'mb-8' : 'mb-0'}`}
-            style={{ color: '#475569' }}
-          >
-            {description}
-          </motion.p>
-
-          {/* CTA */}
-          {path && (
-            <motion.div
-              animate={hovered ? { x: 6 } : { x: 0 }}
-              transition={{ ...springCfg, type: 'spring', delay: 0.15 }}
-              className="flex items-center gap-2 text-[13px] font-bold mt-auto relative"
-              style={{ color: hovered ? accent.color : '#6366f1' }}
-            >
-              <span className="relative">
-                Explore Module
-                <motion.span
-                  className="absolute left-0 -bottom-0.5 h-[1.5px] rounded-full"
-                  animate={{ width: hovered ? '100%' : '0%' }}
-                  transition={{ duration: 0.3, ease: 'easeOut', delay: 0.1 }}
-                  style={{ background: accent.color }}
-                />
-              </span>
-              <motion.span
-                animate={hovered ? { x: 6 } : { x: 0 }}
-                transition={{ ...springCfg, type: 'spring', delay: 0.18 }}
-              >
-                <ArrowRight className="w-4 h-4" />
-              </motion.span>
-            </motion.div>
-          )}
-
         </div>
-      </motion.div>
+      </div>
 
-      {/* Outer radial glow behind card */}
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.4 }}
-            className="absolute inset-0 rounded-[2rem] pointer-events-none -z-10"
-            style={{
-              background: `radial-gradient(ellipse at 50% 100%, ${accent.glow} 0%, transparent 70%)`,
-              filter: 'blur(20px)',
-              transform: 'translateY(20px) scaleX(0.9)',
-            }}
-            aria-hidden
-          />
-        )}
-      </AnimatePresence>
+      {/* Text Content */}
+      <h3 className="relative z-10 text-[20px] font-bold text-slate-900 dark:text-white mb-3 leading-tight transition-colors duration-300 drop-shadow-sm">
+        {title}
+      </h3>
+      
+      <p className="relative z-10 text-[14px] text-slate-700 dark:text-slate-300 leading-relaxed font-medium transition-colors duration-300">
+        {description}
+      </p>
     </motion.div>
   );
 }
