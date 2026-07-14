@@ -28,7 +28,7 @@ export default function Hero() {
     <div className="relative w-[100vw] left-[calc(-50vw+50%)] flex flex-col items-center overflow-hidden pt-4 pb-6 lg:pt-6">
 
       {/* Structured Layout Layer */}
-      <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-[1500px] px-8">
+      <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-[1240px] px-8">
 
         {/* Top Row of Modules */}
         <div className="flex flex-wrap justify-center gap-4 mb-4 lg:mb-6">
