@@ -32,13 +32,11 @@ export function useScrollToContent() {
       }
     }
 
-    // 3. Otherwise (direct visit, or fresh SPA navigation from Home), execute the smooth scroll.
+    // 3. Otherwise (direct visit, or fresh SPA navigation from Home), execute scroll to top.
     const timer = setTimeout(() => {
-      if (ref.current) {
-        ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        sessionStorage.setItem(scrollKey, 'true');
-      }
-    }, 100);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      sessionStorage.setItem(scrollKey, 'true');
+    }, 50);
 
     return () => clearTimeout(timer);
   }, [location.key]);
