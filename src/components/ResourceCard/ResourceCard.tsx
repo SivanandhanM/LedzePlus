@@ -51,8 +51,8 @@ export default function ResourceCard({
 
   const handleMouseEnter = useCallback(() => {
     setHovered(true);
-    rawY.set(-10);
-    rawS.set(1.02);
+    rawY.set(-6);
+    rawS.set(1);
   }, [rawY, rawS]);
 
   const handleMouseLeave = useCallback(() => {
@@ -104,8 +104,8 @@ export default function ResourceCard({
     <motion.div
       ref={cardRef}
       onClick={handleClick}
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={handleMouseEnter}
@@ -242,10 +242,10 @@ export default function ResourceCard({
         </div>
 
         {/* Card content */}
-        <div className="relative z-20 flex flex-col h-full p-6 text-white">
+        <div className="relative z-20 flex flex-col justify-between h-full p-6 text-white">
 
           {/* Top row: icon + badge */}
-          <div className="flex justify-between items-start mb-auto">
+          <div className="flex justify-between items-start">
             {/* Icon */}
             <motion.div
               animate={hovered
@@ -279,8 +279,7 @@ export default function ResourceCard({
             </motion.div>
           </div>
 
-          {/* Bottom text content */}
-          <div className="mt-5 flex flex-col gap-2">
+          <div className="flex flex-col gap-2">
             <motion.h3
               animate={hovered ? { y: -2 } : { y: 0 }}
               transition={{ ...springCfg, type: 'spring', delay: 0.05 }}
