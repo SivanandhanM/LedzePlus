@@ -25,9 +25,10 @@ export default function Home() {
   const location = useLocation();
 
   useEffect(() => {
+    const container = document.getElementById('scroll-container');
     if (location.state?.scrollTo) {
       if (location.state.scrollTo === 'top') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        container?.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         const element = document.getElementById(location.state.scrollTo);
         if (element) {
@@ -37,7 +38,7 @@ export default function Home() {
         }
       }
     } else {
-      window.scrollTo(0, 0);
+      container?.scrollTo({ top: 0, behavior: 'instant' });
     }
   }, [location]);
 

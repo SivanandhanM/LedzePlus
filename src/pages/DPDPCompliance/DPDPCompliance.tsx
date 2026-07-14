@@ -76,7 +76,8 @@ const dpdpData = [
 export default function DPDPCompliance() {
   // Scroll to top on mount
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const container = document.getElementById('scroll-container');
+    container?.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
   return (

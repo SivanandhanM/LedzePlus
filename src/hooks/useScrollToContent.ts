@@ -34,7 +34,10 @@ export function useScrollToContent() {
 
     // 3. Otherwise (direct visit, or fresh SPA navigation from Home), execute scroll to top.
     const timer = setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      const container = document.getElementById('scroll-container');
+      if (container) {
+        container.scrollTo({ top: 0, behavior: 'instant' });
+      }
       sessionStorage.setItem(scrollKey, 'true');
     }, 50);
 
