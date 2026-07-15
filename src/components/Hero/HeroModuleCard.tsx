@@ -1,5 +1,7 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import type { ReactNode } from 'react';
+import { memo } from 'react';
 
 interface HeroModuleCardProps {
   title: string;
@@ -10,74 +12,101 @@ interface HeroModuleCardProps {
   delay: number;
 }
 
-export default function HeroModuleCard({ title, desc, icon, colorVar, delay }: HeroModuleCardProps) {
+// ─── Stable Animation Variants ─────────────────────────────────────────────────
+const cardHoverVariants: Variants = {
+  initial: { scale: 1, y: 0 },
+  hover: { 
+    scale: 1.02, 
+    y: -6, 
+    boxShadow: '0 16px 30px rgba(0,0,0,0.08), 0 0 30px var(--color-mod)',
+    borderColor: 'color-mix(in srgb, var(--color-mod) 30%, transparent)',
+    transition: { duration: 0.25, ease: 'easeOut' }
+  },
+  tap: { scale: 0.98, y: -2, transition: { duration: 0.1 } }
+};
 
+const iconHoverVariants: Variants = {
+  initial: { scale: 1, rotate: 0 },
+  hover: { scale: 1.05, rotate: 3, transition: { type: 'spring', stiffness: 300, damping: 20 } }
+};
+
+const titleHoverVariants: Variants = {
+  initial: { color: 'currentColor' },
+  hover: { color: 'var(--color-mod)', transition: { duration: 0.25 } }
+};
+
+const bgHoverVariants: Variants = {
+  initial: { opacity: 0 },
+  hover: { opacity: 0.1, transition: { duration: 0.25 } }
+};
+
+const HeroModuleCard = memo(function HeroModuleCard({ title, desc, icon, colorVar, delay }: HeroModuleCardProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay }}
-      className="relative z-20"
+      className="relative z-20 contain-layout"
       style={{ '--color-mod': `var(${colorVar})` } as React.CSSProperties}
     >
-      <motion.button
+      <m.button
         onClick={() => {
           const element = document.getElementById('modules');
           if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
           }
         }}
-        // Idle floating animation
-        animate={{ y: [-5, 5, -5] }}
-        transition={{
-          duration: 4 + (delay * 1.2),
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 0
-        }}
-        whileHover={{ 
-          scale: 1.05, 
-          boxShadow: '0 20px 40px rgba(0,0,0,0.1), 0 0 40px var(--color-mod)',
-          borderColor: 'color-mix(in srgb, var(--color-mod) 50%, transparent)'
-        }}
-        whileTap={{ scale: 0.95 }}
-        className="group relative flex items-center gap-3 w-[220px] h-[90px] text-left p-3 rounded-2xl glass-premium border border-white/40 dark:border-white/10 shadow-xl overflow-hidden transition-all duration-300 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md"
+        variants={cardHoverVariants}
+        initial="initial"
+        whileHover="hover"
+        whileTap="tap"
+        className="group relative flex items-center gap-4 w-[220px] h-[90px] text-left p-3 rounded-2xl border border-white/20 dark:border-white/5 shadow-lg overflow-hidden bg-white/30 dark:bg-slate-900/40 backdrop-blur-md"
+        style={{ contain: 'layout paint style' }}
       >
         {/* Soft breathing glow behind the card content */}
-        <motion.div 
-          animate={{ opacity: [0.1, 0.3, 0.1] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay }}
-          className="absolute inset-0 pointer-events-none"
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-15"
           style={{ background: `radial-gradient(circle at center, var(--color-mod) 0%, transparent 70%)` }}
         />
 
         {/* Hover Highlight Gradient */}
-        <div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none"
+        <m.div 
+          variants={bgHoverVariants}
+          className="absolute inset-0 pointer-events-none"
           style={{ background: `linear-gradient(135deg, var(--color-mod), transparent)` }}
         />
 
+        {/* Inner Border Refinement */}
+        <div className="absolute inset-0 rounded-2xl pointer-events-none z-0 border border-white/5 mix-blend-overlay" />
+
         {/* Icon Container */}
-        <div 
-          className="relative flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center shadow-inner transition-transform duration-300 group-hover:scale-110"
+        <m.div 
+          variants={iconHoverVariants}
+          className="relative flex-shrink-0 w-10 h-10 rounded-[10px] flex items-center justify-center shadow-sm"
           style={{ 
-            background: `linear-gradient(135deg, var(--color-mod), color-mix(in srgb, var(--color-mod) 70%, black))`,
-            color: 'white'
+            background: `linear-gradient(135deg, color-mix(in srgb, var(--color-mod) 80%, white), var(--color-mod))`,
+            color: 'white',
+            boxShadow: 'inset 0 0 10px rgba(255,255,255,0.2)'
           }}
         >
           {icon}
-        </div>
+        </m.div>
 
         {/* Text Content */}
-        <div className="relative flex flex-col justify-center min-w-0">
-          <h3 className="font-bold text-[14px] text-slate-800 dark:text-slate-100 truncate group-hover:text-[var(--color-mod)] transition-colors duration-300">
+        <div className="relative flex flex-col justify-center min-w-0 z-10">
+          <m.h3 
+            variants={titleHoverVariants}
+            className="font-bold text-[14px] text-slate-800 dark:text-slate-100 truncate"
+          >
             {title}
-          </h3>
-          <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight mt-0.5 line-clamp-2">
+          </m.h3>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight mt-0.5 line-clamp-2">
             {desc}
           </p>
         </div>
-      </motion.button>
-    </motion.div>
+      </m.button>
+    </m.div>
   );
-}
+});
+
+export default HeroModuleCard;

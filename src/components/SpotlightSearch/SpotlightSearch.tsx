@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Search, X, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -71,7 +71,7 @@ export default function SpotlightSearch() {
   return (
     <>
       {/* Trigger button */}
-      <motion.button
+      <m.button
         onClick={() => setIsOpen(true)}
         whileHover={{ scale: 1.03, boxShadow: '0 4px 16px rgba(79,70,229,0.12)' }}
         whileTap={{ scale: 0.96 }}
@@ -80,13 +80,13 @@ export default function SpotlightSearch() {
       >
         <Search className="w-4 h-4 text-slate-400" />
         <span className="text-slate-400">Search docs...</span>
-      </motion.button>
+      </m.button>
 
       <AnimatePresence>
         {isOpen && (
           <>
             {/* Backdrop */}
-            <motion.div
+            <m.div
               key="backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -97,7 +97,7 @@ export default function SpotlightSearch() {
             />
 
             {/* Panel */}
-            <motion.div
+            <m.div
               key="panel"
               initial={{ opacity: 0, scale: 0.96, y: -16, filter: 'blur(8px)' }}
               animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
@@ -115,12 +115,12 @@ export default function SpotlightSearch() {
               >
                 {/* Input row */}
                 <div className="flex items-center px-5 py-4 border-b border-slate-100 dark:border-slate-800 gap-3">
-                  <motion.div
+                  <m.div
                     animate={{ rotate: isOpen ? [0, -10, 0] : 0 }}
                     transition={{ duration: 0.4, delay: 0.1 }}
                   >
                     <Search className="w-5 h-5 text-primary" />
-                  </motion.div>
+                  </m.div>
                   <input
                     ref={inputRef}
                     type="text"
@@ -129,26 +129,26 @@ export default function SpotlightSearch() {
                     onChange={e => setQuery(e.target.value)}
                     className="flex-1 bg-transparent border-none outline-none text-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 font-medium"
                   />
-                  <motion.button
+                  <m.button
                     whileHover={{ scale: 1.12, backgroundColor: 'rgba(239,68,68,0.1)' }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => setIsOpen(false)}
                     className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 transition-colors"
                   >
                     <X className="w-4 h-4" />
-                  </motion.button>
+                  </m.button>
                 </div>
 
                 {/* Results list */}
                 <div className="max-h-80 overflow-y-auto p-2">
                   {filteredLinks.length > 0 ? (
-                    <motion.div
+                    <m.div
                       variants={listVariants}
                       initial="hidden"
                       animate="visible"
                     >
                       {filteredLinks.map((link, i) => (
-                        <motion.button
+                        <m.button
                           key={link.path}
                           variants={itemVariants}
                           onClick={() => handleSelect(link.path)}
@@ -169,17 +169,17 @@ export default function SpotlightSearch() {
                               {link.category}
                             </span>
                           </div>
-                          <motion.div
+                          <m.div
                             animate={{ x: activeIndex === i ? 0 : -6, opacity: activeIndex === i ? 1 : 0 }}
                             transition={{ duration: 0.18 }}
                           >
                             <ArrowRight className="w-4 h-4 text-primary" />
-                          </motion.div>
-                        </motion.button>
+                          </m.div>
+                        </m.button>
                       ))}
-                    </motion.div>
+                    </m.div>
                   ) : (
-                    <motion.div
+                    <m.div
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="py-12 text-center"
@@ -187,7 +187,7 @@ export default function SpotlightSearch() {
                       <div className="text-3xl mb-3">🔍</div>
                       <p className="text-slate-500 font-medium">No results for <span className="text-slate-700 font-bold">"{query}"</span></p>
                       <p className="text-slate-400 text-sm mt-1">Try a different module name</p>
-                    </motion.div>
+                    </m.div>
                   )}
                 </div>
 
@@ -198,7 +198,7 @@ export default function SpotlightSearch() {
                   <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-mono border border-slate-200 dark:border-slate-700">Esc</kbd> close</span>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

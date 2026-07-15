@@ -1,5 +1,5 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
-import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
+import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import CoreCapabilityItem from '../../components/CoreCapabilityItem/CoreCapabilityItem';
@@ -8,7 +8,7 @@ import AnimatedWorkflowPreview from '../../components/WorkflowPreview/AnimatedWo
 import ModuleWorkflowSection from '../../components/ModuleWorkflowSection/ModuleWorkflowSection';
 import { salesWorkflow, salesWorkflowConfig } from '../../workflows/salesWorkflow';
 import { TrendingUp, Truck, FileSpreadsheet, BadgePercent, AlertTriangle, ListChecks, Server, Database } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const features = [
   { title: 'Order-to-Cash Automation', desc: 'Seamlessly convert quotations to sales orders, dispatch notes, and invoices without redundant data entry.', icon: <TrendingUp /> },
@@ -48,14 +48,14 @@ export default function Sales() {
 
       {/* Enterprise Background Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }} transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }} className="absolute top-[10%] -left-1/4 w-[1000px] h-[1000px] bg-indigo-200/40 dark:bg-indigo-900/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
-        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 2 }} className="absolute top-[40%] -right-1/4 w-[800px] h-[800px] bg-emerald-200/40 dark:bg-emerald-900/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
-        <motion.div animate={{ y: [0, -30, 0], rotate: [0, 10, 0] }} transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }} className="absolute top-[30%] left-[5%] text-slate-300 dark:text-slate-800 opacity-20">
+        <m.div animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }} transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }} className="absolute top-[10%] -left-1/4 w-[1000px] h-[1000px] bg-indigo-200/40 dark:bg-indigo-900/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }} />
+        <m.div animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 2 }} className="absolute top-[40%] -right-1/4 w-[800px] h-[800px] bg-emerald-200/40 dark:bg-emerald-900/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }} />
+        <m.div animate={{ y: [0, -30, 0], rotate: [0, 10, 0] }} transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }} className="absolute top-[30%] left-[5%] text-slate-300 dark:text-slate-800 opacity-20">
           <Database size={120} />
-        </motion.div>
-        <motion.div animate={{ y: [0, 40, 0], rotate: [0, -15, 0] }} transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut', delay: 5 }} className="absolute top-[60%] right-[10%] text-slate-300 dark:text-slate-800 opacity-20">
+        </m.div>
+        <m.div animate={{ y: [0, 40, 0], rotate: [0, -15, 0] }} transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut', delay: 5 }} className="absolute top-[60%] right-[10%] text-slate-300 dark:text-slate-800 opacity-20">
           <Server size={180} />
-        </motion.div>
+        </m.div>
       </div>
 
       <div className="relative z-10">
@@ -66,7 +66,6 @@ export default function Sales() {
             description="The Sales Management module orchestrates the complete order-to-cash process, transforming customer interactions into streamlined revenue pipelines. Built for enterprise scale, it seamlessly handles inquiries, quotations, complex pricing rules, order fulfillment, and automated invoicing. It provides real-time visibility into sales performance, accelerates payment collections, and enhances customer satisfaction through flawless delivery execution."
             icon={<TrendingUp className="w-10 h-10" />}
             workflowPreview={<AnimatedWorkflowPreview workflow={salesWorkflow} accentColor="emerald" moduleName="SALES" />}
-            theme={MODULE_THEMES.sales}
           />
         </div>
         <div ref={contentRef} className="scroll-mt-6" />

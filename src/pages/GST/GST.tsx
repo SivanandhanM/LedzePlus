@@ -1,5 +1,5 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
-import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
+import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import Table from '../../components/Table/Table';
@@ -53,7 +53,6 @@ export default function GST() {
           description="The GST & Tax Management module acts as the compliance guardian for the enterprise, ensuring every transaction adheres strictly to government regulations. Designed for zero-error tax handling, it seamlessly automates E-Invoice generation, E-Way bill creation, and multi-state tax calculations. By integrating directly with government portals, it delivers immense business value by eliminating manual return filings, ensuring timely ITC claims, and preventing regulatory penalties."
           icon={<FileText className="w-10 h-10" />}
           workflowPreview={<AnimatedWorkflowPreview workflow={gstWorkflow} accentColor="orange" />}
-          theme={MODULE_THEMES.gst}
         />
       </div>
       <div ref={contentRef} className="scroll-mt-6"></div>

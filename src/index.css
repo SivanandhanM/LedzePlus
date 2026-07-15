@@ -24,6 +24,31 @@
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
+@property --color-primary-hex {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #4F46E5;
+}
+@property --color-secondary-hex {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #4338CA;
+}
+@property --color-accent-hex {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #818CF8;
+}
+
+:root {
+  /* Default Ledze blue rgb values as fallback */
+  --color-primary: 79 70 229;
+  --color-secondary: 67 56 202;
+  --color-primary-hex: #4F46E5;
+  --color-secondary-hex: #4338CA;
+  --color-accent-hex: #818CF8;
+}
+
 body {
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   background: #FAFAFC;
@@ -112,18 +137,15 @@ body {
   line-height: 1.05;
   background: linear-gradient(
     90deg,
-    #2563EB 0%,
-    #4F46E5 25%,
-    #7C3AED 50%,
-    #9333EA 75%,
-    #2563EB 100%
+    var(--color-primary-hex),
+    var(--color-secondary-hex)
   );
-  background-size: 300% 300%;
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: ledzeGradientFlow 10s ease infinite;
+  animation: ledzeGradientFlow 6s ease infinite;
   transition: filter 0.3s ease, transform 0.3s ease, letter-spacing 0.3s ease, text-shadow 0.3s ease;
   display: inline-block;
   padding-bottom: 0.1em; /* Prevent clipping of descenders */
@@ -134,7 +156,23 @@ body {
   filter: brightness(1.1);
   transform: scale(1.02);
   letter-spacing: -0.035em;
-  text-shadow: 0 0 18px rgba(124, 58, 237, 0.12);
+  text-shadow: 0 0 18px rgba(var(--color-primary), 0.15);
+}
+
+.module-card-tint {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--color-primary) / 0.12),
+    rgba(var(--color-primary) / 0.04)
+  );
+}
+
+.module-title-gradient {
+  background: linear-gradient(90deg, var(--color-primary-hex), var(--color-secondary-hex));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 @keyframes shimmer {

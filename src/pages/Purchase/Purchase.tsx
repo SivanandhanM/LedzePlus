@@ -1,7 +1,7 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
 import AnimatedWorkflowPreview from '../../components/WorkflowPreview/AnimatedWorkflowPreview';
 import { purchaseWorkflow } from '../../workflows/purchaseWorkflow';
-import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
+import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import GlassCard from '../../components/GlassCard/GlassCard';
@@ -44,7 +44,6 @@ export default function Purchase() {
           description="The Purchase Management module handles the complete procure-to-pay lifecycle, ensuring transparency, compliance, and cost control across all vendor interactions. Designed for enterprise agility, it streamlines indenting, quotation comparisons, approvals, and order tracking. By digitizing procurement, it eliminates manual bottlenecks, enforces budget controls, and fosters stronger, more reliable supplier relationships."
           icon={<ShoppingCart className="w-10 h-10" />}
           workflowPreview={<AnimatedWorkflowPreview workflow={purchaseWorkflow} accentColor="blue" moduleName="Purchase" />}
-          theme={MODULE_THEMES.purchase}
         />
       </div>
       <div ref={contentRef} className="scroll-mt-6" />

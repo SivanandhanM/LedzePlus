@@ -1,5 +1,5 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
-import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
+import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import GlassCard from '../../components/GlassCard/GlassCard';
@@ -43,7 +43,6 @@ export default function Accounting() {
           description="The Accounting Management module is the financial nucleus of the ERP, delivering real-time insights, rigid compliance, and seamless multi-module ledger integration. Designed to meet global enterprise standards, it automates journaling, enforces strict period closures, and provides an immaculate audit trail. It transforms raw transactional data into strategic financial intelligence, ensuring absolute precision in trial balances, P&L, and balance sheets."
           icon={<BookOpen className="w-10 h-10" />}
           workflowPreview={<AnimatedWorkflowPreview workflow={accountingWorkflow} accentColor="orange" />}
-          theme={MODULE_THEMES.accounting}
         />
       </div>
       <div ref={contentRef} className="scroll-mt-6"></div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import * as LucideIcons from 'lucide-react';
+import { m, AnimatePresence } from 'framer-motion';
+import { iconMap } from '../../workflows/iconMap';
 import type { WorkflowData, WorkflowNode } from '../../workflows/types';
 
 interface PreviewProps {
@@ -10,7 +10,7 @@ interface PreviewProps {
 }
 
 const renderIcon = (name: string, className?: string) => {
-  const Icon = (LucideIcons as any)[name] || LucideIcons.Circle;
+  const Icon = iconMap[name] || iconMap.Circle;
   return <Icon className={className} />;
 };
 
@@ -41,7 +41,7 @@ const nodeGradients: Record<string, string> = {
 export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue', moduleName = 'MODULE' }: PreviewProps) {
   const [activeNode, setActiveNode] = useState<WorkflowNode | null>(null);
   const [step, setStep] = useState(0);
-  
+
   const theme = themeGradients[accentColor] || themeGradients.blue;
   const totalSteps = workflow.nodes.length + workflow.edges.length;
   const isComplete = step > totalSteps + 1;
@@ -55,7 +55,7 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
       } else {
         clearInterval(interval);
       }
-    }, 1000); 
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [workflow, totalSteps]);
@@ -73,20 +73,20 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
     const sourceNode = workflow.nodes.find(n => n.id === edge.source);
     const targetNode = workflow.nodes.find(n => n.id === edge.target);
     if (!sourceNode || !targetNode) return "";
-    return edge.path || `M ${sourceNode.x} ${sourceNode.y} C ${sourceNode.x + (targetNode.x-sourceNode.x)/2} ${sourceNode.y}, ${sourceNode.x + (targetNode.x-sourceNode.x)/2} ${targetNode.y}, ${targetNode.x} ${targetNode.y}`;
+    return edge.path || `M ${sourceNode.x} ${sourceNode.y} C ${sourceNode.x + (targetNode.x - sourceNode.x) / 2} ${sourceNode.y}, ${sourceNode.x + (targetNode.x - sourceNode.x) / 2} ${targetNode.y}, ${targetNode.x} ${targetNode.y}`;
   };
 
   const renderEdgePath = (edge: any) => {
     const d = getEdgePath(edge);
     const isVisible = step > workflow.nodes.findIndex(n => n.id === edge.target);
     const isFlash = step === totalSteps + 1;
-    
+
     return (
       <g key={edge.id}>
         {/* Base Track */}
         <path d={d} fill="none" stroke="rgba(148,163,184,0.2)" strokeWidth="0.8" strokeLinecap="round" />
         {/* Drawn Path */}
-        <motion.path
+        <m.path
           d={d} fill="none" stroke="url(#lineGradient)" strokeWidth="1" strokeLinecap="round"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={isVisible ? { pathLength: 1, opacity: isFlash ? 1 : 0.8, filter: isFlash ? 'drop-shadow(0 0 4px rgba(255,255,255,0.8))' : 'none' } : {}}
@@ -103,12 +103,12 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
 
     // Generate 3 particles per edge moving at different offsets
     return [0, 0.33, 0.66].map((offset, i) => (
-      <motion.path
+      <m.path
         key={`glow-${edge.id}-${i}`}
         d={d} fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round"
         initial={{ pathLength: 0, pathOffset: offset, opacity: 0 }}
-        animate={{ 
-          pathLength: [0, 0.1, 0], 
+        animate={{
+          pathLength: [0, 0.1, 0],
           pathOffset: [offset, offset + 0.9, offset + 1],
           opacity: [0, 1, 0]
         }}
@@ -119,27 +119,27 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
   };
 
   return (
-    <div 
+    <div
       className="relative w-full aspect-[4/3] max-w-[700px] mx-auto rounded-[28px] overflow-hidden bg-white/10 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)] flex items-center justify-center"
       onMouseLeave={() => setActiveNode(null)}
     >
-      
+
       {/* Background Mesh Gradients & Grid */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[28px]">
         {/* Subtle Grid Pattern */}
         <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(#94a3b8 1px, transparent 1px), linear-gradient(90deg, #94a3b8 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
-        
+
         {/* Ambient Lights */}
-        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 8, repeat: Infinity }} className={`absolute -top-1/4 -left-1/4 w-3/4 h-3/4 bg-gradient-to-br ${theme.bg} rounded-full blur-[80px] opacity-30 mix-blend-screen`} />
-        <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 10, repeat: Infinity, delay: 2 }} className={`absolute -bottom-1/4 -right-1/4 w-3/4 h-3/4 bg-gradient-to-tl ${theme.bg} rounded-full blur-[80px] opacity-20 mix-blend-screen`} />
-        
+        <m.div animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 8, repeat: Infinity }} className={`absolute -top-1/4 -left-1/4 w-3/4 h-3/4 bg-gradient-to-br ${theme.bg} rounded-full blur-[80px] opacity-30 mix-blend-screen`} style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }} />
+        <m.div animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 10, repeat: Infinity, delay: 2 }} className={`absolute -bottom-1/4 -right-1/4 w-3/4 h-3/4 bg-gradient-to-tl ${theme.bg} rounded-full blur-[80px] opacity-20 mix-blend-screen`} style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }} />
+
         {/* Floating Background Icons */}
-        <motion.div animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }} transition={{ duration: 10, repeat: Infinity }} className="absolute top-[20%] left-[80%] text-slate-300 dark:text-slate-700 opacity-20">
-          <LucideIcons.Database size={48} />
-        </motion.div>
-        <motion.div animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }} transition={{ duration: 12, repeat: Infinity }} className="absolute top-[70%] left-[10%] text-slate-300 dark:text-slate-700 opacity-20">
-          <LucideIcons.Server size={64} />
-        </motion.div>
+        <m.div animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }} transition={{ duration: 10, repeat: Infinity }} className="absolute top-[20%] left-[80%] text-slate-300 dark:text-slate-700 opacity-20">
+          <iconMap.Database size={48} />
+        </m.div>
+        <m.div animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }} transition={{ duration: 12, repeat: Infinity }} className="absolute top-[70%] left-[10%] text-slate-300 dark:text-slate-700 opacity-20">
+          <iconMap.Server size={64} />
+        </m.div>
       </div>
 
       {/* Internal Panel Header */}
@@ -156,7 +156,7 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
       {/* Live Status Badge */}
       <div className="absolute top-6 right-6 md:top-8 md:right-8 z-30 pointer-events-none">
         <div className="px-3 py-1.5 rounded-full bg-white/60 dark:bg-slate-800/60 backdrop-blur-md border border-white/60 dark:border-white/10 shadow-sm flex items-center gap-2">
-          <LucideIcons.Activity className="w-3 h-3 md:w-3.5 md:h-3.5 text-blue-500" />
+          <iconMap.Activity className="w-3 h-3 md:w-3.5 md:h-3.5 text-blue-500" />
           <span className="text-[9px] md:text-[10px] font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider">System Active</span>
         </div>
       </div>
@@ -165,10 +165,10 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
       <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-30 w-max max-w-[90%] pointer-events-none hidden sm:block">
         <div className="flex flex-wrap items-center justify-center gap-3 px-4 py-2.5 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-md border border-white/50 dark:border-slate-700/50 shadow-sm">
           {workflow.nodes.slice(0, 5).map((node) => (
-             <div key={node.id} className="flex items-center gap-1.5">
-               <div className={`w-2 h-2 rounded-full bg-gradient-to-br ${nodeGradients[node.color || ''] || 'from-slate-400 to-slate-500'}`} />
-               <span className="text-[8.5px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider truncate max-w-[80px]">{node.label}</span>
-             </div>
+            <div key={node.id} className="flex items-center gap-1.5">
+              <div className={`w-2 h-2 rounded-full bg-gradient-to-br ${nodeGradients[node.color || ''] || 'from-slate-400 to-slate-500'}`} />
+              <span className="text-[8.5px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider truncate max-w-[80px]">{node.label}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -176,7 +176,7 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
       {/* Tooltip Overlay */}
       <AnimatePresence>
         {activeNode && activeNode.tooltip && (
-          <motion.div
+          <m.div
             key={activeNode.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -191,10 +191,10 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
               {activeNode.tooltip.purpose}
             </p>
             <div className="mt-2 pt-2 border-t border-slate-200/60 dark:border-slate-700/60 flex justify-between items-center text-[10px] uppercase font-bold tracking-wider text-slate-400">
-               <span>Estimated Process Time</span>
-               <span className="text-emerald-500 flex items-center gap-1"><LucideIcons.Zap className="w-3 h-3" /> {activeNode.tooltip.estimatedTime || 'Real-time'}</span>
+              <span>Estimated Process Time</span>
+              <span className="text-emerald-500 flex items-center gap-1"><iconMap.Zap className="w-3 h-3" /> {activeNode.tooltip.estimatedTime || 'Real-time'}</span>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
@@ -217,23 +217,23 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
           const isActive = step === index;
           const isHovered = activeNode?.id === node.id;
           const isFlash = step === totalSteps + 1;
-          
+
           // Determine status based on sequence position
           const status = isComplete ? 'completed' : (isActive ? 'running' : (isVisible ? 'completed' : 'pending'));
           const gradientClass = nodeGradients[node.color || ''] || 'from-slate-600 to-slate-800';
 
           return (
-            <motion.div
+            <m.div
               key={node.id}
               initial={{ opacity: 0, scale: 0.5, y: 20 }}
-              animate={isVisible ? { 
-                opacity: 1, 
-                scale: isHovered || isActive || isFlash ? 1.05 : 1, 
+              animate={isVisible ? {
+                opacity: 1,
+                scale: isHovered || isActive || isFlash ? 1.05 : 1,
                 y: isHovered ? -8 : (isComplete && !activeNode ? [0, -4, 0] : 0),
                 rotate: isHovered ? 2 : 0,
                 filter: isFlash || isActive ? `drop-shadow(0 0 15px ${theme.glow})` : 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))'
               } : {}}
-              transition={{ 
+              transition={{
                 duration: 0.5,
                 y: isComplete && !activeNode && !isHovered ? { duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.3 } : { duration: 0.3 },
                 rotate: { duration: 0.3 }
@@ -246,10 +246,10 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
               <div className="flex flex-col items-center gap-2">
                 {/* Status Indicator */}
                 <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full border-2 border-white dark:border-slate-800 z-30 transition-colors duration-300 ${status === 'completed' ? 'bg-emerald-500' : (status === 'running' ? 'bg-blue-500 animate-pulse' : 'bg-slate-300')}`} />
-                
+
                 {/* Ripple Effect for active node */}
                 {isActive && (
-                  <motion.div 
+                  <m.div
                     initial={{ scale: 1, opacity: 0.5 }}
                     animate={{ scale: 1.5, opacity: 0 }}
                     transition={{ duration: 1, repeat: Infinity }}
@@ -263,13 +263,13 @@ export default function AnimatedWorkflowPreview({ workflow, accentColor = 'blue'
                   <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none" />
                   {renderIcon(node.icon, "w-6 h-6 text-white drop-shadow-md relative z-10")}
                 </div>
-                
+
                 {/* Label */}
                 <div className={`text-[10px] md:text-[11px] font-bold tracking-wide whitespace-nowrap px-2.5 py-1 rounded-lg bg-white/90 dark:bg-slate-800/90 backdrop-blur-md shadow-sm transition-colors duration-300 ${isHovered ? 'text-slate-900 dark:text-white' : 'text-slate-600 dark:text-slate-400'}`}>
                   {node.label}
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

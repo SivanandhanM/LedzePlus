@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { m, AnimatePresence, useInView } from 'framer-motion';
 import {
   FileText, Send, GitCompare, ClipboardCheck, Truck, PackageCheck,
   ShieldCheck, BarChart3, X, ChevronLeft, ChevronRight,
@@ -199,7 +199,7 @@ function StepCard({ step, index, isActive, isDimmed, onClick }: StepCardProps) {
   const Icon = step.icon;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 30, scale: 0.92 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: '-60px' }}
@@ -224,7 +224,7 @@ function StepCard({ step, index, isActive, isDimmed, onClick }: StepCardProps) {
 
       {/* Active pulse ring */}
       {isActive && (
-        <motion.div
+        <m.div
           className={`absolute inset-0 rounded-2xl border-2 ${c.border}`}
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 1.5, repeat: Infinity }}
@@ -237,20 +237,20 @@ function StepCard({ step, index, isActive, isDimmed, onClick }: StepCardProps) {
       </div>
 
       {/* Icon */}
-      <motion.div
+      <m.div
         className={`w-10 h-10 rounded-xl ${c.bg} border ${c.border}/50 flex items-center justify-center shadow-sm relative z-10`}
         animate={isActive ? { rotate: [0, 5, -5, 0] } : { rotate: 0 }}
         transition={{ duration: 0.4 }}
       >
         <Icon className={`w-5 h-5 ${c.text}`} strokeWidth={1.8} />
-      </motion.div>
+      </m.div>
 
       {/* Text */}
       <div className="relative z-10">
         <h4 className="text-[12px] font-bold text-slate-800 dark:text-white leading-tight">{step.title}</h4>
         <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed mt-0.5 line-clamp-2">{step.description}</p>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -277,7 +277,7 @@ function HConnector({ color }: { color: string }) {
         {/* Track */}
         <path d="M2,40 L38,40" stroke="rgba(148,163,184,0.2)" strokeWidth="2" fill="none" />
         {/* Animated stroke */}
-        <motion.path
+        <m.path
           d="M2,40 L36,40"
           stroke={`url(#${uid})`}
           strokeWidth="2"
@@ -290,7 +290,7 @@ function HConnector({ color }: { color: string }) {
           transition={{ duration: 0.6, ease: 'easeInOut' }}
         />
         {/* Animated particle — animate cx as a plain SVG attr */}
-        <motion.circle
+        <m.circle
           r={3}
           cy={40}
           fill={c.particle}
@@ -322,7 +322,7 @@ function TurnConnector({ color }: { color: string }) {
         {/* Track */}
         <path d="M0,40 Q30,40 30,80 L30,120" stroke="rgba(148,163,184,0.2)" strokeWidth="2" fill="none" />
         {/* Animated stroke */}
-        <motion.path
+        <m.path
           d="M0,40 Q30,40 30,80 L30,120"
           stroke={`url(#turn-g-${color})`}
           strokeWidth="2"
@@ -334,7 +334,7 @@ function TurnConnector({ color }: { color: string }) {
           transition={{ duration: 0.9, ease: 'easeInOut', delay: 0.3 }}
         />
         {/* Particle travelling along bezier — approximate with simple motion */}
-        <motion.circle
+        <m.circle
           r={3}
           fill={c.particle}
           style={{ filter: `drop-shadow(0 0 5px ${c.particle})` }}
@@ -364,7 +364,7 @@ function VConnector({ color }: { color: string }) {
         </marker>
       </defs>
       <path d="M16,2 L16,38" stroke="rgba(148,163,184,0.2)" strokeWidth="2" fill="none" />
-      <motion.path
+      <m.path
         d="M16,2 L16,36"
         stroke={`url(#vg-${color})`}
         strokeWidth="2"
@@ -376,7 +376,7 @@ function VConnector({ color }: { color: string }) {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       />
-      <motion.circle
+      <m.circle
         r={3}
         cx={16}
         fill={c.particle}
@@ -406,7 +406,7 @@ function DetailDrawer({ step, totalSteps, onClose, onNext, onPrev, isFirst, isLa
   const Icon = step.icon;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: 60 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 60 }}
@@ -415,7 +415,7 @@ function DetailDrawer({ step, totalSteps, onClose, onNext, onPrev, isFirst, isLa
     >
       {/* Progress bar */}
       <div className="h-1 bg-slate-100 dark:bg-slate-800 rounded-t-3xl overflow-hidden">
-        <motion.div
+        <m.div
           className={`h-full ${c.badge}`}
           initial={{ width: 0 }}
           animate={{ width: `${(step.id / totalSteps) * 100}%` }}
@@ -502,7 +502,7 @@ function DetailDrawer({ step, totalSteps, onClose, onNext, onPrev, isFirst, isLa
           Next <ChevronRight className="w-4 h-4" />
         </button>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -514,7 +514,7 @@ function ExtraFeatureCard({ feat, index }: { feat: typeof EXTRA_FEATURES[number]
   const Icon = feat.icon;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -527,7 +527,7 @@ function ExtraFeatureCard({ feat, index }: { feat: typeof EXTRA_FEATURES[number]
       </div>
       <h4 className="text-[13px] font-bold text-slate-800 dark:text-white">{feat.title}</h4>
       <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">{feat.desc}</p>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -571,20 +571,22 @@ export default function PurchaseWorkflowSection() {
 
       {/* ── Background blobs ─────────────────────────────────────────────── */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
-        <motion.div
+        <m.div
           animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.6, 0.4] }}
           transition={{ duration: 14, repeat: Infinity }}
           className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-[120px]"
+          style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
         />
-        <motion.div
+        <m.div
           animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 18, repeat: Infinity, delay: 3 }}
           className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-purple-400/10 rounded-full blur-[120px]"
+          style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
         />
       </div>
 
       {/* ── BANNER ──────────────────────────────────────────────────────── */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7 }}
@@ -596,7 +598,7 @@ export default function PurchaseWorkflowSection() {
             className="pointer-events-none absolute inset-0 opacity-[0.04]"
             style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}
           />
-          <motion.div
+          <m.div
             initial={{ scale: 0.85, opacity: 0 }}
             animate={inView ? { scale: 1, opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -611,9 +613,9 @@ export default function PurchaseWorkflowSection() {
               13 automated steps — from internal requisition to vendor performance analytics.
               Click any step to explore the full business logic.
             </p>
-          </motion.div>
+          </m.div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* ── WORKFLOW CANVAS (Desktop & Tablet) ──────────────────────────── */}
       <div className="hidden sm:block mb-16">
@@ -682,7 +684,7 @@ export default function PurchaseWorkflowSection() {
       </div>
 
       {/* ── ADVANCED FEATURES ────────────────────────────────────────────── */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -698,10 +700,10 @@ export default function PurchaseWorkflowSection() {
             <ExtraFeatureCard key={feat.title} feat={feat} index={i} />
           ))}
         </div>
-      </motion.div>
+      </m.div>
 
       {/* ── BENEFITS STRIP ───────────────────────────────────────────────── */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -715,7 +717,7 @@ export default function PurchaseWorkflowSection() {
             const c = COLOR_MAP[b.color];
             const Icon = b.icon;
             return (
-              <motion.div
+              <m.div
                 key={i}
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -727,17 +729,17 @@ export default function PurchaseWorkflowSection() {
                   <Icon className={`w-4 h-4 ${c.text}`} strokeWidth={2} />
                 </div>
                 <span className="text-[13px] font-semibold text-slate-700 dark:text-slate-200">{b.text}</span>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
-      </motion.div>
+      </m.div>
 
       {/* ── DETAIL DRAWER ────────────────────────────────────────────────── */}
       <AnimatePresence>
         {activeStep && (
           <>
-            <motion.div
+            <m.div
               key="backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

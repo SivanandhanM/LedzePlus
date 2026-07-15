@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useScrollToContent } from '../../hooks/useScrollToContent';
-import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
+import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import { Book, FileText } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const gstData = [
   { id: '1', title: 'GSTR-1', desc: 'GSTR-1 is a monthly or quarterly GST return used by registered businesses to report all sales (outward supplies).' },
@@ -41,7 +41,7 @@ export default function GSTKnowledgeCenter() {
     <div className="relative pb-16 overflow-hidden">
       {/* Background Enhancements */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }} transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }} className="absolute top-[10%] -left-1/4 w-[800px] h-[800px] bg-orange-200/40 dark:bg-orange-900/10 rounded-full blur-[120px]" />
+        <m.div animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }} transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }} className="absolute top-[10%] -left-1/4 w-[800px] h-[800px] bg-orange-200/40 dark:bg-orange-900/10 rounded-full blur-[120px]" style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }} />
       </div>
 
       <div className="relative z-10">
@@ -50,7 +50,6 @@ export default function GSTKnowledgeCenter() {
           subtitle="Indirect Tax & Compliance Hub"
           description="Access a comprehensive glossary of Goods and Services Tax (GST) returns, electronic invoicing standards, e-Way bills, and statutory compliance resources designed for enterprise accounting."
           icon={<Book className="w-10 h-10" />}
-          theme={MODULE_THEMES.gst}
         />
 
         <div ref={contentRef} className="scroll-mt-6"></div>
@@ -58,7 +57,7 @@ export default function GSTKnowledgeCenter() {
         <Section title="Statutory Tax Returns & Documents">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
             {gstData.map((item, idx) => (
-              <motion.div
+              <m.div
                 key={item.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -87,13 +86,13 @@ export default function GSTKnowledgeCenter() {
                 </p>
 
                 {/* Bottom Glowing Accent Line */}
-                <motion.div
+                <m.div
                   className="absolute bottom-0 left-6 right-6 h-[3px] rounded-t-full bg-gradient-to-r from-orange-500 to-amber-500"
                   initial={{ opacity: 0, scaleX: 0 }}
                   whileHover={{ opacity: 1, scaleX: 1 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
                 />
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </Section>

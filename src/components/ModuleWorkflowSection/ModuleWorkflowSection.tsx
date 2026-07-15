@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { m, AnimatePresence, useInView } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, AlertCircle, CheckCircle2 } from 'lucide-react';
-import * as LucideIcons from 'lucide-react';
+import { iconMap } from '../../workflows/iconMap';
 import type { ModuleWorkflowConfig, ModuleStep, ExtraFeature } from '../../workflows/moduleWorkflowTypes';
 
 /* ─────────────────────────────────────────────────────────────────────────────
    ICON RENDERER
 ───────────────────────────────────────────────────────────────────────────── */
 const renderIcon = (name: string, className?: string) => {
-  const Icon = (LucideIcons as any)[name] || LucideIcons.Circle;
+  const Icon = iconMap[name] || iconMap.Circle;
   return <Icon className={className} />;
 };
 
@@ -19,17 +19,17 @@ export const COLOR_MAP: Record<string, {
   bg: string; border: string; text: string; badge: string;
   glow: string; particle: string; gradFrom: string; gradTo: string;
 }> = {
-  blue:    { bg: 'bg-blue-50 dark:bg-blue-950/30',       border: 'border-blue-400',    text: 'text-blue-600 dark:text-blue-400',       badge: 'bg-blue-500',    glow: 'shadow-blue-500/25',    particle: '#3b82f6', gradFrom: '#3b82f6', gradTo: '#6366f1' },
+  blue: { bg: 'bg-blue-50 dark:bg-blue-950/30', border: 'border-blue-400', text: 'text-blue-600 dark:text-blue-400', badge: 'bg-blue-500', glow: 'shadow-blue-500/25', particle: '#3b82f6', gradFrom: '#3b82f6', gradTo: '#6366f1' },
   emerald: { bg: 'bg-emerald-50 dark:bg-emerald-950/30', border: 'border-emerald-400', text: 'text-emerald-600 dark:text-emerald-400', badge: 'bg-emerald-500', glow: 'shadow-emerald-500/25', particle: '#10b981', gradFrom: '#10b981', gradTo: '#06b6d4' },
-  amber:   { bg: 'bg-amber-50 dark:bg-amber-950/30',     border: 'border-amber-400',   text: 'text-amber-600 dark:text-amber-400',     badge: 'bg-amber-500',   glow: 'shadow-amber-500/25',   particle: '#f59e0b', gradFrom: '#f59e0b', gradTo: '#ef4444' },
-  cyan:    { bg: 'bg-cyan-50 dark:bg-cyan-950/30',       border: 'border-cyan-400',    text: 'text-cyan-600 dark:text-cyan-400',       badge: 'bg-cyan-500',    glow: 'shadow-cyan-500/25',    particle: '#06b6d4', gradFrom: '#06b6d4', gradTo: '#3b82f6' },
-  purple:  { bg: 'bg-purple-50 dark:bg-purple-950/30',   border: 'border-purple-400',  text: 'text-purple-600 dark:text-purple-400',   badge: 'bg-purple-500',  glow: 'shadow-purple-500/25',  particle: '#a855f7', gradFrom: '#a855f7', gradTo: '#ec4899' },
-  rose:    { bg: 'bg-rose-50 dark:bg-rose-950/30',       border: 'border-rose-400',    text: 'text-rose-600 dark:text-rose-400',       badge: 'bg-rose-500',    glow: 'shadow-rose-500/25',    particle: '#f43f5e', gradFrom: '#f43f5e', gradTo: '#fb923c' },
-  pink:    { bg: 'bg-pink-50 dark:bg-pink-950/30',       border: 'border-pink-400',    text: 'text-pink-600 dark:text-pink-400',       badge: 'bg-pink-500',    glow: 'shadow-pink-500/25',    particle: '#ec4899', gradFrom: '#ec4899', gradTo: '#a855f7' },
-  indigo:  { bg: 'bg-indigo-50 dark:bg-indigo-950/30',   border: 'border-indigo-400',  text: 'text-indigo-600 dark:text-indigo-400',   badge: 'bg-indigo-500',  glow: 'shadow-indigo-500/25',  particle: '#6366f1', gradFrom: '#6366f1', gradTo: '#3b82f6' },
-  orange:  { bg: 'bg-orange-50 dark:bg-orange-950/30',   border: 'border-orange-400',  text: 'text-orange-600 dark:text-orange-400',   badge: 'bg-orange-500',  glow: 'shadow-orange-500/25',  particle: '#f97316', gradFrom: '#f97316', gradTo: '#f59e0b' },
-  teal:    { bg: 'bg-teal-50 dark:bg-teal-950/30',       border: 'border-teal-400',    text: 'text-teal-600 dark:text-teal-400',       badge: 'bg-teal-500',    glow: 'shadow-teal-500/25',    particle: '#14b8a6', gradFrom: '#14b8a6', gradTo: '#06b6d4' },
-  slate:   { bg: 'bg-slate-50 dark:bg-slate-950/30',     border: 'border-slate-400',   text: 'text-slate-600 dark:text-slate-400',     badge: 'bg-slate-500',   glow: 'shadow-slate-500/25',   particle: '#94a3b8', gradFrom: '#94a3b8', gradTo: '#6366f1' },
+  amber: { bg: 'bg-amber-50 dark:bg-amber-950/30', border: 'border-amber-400', text: 'text-amber-600 dark:text-amber-400', badge: 'bg-amber-500', glow: 'shadow-amber-500/25', particle: '#f59e0b', gradFrom: '#f59e0b', gradTo: '#ef4444' },
+  cyan: { bg: 'bg-cyan-50 dark:bg-cyan-950/30', border: 'border-cyan-400', text: 'text-cyan-600 dark:text-cyan-400', badge: 'bg-cyan-500', glow: 'shadow-cyan-500/25', particle: '#06b6d4', gradFrom: '#06b6d4', gradTo: '#3b82f6' },
+  purple: { bg: 'bg-purple-50 dark:bg-purple-950/30', border: 'border-purple-400', text: 'text-purple-600 dark:text-purple-400', badge: 'bg-purple-500', glow: 'shadow-purple-500/25', particle: '#a855f7', gradFrom: '#a855f7', gradTo: '#ec4899' },
+  rose: { bg: 'bg-rose-50 dark:bg-rose-950/30', border: 'border-rose-400', text: 'text-rose-600 dark:text-rose-400', badge: 'bg-rose-500', glow: 'shadow-rose-500/25', particle: '#f43f5e', gradFrom: '#f43f5e', gradTo: '#fb923c' },
+  pink: { bg: 'bg-pink-50 dark:bg-pink-950/30', border: 'border-pink-400', text: 'text-pink-600 dark:text-pink-400', badge: 'bg-pink-500', glow: 'shadow-pink-500/25', particle: '#ec4899', gradFrom: '#ec4899', gradTo: '#a855f7' },
+  indigo: { bg: 'bg-indigo-50 dark:bg-indigo-950/30', border: 'border-indigo-400', text: 'text-indigo-600 dark:text-indigo-400', badge: 'bg-indigo-500', glow: 'shadow-indigo-500/25', particle: '#6366f1', gradFrom: '#6366f1', gradTo: '#3b82f6' },
+  orange: { bg: 'bg-orange-50 dark:bg-orange-950/30', border: 'border-orange-400', text: 'text-orange-600 dark:text-orange-400', badge: 'bg-orange-500', glow: 'shadow-orange-500/25', particle: '#f97316', gradFrom: '#f97316', gradTo: '#f59e0b' },
+  teal: { bg: 'bg-teal-50 dark:bg-teal-950/30', border: 'border-teal-400', text: 'text-teal-600 dark:text-teal-400', badge: 'bg-teal-500', glow: 'shadow-teal-500/25', particle: '#14b8a6', gradFrom: '#14b8a6', gradTo: '#06b6d4' },
+  slate: { bg: 'bg-slate-50 dark:bg-slate-950/30', border: 'border-slate-400', text: 'text-slate-600 dark:text-slate-400', badge: 'bg-slate-500', glow: 'shadow-slate-500/25', particle: '#94a3b8', gradFrom: '#94a3b8', gradTo: '#6366f1' },
 };
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -47,7 +47,7 @@ function StepCard({ step, index, isActive, isDimmed, onClick }: StepCardProps) {
   const c = COLOR_MAP[step.color] || COLOR_MAP.blue;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 30, scale: 0.92 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: '-60px' }}
@@ -72,7 +72,7 @@ function StepCard({ step, index, isActive, isDimmed, onClick }: StepCardProps) {
 
       {/* Active pulse ring */}
       {isActive && (
-        <motion.div
+        <m.div
           className={`absolute inset-0 rounded-2xl border-2 ${c.border}`}
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 1.5, repeat: Infinity }}
@@ -85,20 +85,20 @@ function StepCard({ step, index, isActive, isDimmed, onClick }: StepCardProps) {
       </div>
 
       {/* Icon */}
-      <motion.div
+      <m.div
         className={`w-10 h-10 rounded-xl ${c.bg} border ${c.border}/50 flex items-center justify-center shadow-sm relative z-10`}
         animate={isActive ? { rotate: [0, 5, -5, 0] } : { rotate: 0 }}
         transition={{ duration: 0.4 }}
       >
         {renderIcon(step.icon, `w-5 h-5 ${c.text}`)}
-      </motion.div>
+      </m.div>
 
       {/* Text */}
       <div className="relative z-10">
         <h4 className="text-[12px] font-bold text-slate-800 dark:text-white leading-tight">{step.title}</h4>
         <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed mt-0.5 line-clamp-2">{step.description}</p>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -123,7 +123,7 @@ function HConnector({ color }: { color: string }) {
           </marker>
         </defs>
         <path d="M2,40 L38,40" stroke="rgba(148,163,184,0.2)" strokeWidth="2" fill="none" />
-        <motion.path
+        <m.path
           d="M2,40 L36,40"
           stroke={`url(#${uid})`}
           strokeWidth="2"
@@ -135,7 +135,7 @@ function HConnector({ color }: { color: string }) {
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
         />
-        <motion.circle
+        <m.circle
           r={3}
           cy={40}
           fill={c.particle}
@@ -166,7 +166,7 @@ function TurnConnector({ color }: { color: string }) {
           </linearGradient>
         </defs>
         <path d="M0,40 Q30,40 30,80 L30,120" stroke="rgba(148,163,184,0.2)" strokeWidth="2" fill="none" />
-        <motion.path
+        <m.path
           d="M0,40 Q30,40 30,80 L30,120"
           stroke={`url(#${gid})`}
           strokeWidth="2"
@@ -177,7 +177,7 @@ function TurnConnector({ color }: { color: string }) {
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: 'easeInOut', delay: 0.3 }}
         />
-        <motion.circle
+        <m.circle
           r={3}
           fill={c.particle}
           style={{ filter: `drop-shadow(0 0 5px ${c.particle})` }}
@@ -207,7 +207,7 @@ function VConnector({ color }: { color: string }) {
         </marker>
       </defs>
       <path d="M16,2 L16,38" stroke="rgba(148,163,184,0.2)" strokeWidth="2" fill="none" />
-      <motion.path
+      <m.path
         d="M16,2 L16,36"
         stroke={`url(#vg-mws-${color})`}
         strokeWidth="2"
@@ -219,7 +219,7 @@ function VConnector({ color }: { color: string }) {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       />
-      <motion.circle
+      <m.circle
         r={3}
         cx={16}
         fill={c.particle}
@@ -248,7 +248,7 @@ function DetailDrawer({ step, totalSteps, onClose, onNext, onPrev, isFirst, isLa
   const c = COLOR_MAP[step.color] || COLOR_MAP.blue;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: 60 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 60 }}
@@ -257,7 +257,7 @@ function DetailDrawer({ step, totalSteps, onClose, onNext, onPrev, isFirst, isLa
     >
       {/* Progress bar */}
       <div className="h-1 bg-slate-100 dark:bg-slate-800 rounded-t-3xl overflow-hidden">
-        <motion.div
+        <m.div
           className={`h-full ${c.badge}`}
           initial={{ width: 0 }}
           animate={{ width: `${(step.id / totalSteps) * 100}%` }}
@@ -344,7 +344,7 @@ function DetailDrawer({ step, totalSteps, onClose, onNext, onPrev, isFirst, isLa
           Next <ChevronRight className="w-4 h-4" />
         </button>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -355,7 +355,7 @@ function ExtraFeatureCard({ feat, index }: { feat: ExtraFeature; index: number }
   const c = COLOR_MAP[feat.color] || COLOR_MAP.blue;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -368,7 +368,7 @@ function ExtraFeatureCard({ feat, index }: { feat: ExtraFeature; index: number }
       </div>
       <h4 className="text-[13px] font-bold text-slate-800 dark:text-white">{feat.title}</h4>
       <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">{feat.desc}</p>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -421,49 +421,99 @@ export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionP
 
       {/* ── Background blobs ─────────────────────────────────────────────── */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
-        <motion.div
+        <m.div
           animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.6, 0.4] }}
           transition={{ duration: 14, repeat: Infinity }}
           className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-[120px]"
+          style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
         />
-        <motion.div
+        <m.div
           animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 18, repeat: Infinity, delay: 3 }}
           className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-purple-400/10 rounded-full blur-[120px]"
+          style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
         />
       </div>
 
       {/* ── BANNER ──────────────────────────────────────────────────────── */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7 }}
         className="relative rounded-3xl overflow-hidden mb-12 shadow-2xl"
       >
-        <div className={`bg-gradient-to-br ${bannerGradient} p-8 md:p-12 text-center relative overflow-hidden`}>
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.1)_0%,_transparent_70%)]" />
+        <div 
+          className="p-8 md:p-12 text-center relative overflow-hidden"
+          style={{
+            background: 'linear-gradient(135deg, var(--color-primary-hex) 0%, var(--color-secondary-hex) 55%, var(--color-accent-hex) 100%)',
+            border: '1px solid rgba(255,255,255,.15)',
+            boxShadow: '0 24px 50px rgba(15,23,42,.18)',
+            transition: '--color-primary-hex 500ms ease-in-out, --color-secondary-hex 500ms ease-in-out, --color-accent-hex 500ms ease-in-out'
+          } as any}
+        >
+          {/* Decorative Lighting */}
+          <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(circle at top left, rgba(255,255,255,.14), transparent 45%)' }} />
+          <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(circle at bottom right, rgba(255,255,255,.08), transparent 55%)' }} />
+          
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.04]"
             style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}
           />
-          <motion.div
+
+          {/* Watermark Icons */}
+          {(() => {
+            const getWatermarkIcons = (label: string) => {
+              const l = label.toLowerCase();
+              if (l.includes('purchase')) return ['PackageSearch', 'FileText', 'Users'];
+              if (l.includes('sales')) return ['Activity', 'UserPlus', 'Truck'];
+              if (l.includes('inventory')) return ['Layers', 'ScanBarcode', 'Package'];
+              if (l.includes('accounting') || l.includes('billing')) return ['FileCheck', 'Calculator', 'Receipt'];
+              if (l.includes('banking')) return ['Landmark', 'Wallet', 'CreditCard'];
+              if (l.includes('gst')) return ['FileSignature', 'Shield', 'Receipt'];
+              if (l.includes('payroll')) return ['Users', 'Banknote', 'CalendarDays'];
+              if (l.includes('gate')) return ['Truck', 'ShieldCheck', 'ScanFace'];
+              return ['Layers', 'Activity', 'Shield'];
+            };
+            
+            const icons = getWatermarkIcons(moduleLabel);
+            
+            return (
+              <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-between px-10 opacity-[0.04] text-white">
+                {renderIcon(icons[0], "w-40 h-40 -ml-10 -rotate-12")}
+                {renderIcon(icons[1], "w-32 h-32 mb-32")}
+                {renderIcon(icons[2], "w-48 h-48 -mr-16 rotate-12")}
+              </div>
+            );
+          })()}
+
+          <m.div
             initial={{ scale: 0.85, opacity: 0 }}
             animate={inView ? { scale: 1, opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative z-10"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-bold tracking-widest uppercase mb-4 border border-white/30">
+            <span 
+              className="inline-block px-4 py-1.5 rounded-full text-white text-[11px] font-black tracking-widest uppercase mb-5 border border-white/20 shadow-sm"
+              style={{ background: 'rgba(255,255,255,.18)' }}
+            >
               {moduleLabel}
             </span>
-            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-3">
+            <h2 
+              className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4"
+              style={{ textShadow: '0 2px 12px rgba(0,0,0,.18)' }}
+            >
               {subtitle}
             </h2>
-            <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto font-medium">
+            <p 
+              className="text-base md:text-lg max-w-2xl mx-auto font-medium"
+              style={{ color: 'rgba(255,255,255,.85)' }}
+            >
               {stepCountLabel} — from initial trigger to final completion.
               Click any step to explore the full business logic.
             </p>
-          </motion.div>
+          </m.div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* ── WORKFLOW CANVAS (Desktop & Tablet) ──────────────────────────── */}
       <div className="hidden sm:block mb-16">
@@ -535,7 +585,7 @@ export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionP
 
       {/* ── ADVANCED FEATURES ────────────────────────────────────────────── */}
       {extraFeatures.length > 0 && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -551,12 +601,12 @@ export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionP
               <ExtraFeatureCard key={feat.title} feat={feat} index={i} />
             ))}
           </div>
-        </motion.div>
+        </m.div>
       )}
 
       {/* ── BENEFITS STRIP ───────────────────────────────────────────────── */}
       {benefits.length > 0 && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -569,7 +619,7 @@ export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionP
             {benefits.map((b, i) => {
               const c = COLOR_MAP[b.color] || COLOR_MAP.blue;
               return (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -581,18 +631,18 @@ export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionP
                     {renderIcon(b.icon, `w-4 h-4 ${c.text}`)}
                   </div>
                   <span className="text-[13px] font-semibold text-slate-700 dark:text-slate-200">{b.text}</span>
-                </motion.div>
+                </m.div>
               );
             })}
           </div>
-        </motion.div>
+        </m.div>
       )}
 
       {/* ── DETAIL DRAWER ────────────────────────────────────────────────── */}
       <AnimatePresence>
         {activeStep && (
           <>
-            <motion.div
+            <m.div
               key="backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

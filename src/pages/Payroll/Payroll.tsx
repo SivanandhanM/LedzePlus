@@ -1,5 +1,5 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
-import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
+import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import Table from '../../components/Table/Table';
@@ -53,7 +53,6 @@ export default function Payroll() {
           description="The HR & Payroll Management module is the comprehensive command center for all workforce operations. Built for enterprise complexity, it handles everything from onboarding and biometric attendance sync to complex salary structures and statutory compliance (PF, ESI, TDS). It delivers immense value by automating time-consuming payroll cycles, ensuring accurate disbursements, and maintaining a secure, centralized repository of all employee records."
           icon={<Users className="w-10 h-10" />}
           workflowPreview={<AnimatedWorkflowPreview workflow={payrollWorkflow} accentColor="rose" />}
-          theme={MODULE_THEMES.payroll}
         />
       </div>
       <div ref={contentRef} className="scroll-mt-6"></div>

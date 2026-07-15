@@ -1,6 +1,8 @@
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import MainLayout from './layouts/MainLayout';
+import MotionProvider from './providers/MotionProvider';
+import ThemeProvider from './providers/ThemeProvider';
 
 import { lazy } from 'react';
 
@@ -11,7 +13,7 @@ const Billing = lazy(() => import('./pages/Billing/Billing'));
 const Inventory = lazy(() => import('./pages/Inventory/Inventory'));
 const Accounting = lazy(() => import('./pages/Accounting/Accounting'));
 const Payroll = lazy(() => import('./pages/Payroll/Payroll'));
-const Banking = lazy(() => import('./pages/Banking/Banking'));
+const Banking = lazy(() => import('./pages/Banking'));
 const GateManagement = lazy(() => import('./pages/GateManagement/GateManagement'));
 const GST = lazy(() => import('./pages/GST/GST'));
 const DPDPCompliance = lazy(() => import('./pages/DPDPCompliance/DPDPCompliance'));
@@ -19,27 +21,31 @@ const GSTKnowledgeCenter = lazy(() => import('./pages/GSTKnowledgeCenter/GSTKnow
 
 function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
+    <MotionProvider>
+      <HashRouter>
+        <ThemeProvider>
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<Home />} />
 
-          <Route path="purchase" element={<Purchase />} />
-          <Route path="sales" element={<Sales />} />
-          <Route path="billing" element={<Billing />} />
-          <Route path="inventory" element={<Inventory />} />
-          <Route path="accounting" element={<Accounting />} />
-          <Route path="payroll" element={<Payroll />} />
-          <Route path="banking" element={<Banking />} />
-          <Route path="gate-management" element={<GateManagement />} />
-          <Route path="gst" element={<GST />} />
-          <Route path="dpdp-compliance" element={<DPDPCompliance />} />
-          <Route path="gst-knowledge-center" element={<GSTKnowledgeCenter />} />
+              <Route path="purchase" element={<Purchase />} />
+              <Route path="sales" element={<Sales />} />
+              <Route path="billing" element={<Billing />} />
+              <Route path="inventory" element={<Inventory />} />
+              <Route path="accounting" element={<Accounting />} />
+              <Route path="payroll" element={<Payroll />} />
+              <Route path="banking" element={<Banking />} />
+              <Route path="gate-management" element={<GateManagement />} />
+              <Route path="gst" element={<GST />} />
+              <Route path="dpdp-compliance" element={<DPDPCompliance />} />
+              <Route path="gst-knowledge-center" element={<GSTKnowledgeCenter />} />
 
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Route>
-      </Routes>
-    </HashRouter>
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
+          </Routes>
+        </ThemeProvider>
+      </HashRouter>
+    </MotionProvider>
   );
 }
 

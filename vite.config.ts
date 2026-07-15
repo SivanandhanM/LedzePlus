@@ -12,7 +12,14 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true,
+        passes: 2,
+        toplevel: true,
+        unused: true,
+        dead_code: true,
       },
+      mangle: {
+        safari10: true,
+      }
     },
     cssCodeSplit: true,
     assetsInlineLimit: 4096,
@@ -20,8 +27,8 @@ export default defineConfig({
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'motion-vendor': ['framer-motion'],
-          'icons-vendor': ['lucide-react'],
+          'framer-motion': ['framer-motion'],
+          'lucide-icons': ['lucide-react']
         },
       },
     },

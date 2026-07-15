@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useMemo, useCallback, memo } from 'react';
+import { m, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import type { ReactNode } from 'react';
@@ -18,32 +18,34 @@ const rowVariants: Variants = {
   }),
 };
 
-export default function Table({ headers, rows }: TableProps) {
+const Table = memo(function Table({ headers, rows }: TableProps) {
   const [sortCol, setSortCol] = useState<number | null>(null);
   const [sortDesc, setSortDesc] = useState(false);
 
-  const sortedRows = [...rows].sort((a, b) => {
-    if (sortCol === null) return 0;
-    const cellA = a[sortCol];
-    const cellB = b[sortCol];
-    if (typeof cellA === 'string' && typeof cellB === 'string') {
-      return sortDesc ? cellB.localeCompare(cellA) : cellA.localeCompare(cellB);
-    }
-    return 0;
-  });
+  const sortedRows = useMemo(() => {
+    return [...rows].sort((a, b) => {
+      if (sortCol === null) return 0;
+      const cellA = a[sortCol];
+      const cellB = b[sortCol];
+      if (typeof cellA === 'string' && typeof cellB === 'string') {
+        return sortDesc ? cellB.localeCompare(cellA) : cellA.localeCompare(cellB);
+      }
+      return 0;
+    });
+  }, [rows, sortCol, sortDesc]);
 
-  const handleSort = (index: number) => {
+  const handleSort = useCallback((index: number) => {
     if (sortCol === index) {
-      setSortDesc(!sortDesc);
+      setSortDesc(prev => !prev);
     } else {
       setSortCol(index);
       setSortDesc(false);
     }
-  };
+  }, [sortCol]);
 
   return (
     <div className="my-8">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -92,7 +94,7 @@ export default function Table({ headers, rows }: TableProps) {
           <tbody className="relative divide-y divide-slate-100/60 dark:divide-slate-800/50">
             <AnimatePresence>
               {sortedRows.map((row, rowIndex) => (
-                <motion.tr
+                <m.tr
                   key={rowIndex}
                   custom={rowIndex}
                   variants={rowVariants}
@@ -103,7 +105,7 @@ export default function Table({ headers, rows }: TableProps) {
                 >
                   {/* Left accent indicator on hover */}
                   <td className="relative py-4 px-6 text-sm text-slate-700 dark:text-slate-300 font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    <motion.div
+                    <m.div
                       className="absolute left-0 top-[20%] bottom-[20%] w-[3px] rounded-r-full bg-primary"
                       initial={{ scaleY: 0 }}
                       whileHover={{ scaleY: 1 }}
@@ -120,12 +122,14 @@ export default function Table({ headers, rows }: TableProps) {
                       {cell}
                     </td>
                   ))}
-                </motion.tr>
+                </m.tr>
               ))}
             </AnimatePresence>
           </tbody>
         </table>
-      </motion.div>
+      </m.div>
     </div>
   );
-}
+});
+
+export default Table;

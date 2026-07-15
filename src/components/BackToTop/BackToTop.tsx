@@ -1,6 +1,6 @@
 import { ArrowUp } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence, useSpring } from 'framer-motion';
+import { m, AnimatePresence, useSpring } from 'framer-motion';
 
 const RADIUS = 20;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
@@ -20,7 +20,12 @@ export default function BackToTop() {
     const handleScroll = () => {
       const scrollTop = container.scrollTop;
       const scrollHeight = container.scrollHeight - container.clientHeight;
-      const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+      // Due to sub-pixel rendering, scrollTop might not exactly equal scrollHeight.
+      // If we are within 2px of the bottom, clamp to 1.
+      let progress = 0;
+      if (scrollHeight > 0) {
+        progress = Math.abs(scrollHeight - scrollTop) <= 2 ? 1 : scrollTop / scrollHeight;
+      }
       setScrollProgress(progress);
       springProgress.set(progress);
       setIsVisible(scrollTop > 300);
@@ -42,7 +47,7 @@ export default function BackToTop() {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.button
+        <m.button
           initial={{ opacity: 0, y: 20, scale: 0.8 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.8 }}
@@ -58,7 +63,7 @@ export default function BackToTop() {
             {/* Ripple */}
             <AnimatePresence>
               {ripple && (
-                <motion.div
+                <m.div
                   className="absolute inset-0 rounded-full bg-primary/30"
                   initial={{ scale: 1, opacity: 0.6 }}
                   animate={{ scale: 2.2, opacity: 0 }}
@@ -78,14 +83,15 @@ export default function BackToTop() {
                 strokeWidth="3"
               />
               {/* Progress arc */}
-              <motion.circle
+              <m.circle
                 cx="24" cy="24" r={RADIUS}
                 fill="none"
                 stroke="url(#progressGradient)"
                 strokeWidth="3"
                 strokeLinecap="round"
-                strokeDasharray={CIRCUMFERENCE}
-                animate={{ strokeDashoffset }}
+                pathLength={1}
+                strokeDasharray="1 1"
+                animate={{ strokeDashoffset: 1 - scrollProgress }}
                 transition={{ type: 'spring', stiffness: 80, damping: 20 }}
               />
               <defs>
@@ -115,7 +121,7 @@ export default function BackToTop() {
               />
             </div>
           </div>
-        </motion.button>
+        </m.button>
       )}
     </AnimatePresence>
   );

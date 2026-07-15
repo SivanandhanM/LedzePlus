@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 import AnimatedHeadline from './AnimatedHeadline';
 import HeroModuleCard from './HeroModuleCard';
@@ -49,7 +49,7 @@ export default function Hero() {
         <div className="flex flex-col lg:flex-row items-center lg:items-stretch justify-center w-full max-w-[1080px] mx-auto gap-6 lg:gap-8 my-4 relative">
 
           {/* Left Column: About */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -65,7 +65,7 @@ export default function Hero() {
             <p className="text-[14px] leading-[1.8] text-slate-500 dark:text-slate-400 mb-0 font-medium">
               A unified enterprise resource planning platform that seamlessly connects procurement, inventory, finance, HR, taxation, banking, and operations through one intelligent ecosystem designed for modern businesses.
             </p>
-          </motion.div>
+          </m.div>
 
           {/* Center Column: Hero Headline */}
           <div className="order-1 lg:order-2 flex-1 flex justify-center w-full relative min-w-[300px]">
@@ -89,7 +89,7 @@ export default function Hero() {
           </div>
 
           {/* Right Column: Why */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -105,7 +105,7 @@ export default function Hero() {
             <p className="text-[14px] leading-[1.8] text-slate-500 dark:text-slate-400 mb-0 font-medium">
               Built for growing enterprises with intelligent automation, real-time analytics, enterprise-grade security, and scalable architecture that supports every stage of business growth.
             </p>
-          </motion.div>
+          </m.div>
 
         </div>
 

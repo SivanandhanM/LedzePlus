@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion';
+import { memo } from 'react';
+import { m } from 'framer-motion';
 
-export default function Footer() {
+const Footer = memo(function Footer() {
   return (
-    <motion.footer
+    <m.footer
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -18,7 +19,7 @@ export default function Footer() {
 
       <p className="mt-2 text-sm text-slate-400 dark:text-slate-500">
         Powered by{' '}
-        <motion.a
+        <m.a
           href="https://www.navanalatech.com/"
           target="_blank"
           rel="noopener noreferrer"
@@ -28,17 +29,17 @@ export default function Footer() {
         >
           NAVANALA TECHNOLOGIES PRIVATE LIMITED
           {/* Animated underline */}
-          <motion.span
+          <m.span
             className="absolute left-0 -bottom-0.5 h-[1.5px] bg-primary dark:bg-skyblue rounded-full"
             initial={{ width: 0 }}
             whileHover={{ width: '100%' }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
           />
-        </motion.a>
+        </m.a>
       </p>
 
       {/* Subtle badge */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
@@ -47,7 +48,9 @@ export default function Footer() {
       >
         <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-pulse" />
         Enterprise ERP Documentation
-      </motion.div>
-    </motion.footer>
+      </m.div>
+    </m.footer>
   );
-}
+});
+
+export default Footer;

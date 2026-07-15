@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { m, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 export default function ScrollProgress() {
@@ -19,7 +19,7 @@ export default function ScrollProgress() {
     <>
       {/* Main gradient progress bar */}
       <div className="fixed top-0 left-0 right-0 h-[3px] z-[100] bg-slate-100/50">
-        <motion.div
+        <m.div
           className="h-full origin-left"
           style={{
             scaleX: scrollYProgress,
@@ -27,7 +27,7 @@ export default function ScrollProgress() {
           }}
         />
         {/* Glowing leading-edge pulse dot */}
-        <motion.div
+        <m.div
           className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full pointer-events-none"
           style={{
             left: dotX,

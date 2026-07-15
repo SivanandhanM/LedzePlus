@@ -82,7 +82,7 @@ export default function Home() {
             badge="DATA PRIVACY"
             icon={<Lock className="w-6 h-6" />}
             path="/dpdp-compliance"
-            accentColor="#0F766E"
+            accentColor="#4ADBD1"
             delay={0.1}
           />
           <ResourceCard
@@ -91,7 +91,7 @@ export default function Home() {
             badge="INDIRECT TAX"
             icon={<Book className="w-6 h-6" />}
             path="/gst-knowledge-center"
-            accentColor="#EA580C"
+            accentColor="#F5BE83"
             delay={0.2}
           />
         </div>

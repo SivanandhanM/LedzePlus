@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, TrendingUp, Receipt, Package, BookOpen, Users, Building2, FileText, ShieldCheck } from 'lucide-react';
 import logoImg from '../../assets/images/logo.webp';
 
@@ -24,7 +24,7 @@ export default function RouteLoader({ isLoading }: RouteLoaderProps) {
   return (
     <AnimatePresence>
       {isLoading && (
-        <motion.div
+        <m.div
           key="route-loader"
           initial={{ opacity: 0, scale: 1.02 }}
           animate={{
@@ -42,7 +42,7 @@ export default function RouteLoader({ isLoading }: RouteLoaderProps) {
           aria-hidden="true"
         >
           {/* Frosted backdrop */}
-          <motion.div
+          <m.div
             className="absolute inset-0"
             initial={{ backdropFilter: 'blur(0px)' }}
             animate={{ backdropFilter: 'blur(16px)', transition: { duration: 0.5 } }}
@@ -56,7 +56,7 @@ export default function RouteLoader({ isLoading }: RouteLoaderProps) {
           <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
             
             {/* Center Logo */}
-            <motion.div
+            <m.div
               className="relative z-20 w-24 h-24 rounded-3xl bg-white shadow-2xl shadow-primary/20 border border-slate-100 flex items-center justify-center"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ 
@@ -83,10 +83,10 @@ export default function RouteLoader({ isLoading }: RouteLoaderProps) {
               }}
             >
               <img src={logoImg} alt="LEDZE Plus" className="w-14 h-14 object-contain" />
-            </motion.div>
+            </m.div>
 
             {/* Final Energy Pulse Wave */}
-            <motion.div
+            <m.div
               className="absolute top-1/2 left-1/2 -ml-[100px] -mt-[100px] w-[200px] h-[200px] rounded-full border-[4px] border-primary/60 pointer-events-none"
               initial={{ scale: 0, opacity: 0 }}
               animate={{
@@ -118,14 +118,14 @@ export default function RouteLoader({ isLoading }: RouteLoaderProps) {
                 ];
 
                 return trails.map((trail, idx) => (
-                  <motion.div
+                  <m.div
                     key={`${i}-${idx}`}
                     className="absolute top-0 left-0"
                     initial={{ rotate: initialAngle + trail.angleOffset }}
                     animate={{ rotate: initialAngle + trail.angleOffset + 360 * rotations }}
                     transition={{ duration: TOTAL_DURATION, ease: "easeInOut" }}
                   >
-                    <motion.div
+                    <m.div
                       initial={{ x: radius, opacity: 0, scale: 0 }}
                       animate={{
                         x: [radius, radius, radius, 0],
@@ -151,14 +151,14 @@ export default function RouteLoader({ isLoading }: RouteLoaderProps) {
                       }}
                     >
                       <Icon className="w-5 h-5" />
-                    </motion.div>
-                  </motion.div>
+                    </m.div>
+                  </m.div>
                 ));
               })}
             </div>
 
             {/* LEDZE PLUS Text glowing */}
-            <motion.div
+            <m.div
               className="absolute top-1/2 mt-24 text-lg font-bold tracking-[0.35em] uppercase"
               initial={{ opacity: 0, y: 10, textShadow: '0 0 0px rgba(79,70,229,0)' }}
               animate={{ 
@@ -179,10 +179,10 @@ export default function RouteLoader({ isLoading }: RouteLoaderProps) {
               style={{ color: '#4F46E5' }}
             >
               LEDZE Plus
-            </motion.div>
+            </m.div>
 
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

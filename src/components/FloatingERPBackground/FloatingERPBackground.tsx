@@ -1,5 +1,5 @@
-import { useMemo, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useMemo, useEffect, memo } from 'react';
+import { m, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import {
   Package, Boxes, Warehouse, ShoppingCart, ClipboardList, 
   Calculator, Receipt, CreditCard, Banknote, Building2, 
@@ -38,120 +38,93 @@ const fallbackColors = ['#94A3B8', '#9ca3af', '#cbd5e1'];
 const rand = (min: number, max: number) => Math.random() * (max - min) + min;
 const randChoice = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
-// ── Ambient orb config ────────────────────────────────────────────────────────
+// ── Ambient orb config (Static versions to prevent GPU thrashing) ─────────────
 const orbs = [
   {
     id: 'orb-tr',
     style: { top: '-10%', right: '-10%' },
     size: 600,
-    color: 'rgba(255, 170, 220, 0.20)',
+    color: 'rgba(255, 170, 220, 0.15)', // Slightly reduced opacity since it's static
     blur: 220,
-    yAnim: [0, -30, 0],
-    xAnim: [0, 20, 0],
-    scale: [1, 1.12, 1],
-    duration: 28,
-    delay: 0,
   },
   {
     id: 'orb-bl',
     style: { bottom: '-10%', left: '-10%' },
     size: 650,
-    color: 'rgba(110, 170, 255, 0.18)',
+    color: 'rgba(110, 170, 255, 0.12)',
     blur: 240,
-    yAnim: [0, 25, 0],
-    xAnim: [0, -20, 0],
-    scale: [1, 1.1, 1],
-    duration: 34,
-    delay: -8,
   },
   {
     id: 'orb-cr',
     style: { top: '30%', right: '10%' },
     size: 500,
-    color: 'rgba(170, 150, 255, 0.14)',
+    color: 'rgba(170, 150, 255, 0.10)',
     blur: 180,
-    yAnim: [0, -20, 0],
-    xAnim: [0, 15, 0],
-    scale: [1, 1.08, 1],
-    duration: 22,
-    delay: -4,
   },
   {
     id: 'orb-ul',
     style: { top: '10%', left: '10%' },
     size: 450,
-    color: 'rgba(120, 210, 255, 0.12)',
+    color: 'rgba(120, 210, 255, 0.08)',
     blur: 180,
-    yAnim: [0, 18, 0],
-    xAnim: [0, -12, 0],
-    scale: [1, 1.1, 1],
-    duration: 40,
-    delay: -14,
   },
 ];
 
-export default function FloatingERPBackground() {
+const FloatingERPBackground = memo(function FloatingERPBackground() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const scrollY = useMotionValue(0);
 
-  const smoothMouseX = useSpring(mouseX, { damping: 30, stiffness: 100 });
-  const smoothMouseY = useSpring(mouseY, { damping: 30, stiffness: 100 });
-  const smoothScrollY = useSpring(scrollY, { damping: 30, stiffness: 100 });
+  const smoothMouseX = useSpring(mouseX, { damping: 40, stiffness: 80, mass: 1.5 });
+  const smoothMouseY = useSpring(mouseY, { damping: 40, stiffness: 80, mass: 1.5 });
 
   useEffect(() => {
+    // Throttle mouse move slightly via passive listener and simple logic
+    let ticking = false;
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set((e.clientX / window.innerWidth) * 2 - 1);
-      mouseY.set((e.clientY / window.innerHeight) * 2 - 1);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          mouseX.set((e.clientX / window.innerWidth) * 2 - 1);
+          mouseY.set((e.clientY / window.innerHeight) * 2 - 1);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('mousemove', handleMouseMove);
-
-    const scrollContainer = document.getElementById('scroll-container');
-    const handleScroll = () => {
-      if (scrollContainer) scrollY.set(scrollContainer.scrollTop);
-    };
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll);
-      handleScroll();
-    }
-
+    
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    
+    // Completely removed scroll listener to eliminate sync layout thrashing on main thread
+    
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      scrollContainer?.removeEventListener('scroll', handleScroll);
     };
-  }, [mouseX, mouseY, scrollY]);
+  }, [mouseX, mouseY]);
 
   const generatedIcons = useMemo(() => {
     const items = [];
-    const totalIcons = Math.floor(rand(60, 80));
+    const totalIcons = Math.floor(rand(40, 60)); // Reduced count slightly for further performance safety
 
     for (let i = 0; i < totalIcons; i++) {
       const layerRand = Math.random();
       const layer = layerRand < 0.25 ? 1 : layerRand < 0.6 ? 2 : 3;
 
-      let size, opacity, blur, duration, mouseParallax, scrollParallax;
+      let size, opacity, blur, mouseParallax;
 
       if (layer === 1) {
         size = randChoice([90, 110]);
-        opacity = 0.10;
+        opacity = 0.08;
         blur = 0;
-        duration = rand(25, 35);
-        mouseParallax = 20;
-        scrollParallax = -0.25;
+        mouseParallax = 25;
       } else if (layer === 2) {
         size = randChoice([55, 70]);
-        opacity = 0.12;
+        opacity = 0.10;
         blur = 2;
-        duration = rand(20, 25);
-        mouseParallax = 12;
-        scrollParallax = -0.15;
+        mouseParallax = 15;
       } else {
         size = 40;
-        opacity = 0.15;
-        blur = 5;
-        duration = rand(15, 20);
-        mouseParallax = 6;
-        scrollParallax = -0.05;
+        opacity = 0.12;
+        blur = 4;
+        mouseParallax = 8;
       }
 
       const IconComponent = randChoice(iconsList);
@@ -161,19 +134,13 @@ export default function FloatingERPBackground() {
         id: `icon-${i}`,
         IconComponent,
         iconColor,
-        top: `${rand(0, 100)}vh`,
-        left: `${rand(0, 100)}vw`,
+        top: `${rand(-5, 105)}vh`,
+        left: `${rand(-5, 105)}vw`,
         size,
         baseOpacity: opacity,
         blur,
-        duration,
         mouseParallax,
-        scrollParallax,
-        delay: rand(-30, 0),
         initialRotation: rand(0, 360),
-        yAnim: [rand(-15, -25), rand(15, 25), rand(-15, -25)],
-        xAnim: [rand(-5, -10), rand(5, 10), rand(-5, -10)],
-        rotAnim: [rand(-5, -10), rand(5, 10), rand(-5, -10)],
       });
     }
     return items;
@@ -181,12 +148,12 @@ export default function FloatingERPBackground() {
 
   return (
     <div
-      className="fixed inset-0 pointer-events-none overflow-hidden z-0"
+      className="fixed inset-0 pointer-events-none overflow-hidden z-0 contain-paint"
       aria-hidden="true"
     >
-      {/* ── Animated ambient mesh gradient orbs ── */}
+      {/* ── Static ambient mesh gradient orbs ── */}
       {orbs.map(orb => (
-        <motion.div
+        <div
           key={orb.id}
           className="absolute rounded-full"
           style={{
@@ -195,32 +162,21 @@ export default function FloatingERPBackground() {
             height: orb.size,
             background: orb.color,
             filter: `blur(${orb.blur}px)`,
-          }}
-          animate={{
-            y: orb.yAnim,
-            x: orb.xAnim,
-            scale: orb.scale,
-          }}
-          transition={{
-            duration: orb.duration,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: orb.delay,
+            willChange: 'transform' // Hardware accelerate the blur
           }}
         />
       ))}
 
-      {/* ── Floating ERP icons ── */}
-      <motion.div className="w-full h-full relative">
+      {/* ── Stable ERP icons with subtle mouse parallax only ── */}
+      <div className="w-full h-full relative">
         {generatedIcons.map((item) => {
           const {
             IconComponent, iconColor, id, top, left, size, baseOpacity, blur,
-            duration, delay, yAnim, xAnim, rotAnim, initialRotation,
-            mouseParallax, scrollParallax,
+            initialRotation, mouseParallax,
           } = item;
 
           return (
-            <motion.div
+            <m.div
               key={id}
               className="absolute"
               style={{
@@ -229,53 +185,36 @@ export default function FloatingERPBackground() {
                 width: size,
                 height: size,
                 x: useTransform(smoothMouseX, (v) => v * mouseParallax),
-                y: useTransform(smoothScrollY, (v) => v * scrollParallax),
+                y: useTransform(smoothMouseY, (v) => v * mouseParallax),
               }}
             >
-              <motion.div
-                className="w-full h-full absolute inset-0"
+              <div
+                className="flex items-center justify-center w-full h-full"
                 style={{
-                  y: useTransform(smoothMouseY, (v) => v * mouseParallax),
+                  // Removed backdrop-filter to prevent massive GPU overhead
+                  // Used solid but highly translucent white instead to mimic glass reflection
+                  background: 'rgba(255, 255, 255, 0.12)', 
+                  border: '1px solid rgba(255, 255, 255, 0.20)',
+                  borderRadius: '22px',
+                  boxShadow: 'inset 0 2px 10px rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.02)',
+                  filter: blur > 0 ? `blur(${blur}px)` : 'none',
+                  opacity: baseOpacity,
+                  transform: `rotate(${initialRotation}deg)`,
                 }}
               >
-                <motion.div
-                  className="flex items-center justify-center w-full h-full will-change-transform"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.16)',
-                    backdropFilter: 'blur(18px)',
-                    WebkitBackdropFilter: 'blur(18px)',
-                    border: '1px solid rgba(255, 255, 255, 0.30)',
-                    borderRadius: '22px',
-                    boxShadow: '0 15px 40px rgba(90, 90, 170, 0.08)',
-                    filter: blur > 0 ? `blur(${blur}px)` : 'none',
-                  }}
-                  initial={{ rotate: initialRotation }}
-                  animate={{
-                    y: yAnim,
-                    x: xAnim,
-                    rotate: [initialRotation + rotAnim[0], initialRotation + rotAnim[1], initialRotation + rotAnim[2]],
-                    scale: [1, 1.05, 1],
-                    opacity: [baseOpacity, baseOpacity * 1.5, baseOpacity],
-                  }}
-                  transition={{
-                    duration,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                    delay,
-                  }}
-                >
-                  <IconComponent
-                    size={size * 0.45}
-                    color={iconColor}
-                    strokeWidth={1.5}
-                    style={{ opacity: 0.85 }}
-                  />
-                </motion.div>
-              </motion.div>
-            </motion.div>
+                <IconComponent
+                  size={size * 0.45}
+                  color={iconColor}
+                  strokeWidth={1.5}
+                  style={{ opacity: 0.9 }}
+                />
+              </div>
+            </m.div>
           );
         })}
-      </motion.div>
+      </div>
     </div>
   );
-}
+});
+
+export default FloatingERPBackground;

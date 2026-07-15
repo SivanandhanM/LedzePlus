@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Suspense, useState, useEffect, useRef, useCallback } from 'react';
 import Navbar from '../components/Navbar/Navbar';
@@ -19,18 +19,16 @@ function PageReadyNotifier({ onReady }: { onReady: () => void }) {
 }
 
 const pageVariants: Variants = {
-  initial: { opacity: 0, y: 20, filter: 'blur(4px)' },
+  initial: { opacity: 0, y: 20 },
   animate: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     // Removed artificial delay
     transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 },
   },
   exit: {
     opacity: 0,
     scale: 0.98,
-    filter: 'blur(4px)',
     transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -64,27 +62,34 @@ export default function MainLayout() {
       <ScrollProgress />
       <Navbar />
       <div className="flex flex-1 overflow-hidden">
-        <main id="scroll-container" className="flex-1 overflow-y-auto p-6 relative">
+        <main 
+          id="scroll-container" 
+          className="flex-1 overflow-y-auto p-6 relative"
+          style={{ 
+            contain: 'layout paint style', 
+            transform: 'translate3d(0,0,0)',
+            backfaceVisibility: 'hidden'
+          }}
+        >
           <div className="max-w-[1600px] w-[95%] mx-auto relative z-10 flex flex-col">
             <AnimatePresence mode="wait">
-              <motion.div
+              <m.div
                 key={location.key}
                 variants={pageVariants}
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                style={{ willChange: 'transform, opacity, filter' }}
               >
                 <Suspense fallback={null}>
                   <Outlet />
                   <PageReadyNotifier onReady={handlePageReady} />
                 </Suspense>
                 <Footer />
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
-          <BackToTop />
         </main>
+        <BackToTop />
       </div>
     </div>
   );

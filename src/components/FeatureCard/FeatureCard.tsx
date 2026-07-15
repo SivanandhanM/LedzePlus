@@ -1,5 +1,5 @@
 import type { ReactNode, MouseEvent } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 
 interface FeatureCardProps {
@@ -54,18 +54,25 @@ export default function FeatureCard({ title, description, icon, delay = 0, class
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
-    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+    
+    // Defer the write to prevent synchronous layout thrashing (Read-Write loop)
+    requestAnimationFrame(() => {
+      if (e.currentTarget) {
+        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+      }
+    });
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
       onMouseMove={handleMouseMove}
       className={`group relative overflow-hidden backdrop-blur-xl border ${theme.border} rounded-[24px] p-7 transition-all duration-300 cursor-pointer shadow-[0_8px_20px_-6px_rgba(0,0,0,0.05)] hover:-translate-y-2 hover:scale-[1.03] ${theme.shadow} ${className}`}
+      style={{ contain: 'layout paint style' }}
     >
       {/* Base Pastel Gradient Background */}
       <div className={`absolute inset-0 bg-gradient-to-br ${theme.bg} opacity-100 group-hover:opacity-95 transition-opacity duration-500`} />
@@ -77,11 +84,11 @@ export default function FeatureCard({ title, description, icon, delay = 0, class
       />
       
       {/* Blurred Floating Color Blobs */}
-      <div className={`absolute -top-10 -right-10 w-40 h-40 rounded-full ${theme.blob} opacity-30 dark:opacity-20 blur-3xl group-hover:scale-150 group-hover:opacity-40 transition-all duration-700 ease-in-out`} />
-      <div className={`absolute -bottom-10 -left-10 w-40 h-40 rounded-full ${theme.blob} opacity-20 dark:opacity-10 blur-3xl group-hover:scale-150 group-hover:opacity-30 transition-all duration-700 ease-in-out`} />
+      <div className={`absolute -top-10 -right-10 w-40 h-40 rounded-full ${theme.blob} opacity-30 dark:opacity-20 blur-3xl group-hover:scale-150 group-hover:opacity-40 transition-all duration-700 ease-in-out`} style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }} />
+      <div className={`absolute -bottom-10 -left-10 w-40 h-40 rounded-full ${theme.blob} opacity-20 dark:opacity-10 blur-3xl group-hover:scale-150 group-hover:opacity-30 transition-all duration-700 ease-in-out`} style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }} />
 
       {/* Light Noise Texture */}
-      <div className="absolute inset-0 opacity-[0.025] mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }} />
+      <div className="absolute inset-0 opacity-[0.025] mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")', transform: 'translateZ(0)' }} />
 
       {/* Mouse Follow Radial Light Effect */}
       <div 
@@ -101,11 +108,11 @@ export default function FeatureCard({ title, description, icon, delay = 0, class
 
       {/* Icon Container */}
       <div className="relative mb-6 inline-block z-10">
-        <motion.div 
+        <m.div 
           className="absolute inset-0 rounded-2xl bg-current opacity-30 blur-md"
           animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          style={{ color: theme.glow }}
+          style={{ color: theme.glow, willChange: 'transform, opacity', transform: 'translateZ(0)' }}
         />
         <div className={`relative w-14 h-14 rounded-[16px] ${theme.iconBg} ${theme.iconText} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 overflow-hidden`}>
           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -123,6 +130,6 @@ export default function FeatureCard({ title, description, icon, delay = 0, class
       <p className="relative z-10 text-[14px] text-slate-700 dark:text-slate-300 leading-relaxed font-medium transition-colors duration-300">
         {description}
       </p>
-    </motion.div>
+    </m.div>
   );
 }

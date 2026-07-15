@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { CheckCircle2, ChevronRight } from 'lucide-react';
 
 interface CoreCapabilityItemProps {
@@ -24,7 +24,7 @@ export default function CoreCapabilityItem({ text, delay = 0 }: CoreCapabilityIt
   const theme = themeStyles[themeName];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: -10 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-20px" }}
@@ -50,6 +50,6 @@ export default function CoreCapabilityItem({ text, delay = 0 }: CoreCapabilityIt
       <div className={`shrink-0 relative z-10 w-8 h-8 rounded-full bg-transparent flex items-center justify-center transition-colors duration-300 ${theme.arrowBg}`}>
         <ChevronRight className={`w-5 h-5 text-slate-400 transition-colors duration-300 transform group-hover:translate-x-1 ${theme.arrowText}`} />
       </div>
-    </motion.div>
+    </m.div>
   );
 }
