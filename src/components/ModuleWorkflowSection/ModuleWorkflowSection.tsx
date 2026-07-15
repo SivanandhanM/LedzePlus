@@ -557,7 +557,8 @@ export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionP
                     <HConnector color={step.color} />
                   )}
                 </div>
-              })}
+              );
+            })}
             </div>
           )}
         </div>
