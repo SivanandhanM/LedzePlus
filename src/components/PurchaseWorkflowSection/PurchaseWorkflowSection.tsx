@@ -618,10 +618,10 @@ export default function PurchaseWorkflowSection() {
       </m.div>
 
       {/* ── WORKFLOW CANVAS (Desktop & Tablet) ──────────────────────────── */}
-      <div className="hidden sm:block mb-16">
-
-        {/* Row 1: Steps 1–6 → Left to Right */}
-        <div className="flex items-start overflow-x-auto pt-4 pb-4 px-2">
+      <div className="hidden sm:block mb-16 overflow-x-auto pb-8 custom-scrollbar">
+        <div className="min-w-max flex flex-col items-end px-4">
+          {/* Row 1: Steps 1–6 → Left to Right */}
+          <div className="flex items-start pt-4 pb-4 px-2 pr-[68px]">
           {row1.map((step, i) => (
             <div key={step.id} className="flex items-start">
               <StepCard
@@ -640,8 +640,8 @@ export default function PurchaseWorkflowSection() {
           <TurnConnector color="blue" />
         </div>
 
-        {/* Row 2: Steps 7–13 → Right to Left (reversed visually) */}
-        <div className="flex items-start justify-end overflow-x-auto pt-4 pb-4 px-2">
+          {/* Row 2: Steps 7–13 → Right to Left (reversed visually) */}
+          <div className="flex items-start flex-row-reverse pt-4 pb-4 px-2">
           {[...row2].reverse().map((step, i, arr) => {
             const origIndex = 6 + (arr.length - 1 - i);
             const nextStep = i < arr.length - 1 ? arr[i + 1] : null;
@@ -662,6 +662,7 @@ export default function PurchaseWorkflowSection() {
           })}
         </div>
       </div>
+    </div>
 
       {/* ── WORKFLOW CANVAS (Mobile — Vertical Timeline) ─────────────────── */}
       <div className="sm:hidden flex flex-col items-center mb-16 gap-0">

@@ -516,10 +516,10 @@ export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionP
       </m.div>
 
       {/* ── WORKFLOW CANVAS (Desktop & Tablet) ──────────────────────────── */}
-      <div className="hidden sm:block mb-16">
-
-        {/* Row 1 */}
-        <div className="flex items-start overflow-x-auto pt-4 pb-4 px-2">
+      <div className="hidden sm:block mb-16 overflow-x-auto pb-8 custom-scrollbar">
+        <div className={`min-w-max flex flex-col ${hasTwoRows ? 'items-end' : 'items-start'} px-4`}>
+          {/* Row 1 */}
+          <div className={`flex items-start pt-4 pb-4 px-2 ${hasTwoRows ? 'pr-[68px]' : ''}`}>
           {row1.map((step, i) => (
             <div key={step.id} className="flex items-start">
               <StepCard
@@ -538,9 +538,9 @@ export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionP
           {hasTwoRows && <TurnConnector color={row2[0]?.color || 'blue'} />}
         </div>
 
-        {/* Row 2 (right-to-left, if >7 steps) */}
-        {hasTwoRows && (
-          <div className="flex items-start justify-end overflow-x-auto pt-4 pb-4 px-2">
+          {/* Row 2 (right-to-left, if >7 steps) */}
+          {hasTwoRows && (
+            <div className="flex items-start flex-row-reverse pt-4 pb-4 px-2">
             {[...row2].reverse().map((step, i, arr) => {
               const origIndex = splitAt + (arr.length - 1 - i);
               const nextStep = i < arr.length - 1 ? arr[i + 1] : null;
@@ -557,10 +557,10 @@ export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionP
                     <HConnector color={step.color} />
                   )}
                 </div>
-              );
-            })}
-          </div>
-        )}
+              })}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* ── WORKFLOW CANVAS (Mobile — Vertical Timeline) ─────────────────── */}
