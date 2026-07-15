@@ -380,7 +380,7 @@ interface ModuleWorkflowSectionProps {
 }
 
 export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionProps) {
-  const { steps, extraFeatures, benefits, moduleName: _moduleName, moduleLabel, subtitle, stepCountLabel, bannerGradient } = config;
+  const { steps, extraFeatures, benefits, moduleName: _moduleName, moduleLabel, subtitle, stepCountLabel } = config;
 
   const [activeStepId, setActiveStepId] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);

@@ -2,8 +2,6 @@ import { ArrowUp } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { m, AnimatePresence, useSpring } from 'framer-motion';
 
-const RADIUS = 20;
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -42,8 +40,6 @@ export default function BackToTop() {
     container?.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const strokeDashoffset = CIRCUMFERENCE * (1 - scrollProgress);
-
   return (
     <AnimatePresence>
       {isVisible && (
@@ -77,14 +73,14 @@ export default function BackToTop() {
             <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 48 48">
               {/* Track */}
               <circle
-                cx="24" cy="24" r={RADIUS}
+                cx="24" cy="24" r={20}
                 fill="none"
                 stroke="rgba(99,102,241,0.15)"
                 strokeWidth="3"
               />
               {/* Progress arc */}
               <m.circle
-                cx="24" cy="24" r={RADIUS}
+                cx="24" cy="24" r={20}
                 fill="none"
                 stroke="url(#progressGradient)"
                 strokeWidth="3"

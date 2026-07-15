@@ -89,7 +89,6 @@ const LandingModuleCard = memo(function LandingModuleCard({
   const cardRef = useRef<HTMLDivElement>(null);
 
   const [hovered, setHovered] = useState(false);
-  const [spotlight, setSpotlight] = useState({ x: 50, y: 50 });
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
 
   const config = useMemo(() => MODULE_CONFIG[title] ?? DEFAULT_CONFIG, [title]);
