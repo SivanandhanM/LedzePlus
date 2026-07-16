@@ -32,9 +32,9 @@ const DEFAULT_CONFIG = { start: '#24214D', mid: '#483FC2', end: '#564EDB', accen
 // ─── Shared Stable Variants (Extracted for Performance) ────────────────────────
 const cardVariants: Variants = {
   initial: { y: 0, scale: 1 },
-  hover: { 
-    y: -6, 
-    scale: 1.02, 
+  hover: {
+    y: -6,
+    scale: 1.02,
     transition: { duration: 0.25, ease: 'easeOut' }
   },
   tap: { scale: 0.98, y: -2, transition: { duration: 0.1 } }
@@ -146,11 +146,11 @@ const LandingModuleCard = memo(function LandingModuleCard({
   // ── Stable Styles ─────────────────────────────────────────────────────────
   const boxShadow = useMemo(() => hovered || isReturning
     ? `0 16px 40px ${hexToRgba(config.end, 0.3)}, 0 0 30px ${hexToRgba(config.accent, 0.2)}`
-    : `0 12px 30px ${hexToRgba(config.end, 0.15)}`, 
+    : `0 12px 30px ${hexToRgba(config.end, 0.15)}`,
     [hovered, isReturning, config]);
 
-  const cardBorder = hovered || isReturning 
-    ? `1px solid rgba(255,255,255,0.2)` 
+  const cardBorder = hovered || isReturning
+    ? `1px solid rgba(255,255,255,0.2)`
     : `1px solid rgba(255,255,255,0.08)`;
 
   const cardBg = `linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.01)), linear-gradient(135deg, ${config.start} 0%, ${config.mid} 55%, ${config.end} 100%)`;
@@ -207,9 +207,9 @@ const LandingModuleCard = memo(function LandingModuleCard({
       >
         {/* Decorative Background Waves (Static) */}
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden mix-blend-screen opacity-5" aria-hidden>
-          <svg 
-            className="w-full h-full scale-[1.15]" 
-            preserveAspectRatio="none" 
+          <svg
+            className="w-full h-full scale-[1.15]"
+            preserveAspectRatio="none"
             viewBox="0 0 800 400"
           >
             <path
@@ -232,7 +232,7 @@ const LandingModuleCard = memo(function LandingModuleCard({
         </div>
 
         {/* Ambient Hover Glow */}
-        <div 
+        <div
           className="absolute -inset-10 pointer-events-none z-0 transition-opacity duration-500 ease-out"
           style={{ opacity: hovered ? 0.6 : 0.0 }}
           aria-hidden
@@ -277,7 +277,7 @@ const LandingModuleCard = memo(function LandingModuleCard({
 
         {/* Card content */}
         <div className="relative z-20 flex flex-col justify-between h-full p-6 text-white">
-          
+
           {/* Top row: icon + badge */}
           <div className="flex justify-between items-start">
             {/* Icon */}
@@ -287,8 +287,8 @@ const LandingModuleCard = memo(function LandingModuleCard({
               style={{
                 background: 'rgba(255,255,255,0.06)',
                 border: '1px solid rgba(255,255,255,0.12)',
-                boxShadow: hovered 
-                  ? `0 4px 12px ${hexToRgba(config.accent, 0.3)}, inset 0 0 10px rgba(255,255,255,0.15)` 
+                boxShadow: hovered
+                  ? `0 4px 12px ${hexToRgba(config.accent, 0.3)}, inset 0 0 10px rgba(255,255,255,0.15)`
                   : 'inset 0 0 8px rgba(255,255,255,0.05)',
                 color: hovered ? '#ffffff' : 'rgba(255,255,255,0.9)',
                 transition: 'box-shadow 0.3s ease, color 0.3s ease',
@@ -335,7 +335,7 @@ const LandingModuleCard = memo(function LandingModuleCard({
             {path && (
               <div
                 className="flex items-center gap-1.5 text-[14px] font-bold relative w-fit mt-1"
-                style={{ 
+                style={{
                   color: hovered ? config.accent : 'rgba(255,255,255,0.95)',
                   transition: 'color 0.3s ease'
                 }}
