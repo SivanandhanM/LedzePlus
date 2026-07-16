@@ -1,5 +1,5 @@
 import { useScrollToContent } from '../../hooks/useScrollToContent';
-import Hero, { MODULE_THEMES } from '../../components/Hero/Hero';
+import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import GlassCard from '../../components/GlassCard/GlassCard';
@@ -50,7 +50,6 @@ export default function Banking() {
           description="The Banking & Cash Management module acts as the financial command center for enterprise liquidity, orchestrating all incoming receipts, outgoing disbursements, and complex multi-bank reconciliations. Designed to eliminate manual banking errors, it ensures absolute transparency across cash flow operations. By automating statement matching and fund transfers, it provides real-time visibility into working capital, empowering CFOs to make data-driven financial decisions."
           icon={<Building2 className="w-10 h-10" />}
           workflowPreview={<AnimatedWorkflowPreview workflow={bankingWorkflow} accentColor="blue" />}
-          theme={MODULE_THEMES.banking}
         />
       </div>
         <div ref={contentRef} className="scroll-mt-6"></div>
