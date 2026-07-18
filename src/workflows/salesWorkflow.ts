@@ -103,7 +103,7 @@ export const salesWorkflowConfig: ModuleWorkflowConfig = {
     { icon: 'ShieldCheck', color: 'indigo',  text: 'Automated GST, E-Invoice & E-Way Bill compliance' },
     { icon: 'Eye',         color: 'blue',    text: 'Real-time visibility into sales performance' },
     { icon: 'Clock',       color: 'emerald', text: 'Accelerated order fulfilment and dispatch cycles' },
-    { icon: 'Link',        color: 'orange',  text: 'Seamless Inventory, Gate & Accounting integration' },
+    { icon: 'Link',        color: 'orange',  text: 'Seamless Gate & Accounting integration' },
     { icon: 'BarChart3',   color: 'cyan',    text: 'Data-driven revenue analytics and insights' },
   ],
 };

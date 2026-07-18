@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import {
   FileText, BarChart3, Users, Database,
-  Key, Eye, Building2, TrendingUp, Package, 
+  Key, Eye, Building2, TrendingUp,
   CreditCard, ShieldCheck, Fingerprint, Activity, PiggyBank, 
   UserCheck, Lock, Shield
 } from 'lucide-react';
@@ -40,11 +40,6 @@ function ReceiptIcon({ className }: { className?: string }) {
 
 /* ─── Enterprise Theme registry ────────────────────────────────────────────── */
 const MODULE_THEMES: Record<string, DPDPTheme> = {
-  inventory: {
-    name: 'Inventory', cardBg: 'linear-gradient(135deg,#F3ECFF 0%,#E7D9FF 100%)',
-    accent: '#9333EA', accentLight: '#C084FC', accentRgb: '147,51,234',
-    icon: <Package className="w-6 h-6" />,
-  },
   purchase: {
     name: 'Purchase', cardBg: 'linear-gradient(135deg,#EEF5FF 0%,#DCEBFF 100%)',
     accent: '#2563EB', accentLight: '#60A5FA', accentRgb: '37,99,235',
@@ -93,22 +88,6 @@ const MODULE_THEMES: Record<string, DPDPTheme> = {
 };
 
 const DPDP_MODULES: DPDPModuleData[] = [
-  {
-    moduleKey: 'inventory', shortDesc: 'Supply Chain Privacy',
-    description: 'Vendor details, transporter records, warehouse personnel, and stock movement data are protected under DPDP Act 2023 with strict access governance.',
-    securityIcons: [
-      { icon: <Lock className="w-5 h-5" />, label: 'Encryption' },
-      { icon: <Shield className="w-5 h-5" />, label: 'Role Access' },
-      { icon: <Database className="w-5 h-5" />, label: 'Storage' },
-      { icon: <BarChart3 className="w-5 h-5" />, label: 'Audit Logs' },
-    ],
-    features: ['Warehouse Access Control', 'Vendor Privacy', 'Goods Traceability', 'Stock Tracking'],
-    complianceScore: 97, status: 'compliant', owner: 'Supply Chain Team',
-    retentionPolicy: '7 years (statutory)', accessModel: 'Role-based (RBAC)',
-    auditTrail: 'Full event logging with tamper-proof records',
-    protectionLayers: ['AES-256 at rest', 'TLS 1.3 in transit', 'Row-level security', 'Masked exports'],
-    implementationNote: 'Data classification enforced at ingestion layer.',
-  },
   {
     moduleKey: 'purchase', shortDesc: 'Procurement Privacy',
     description: 'Vendor PAN, GSTIN, bank accounts, POs, and supplier contacts are fully protected under DPDP Act 2023 with encrypted data pipelines.',

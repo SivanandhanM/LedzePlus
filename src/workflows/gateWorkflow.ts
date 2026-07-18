@@ -83,7 +83,7 @@ export const gateWorkflowConfig: ModuleWorkflowConfig = {
       purpose: 'Complete the facility movement cycle with a verified exit, ensuring no unauthorized material or personnel leaves the premises.',
       inputs: ['Loading / Unloading Completion Confirmation', 'Material Reconciliation Count', 'Security Guard Sign-off'],
       outputs: ['Closed Gate Pass (Tamper-proof)', 'Vehicle Exit Timestamp & Log', 'GRN Trigger (for inward) / Dispatch Confirmation (for outward)'],
-      rules: ['Exit permitted only after GRN is created for inward material', 'Vehicle exit weight reconciled against loaded/unloaded weight record', 'Pass closure triggers automatic notification to Inventory / Sales team'],
+      rules: ['Exit permitted only after GRN is created for inward material', 'Vehicle exit weight reconciled against loaded/unloaded weight record', 'Pass closure triggers automatic notification to Sales team'],
       next: [],
     },
   ],
@@ -103,7 +103,7 @@ export const gateWorkflowConfig: ModuleWorkflowConfig = {
     { icon: 'Zap',         color: 'cyan',    text: 'Pre-authorized passes accelerate vehicle clearance' },
     { icon: 'Lock',        color: 'blue',    text: 'Tamper-proof audit logs for all facility movements' },
     { icon: 'Eye',         color: 'orange',  text: 'Real-time visibility into dock utilization and queues' },
-    { icon: 'Link',        color: 'emerald', text: 'Seamless Purchase, Sales & Inventory integration' },
+    { icon: 'Link',        color: 'emerald', text: 'Seamless Purchase & Sales integration' },
     { icon: 'Scale',       color: 'purple',  text: 'Weight discrepancy prevention eliminates pilferage' },
   ],
 };

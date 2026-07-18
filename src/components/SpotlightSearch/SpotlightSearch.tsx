@@ -8,7 +8,6 @@ const searchLinks = [
   { name: 'Purchase Module', path: '/purchase', category: 'PROCUREMENT' },
   { name: 'Sales Module', path: '/sales', category: 'REVENUE' },
   { name: 'Billing Dashboard', path: '/billing', category: 'INVOICING' },
-  { name: 'Inventory & Warehouse', path: '/inventory', category: 'WAREHOUSE' },
   { name: 'Accounting & Ledger', path: '/accounting', category: 'FINANCE' },
   { name: 'Payroll & HR', path: '/payroll', category: 'HR' },
   { name: 'Banking & Cash', path: '/banking', category: 'CASH & BANK' },

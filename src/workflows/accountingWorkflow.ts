@@ -6,7 +6,7 @@ export const accountingWorkflow: WorkflowData = {
     { id: 'subledger', label: 'Sub-ledger Posting', icon: 'Database', x: 20, y: 28, color: 'text-slate-500', tooltip: { purpose: 'Automated entries from Sales, Purchase, and Payroll modules.' } },
     { id: 'journal', label: 'Journal Entry', icon: 'Edit3', x: 50, y: 28, color: 'text-blue-500', tooltip: { purpose: 'Manual adjustments and accruals posted to the General Ledger.' } },
     { id: 'tb', label: 'Trial Balance', icon: 'Scale', x: 80, y: 28, color: 'text-indigo-500', tooltip: { purpose: 'Generation of pre-close Trial Balance to ensure debits equal credits.' } },
-    { id: 'recon', label: 'Reconciliation', icon: 'CheckSquare', x: 80, y: 72, color: 'text-emerald-500', tooltip: { purpose: 'Bank, Inventory, and Inter-company accounts reconciled.' } },
+    { id: 'recon', label: 'Reconciliation', icon: 'CheckSquare', x: 80, y: 72, color: 'text-emerald-500', tooltip: { purpose: 'Bank and Inter-company accounts reconciled.' } },
     { id: 'reports', label: 'Financial Reports', icon: 'PieChart', x: 50, y: 72, color: 'text-purple-500', tooltip: { purpose: 'P&L, Balance Sheet, and Cash Flow statements finalized.' } },
     { id: 'close', label: 'Period Closing', icon: 'Lock', x: 20, y: 72, color: 'text-rose-500', tooltip: { purpose: 'Accounting period hard-closed to prevent further postings.' } }
   ],
@@ -59,10 +59,10 @@ export const accountingWorkflowConfig: ModuleWorkflowConfig = {
     {
       id: 4, color: 'emerald', icon: 'CheckSquare',
       title: 'Reconciliation',
-      description: 'Match book balances with bank statements, inventory ledger, and inter-company accounts.',
+      description: 'Match book balances with bank statements and inter-company accounts.',
       purpose: 'Identify and resolve discrepancies between internal records and external documents to ensure balance sheet integrity.',
-      inputs: ['Bank Statement Import (CSV/OFX)', 'Inventory Valuation Report', 'Inter-company Account Balances'],
-      outputs: ['Bank Reconciliation Statement (BRS)', 'Inventory Ledger Match Report', 'Variance List for Resolution'],
+      inputs: ['Bank Statement Import (CSV/OFX)', 'Inter-company Account Balances'],
+      outputs: ['Bank Reconciliation Statement (BRS)', 'Variance List for Resolution'],
       rules: ['Outstanding entries > 30 days auto-escalated to Finance Head', 'Bank statement import triggers auto-matching engine', 'All reconciling items require sign-off before period close'],
       next: [5],
     },

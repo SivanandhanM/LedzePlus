@@ -5,7 +5,7 @@ import Section from '../../components/Section/Section';
 import LandingModuleCard from '../../components/LandingModuleCard/LandingModuleCard';
 import ResourceCard from '../../components/ResourceCard/ResourceCard';
 import {
-  ShoppingCart, TrendingUp, Receipt, Package,
+  ShoppingCart, TrendingUp, Receipt,
   BookOpen, Users, Building2, ShieldCheck, FileText, Lock, Book
 } from 'lucide-react';
 
@@ -13,7 +13,6 @@ const modules = [
   { title: 'LEDZE+ Purchase', badge: 'PROCUREMENT', desc: 'Procurement, RFQ, and Vendor workflows.', icon: <ShoppingCart className="w-6 h-6" />, path: '/purchase' },
   { title: 'LEDZE+ Sales', badge: 'REVENUE', desc: 'CRM, Quotations, Orders, and Dispatch.', icon: <TrendingUp className="w-6 h-6" />, path: '/sales' },
   { title: 'LEDZE+ Billing', badge: 'INVOICING', desc: 'Invoicing, Payments, and Customer Timelines.', icon: <Receipt className="w-6 h-6" />, path: '/billing' },
-  { title: 'LEDZE+ Inventory', badge: 'WAREHOUSE', desc: 'Warehouse, Logistics, and Master Data.', icon: <Package className="w-6 h-6" />, path: '/inventory' },
   { title: 'LEDZE+ Accounting', badge: 'FINANCE', desc: 'General Ledger, Trial Balance, and P&L.', icon: <BookOpen className="w-6 h-6" />, path: '/accounting' },
   { title: 'LEDZE+ Payroll', badge: 'HR & PAYROLL', desc: 'HRMS, Attendance, Leave, and Salary.', icon: <Users className="w-6 h-6" />, path: '/payroll' },
   { title: 'LEDZE+ Banking', badge: 'CASH & BANK', desc: 'Receipts, Payments, and Bank Reconciliation.', icon: <Building2 className="w-6 h-6" />, path: '/banking' },

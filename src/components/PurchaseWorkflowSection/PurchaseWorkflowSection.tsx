@@ -18,7 +18,7 @@ const STEPS = [
     purpose: 'Formalise internal demand before initiating procurement.',
     inputs: ['Material Request Form', 'Current Stock Levels', 'Budget Availability'],
     outputs: ['Approved PR Document', 'Budget Reservation'],
-    rules: ['Requires HOD approval for values > ₹50,000', 'Inventory check mandatory before raising'],
+    rules: ['Requires HOD approval for values > ₹50,000'],
     next: [2],
   },
   {
@@ -84,7 +84,7 @@ const STEPS = [
   {
     id: 8, color: 'emerald', icon: PackageCheck,
     title: 'Stock Updation',
-    description: 'Cleared materials automatically posted to inventory with lot tracking.',
+    description: 'Cleared materials automatically tracked with lot tracking.',
     purpose: 'Reflect correct stock levels and enable consumption planning.',
     inputs: ['QC Clearance', 'GRN', 'Warehouse Location'],
     outputs: ['Stock Ledger Entry', 'Bin Allocation', 'Batch/Lot Tag'],
@@ -161,7 +161,7 @@ const BENEFITS = [
   { icon: Globe,        color: 'blue',    text: 'Multi-currency & multi-warehouse PO support' },
   { icon: Lock,         color: 'purple',  text: 'Complete audit trail with digital approvals' },
   { icon: TrendingUp,   color: 'rose',    text: 'Real-time spend analytics & KPI dashboards' },
-  { icon: ArrowRight,   color: 'cyan',    text: 'Seamless Inventory, Accounting & GST integration' },
+  { icon: ArrowRight,   color: 'cyan',    text: 'Seamless Accounting & GST integration' },
 ];
 
 /* ─────────────────────────────────────────────────────────────────────────────

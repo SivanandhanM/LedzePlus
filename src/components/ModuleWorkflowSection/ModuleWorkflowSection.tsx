@@ -469,7 +469,6 @@ export default function ModuleWorkflowSection({ config }: ModuleWorkflowSectionP
               const l = label.toLowerCase();
               if (l.includes('purchase')) return ['PackageSearch', 'FileText', 'Users'];
               if (l.includes('sales')) return ['Activity', 'UserPlus', 'Truck'];
-              if (l.includes('inventory')) return ['Layers', 'ScanBarcode', 'Package'];
               if (l.includes('accounting') || l.includes('billing')) return ['FileCheck', 'Calculator', 'Receipt'];
               if (l.includes('banking')) return ['Landmark', 'Wallet', 'CreditCard'];
               if (l.includes('gst')) return ['FileSignature', 'Shield', 'Receipt'];

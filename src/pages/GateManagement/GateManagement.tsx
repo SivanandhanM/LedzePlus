@@ -34,7 +34,6 @@ const capabilities = [
 const integrationsAndBenefits = [
   ['Sales Integration', 'Outward gate pass requires an approved Sales Dispatch Note.'],
   ['Purchase Integration', 'Inward gate pass linked directly to Purchase Orders/GRN.'],
-  ['Inventory Integration', 'Triggers real-time stock deductions upon vehicle exit.'],
   ['Enhanced Security', 'Ensures no unauthorized material enters or leaves the premises.'],
   ['Reduced Wait Times', 'Pre-authorized passes speed up security clearance at the gate.'],
   ['Dispute Resolution', 'Immutable audit logs protect against vendor delivery claims.'],

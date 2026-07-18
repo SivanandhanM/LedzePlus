@@ -25,7 +25,7 @@ const capabilitiesAndBenefits = [
   'Multi-currency and multi-company financial consolidation capabilities.',
   'Strict period closing rules preventing backdated entry manipulations.',
   'Comprehensive audit trail ensuring compliance with global accounting standards.',
-  'Seamless integration with Inventory (COGS) and HRMS (Payroll processing).',
+  'Seamless integration with HRMS (Payroll processing).',
   'Elimination of manual reconciliation errors through automated ledger matching.',
   'Instant visibility into enterprise financial health for better decision making.',
   'Automated generation of statutory tax reports and GST summaries.'

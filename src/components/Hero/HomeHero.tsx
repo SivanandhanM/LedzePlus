@@ -3,13 +3,12 @@ import { m } from 'framer-motion';
 import AnimatedHeadline from './AnimatedHeadline';
 import HeroModuleCard from './HeroModuleCard';
 import {
-  ShoppingCart, TrendingUp, Receipt, Package,
+  ShoppingCart, TrendingUp, Receipt,
   BookOpen, Users, Building2, ShieldCheck, FileText,
   Layers, Zap,
 } from 'lucide-react';
 
 const topModules = [
-  { id: 'inventory', title: 'INVENTORY', desc: 'Warehouse & Stock', icon: <Package className="w-6 h-6" />, colorVar: '--color-mod-inventory', path: '/inventory' },
   { id: 'purchase', title: 'PURCHASE', desc: 'Orders & Vendors', icon: <ShoppingCart className="w-6 h-6" />, colorVar: '--color-mod-purchase', path: '/purchase' },
   { id: 'sales', title: 'SALES', desc: 'CRM & Fulfillment', icon: <TrendingUp className="w-6 h-6" />, colorVar: '--color-mod-sales', path: '/sales' },
   { id: 'gst', title: 'GST', desc: 'E-Way Bill & Taxes', icon: <FileText className="w-6 h-6" />, colorVar: '--color-mod-gst', path: '/gst' },

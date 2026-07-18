@@ -20,11 +20,6 @@ export const moduleThemes: Record<string, ThemeColors> = {
     secondary: "#5B21B6",
     accent: "#A78BFA"
   },
-  inventory: {
-    primary: "#0F766E",
-    secondary: "#115E59",
-    accent: "#2DD4BF"
-  },
   accounting: {
     primary: "#D97706",
     secondary: "#92400E",

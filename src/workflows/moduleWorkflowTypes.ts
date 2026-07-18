@@ -25,8 +25,8 @@ export interface Benefit {
 }
 
 export interface ModuleWorkflowConfig {
-  moduleName: string;         // e.g. "LEDZE+ Inventory"
-  moduleLabel: string;        // e.g. "Inventory Module"
+  moduleName: string;         // e.g. "LEDZE+ Purchase"
+  moduleLabel: string;        // e.g. "Purchase Module"
   subtitle: string;           // e.g. "Stock-to-Shelf Automation"
   stepCountLabel: string;     // e.g. "6 automated steps"
   bannerGradient: string;     // Tailwind gradient classes, e.g. "from-emerald-600 via-teal-600 to-cyan-700"

@@ -31,7 +31,6 @@ const capabilities = [
 ];
 
 const integrationsAndBenefits = [
-  ['Inventory Integration', 'Real-time stock reservation and depletion upon dispatch.'],
   ['Accounting & Finance', 'Automated ledger entries for Accounts Receivable and Revenue.'],
   ['Gate Management', 'Synchronized outbound logistics and vehicle exit approvals.'],
   ['Reduced Manual Work', 'Elimination of redundant data entry from quote to cash.'],

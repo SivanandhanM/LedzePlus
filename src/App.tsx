@@ -10,7 +10,6 @@ const Home = lazy(() => import('./pages/Home/Home'));
 const Purchase = lazy(() => import('./pages/Purchase/Purchase'));
 const Sales = lazy(() => import('./pages/Sales/Sales'));
 const Billing = lazy(() => import('./pages/Billing/Billing'));
-const Inventory = lazy(() => import('./pages/Inventory/Inventory'));
 const Accounting = lazy(() => import('./pages/Accounting/Accounting'));
 const Payroll = lazy(() => import('./pages/Payroll/Payroll'));
 const Banking = lazy(() => import('./pages/Banking/Banking'));
@@ -27,7 +26,6 @@ function App() {
       import('./pages/GstLearningCenter');
       import('./pages/GST/GST');
       import('./pages/DPDPCompliance/DPDPCompliance');
-      import('./pages/Inventory/Inventory');
     };
 
     if (typeof window !== 'undefined') {
@@ -50,7 +48,6 @@ function App() {
               <Route path="purchase" element={<Purchase />} />
               <Route path="sales" element={<Sales />} />
               <Route path="billing" element={<Billing />} />
-              <Route path="inventory" element={<Inventory />} />
               <Route path="accounting" element={<Accounting />} />
               <Route path="payroll" element={<Payroll />} />
               <Route path="banking" element={<Banking />} />

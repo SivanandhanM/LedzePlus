@@ -18,7 +18,7 @@ const features = [
   { title: 'Multi-level Purchase Approvals', desc: 'Enforce strict financial controls with dynamic, hierarchy-based approval workflows tied to budget limits and department thresholds.', icon: <FileSpreadsheet /> },
   { title: 'Purchase Returns & Debit Notes', desc: 'Instantly generate debit notes linked to the original Purchase Order for short shipments, damaged goods, or rate differences.', icon: <ArrowRightLeft /> },
   { title: 'Spend Analytics & Landed Cost', desc: 'Accurately apportion freight, insurance, and taxes to determine exact valuation, while dashboard analytics provide insights into spending patterns.', icon: <Wallet /> },
-  { title: 'Integration & Compliance', desc: 'Seamlessly interacts with Inventory for stock updates, Accounting for ledger entries, and ensures full GST/Tax compliance on all transactions.', icon: <BadgeAlert /> },
+  { title: 'Integration & Compliance', desc: 'Seamlessly interacts with Accounting for ledger entries, and ensures full GST/Tax compliance on all transactions.', icon: <BadgeAlert /> },
 ];
 
 const capabilitiesAndBenefits = [
@@ -27,7 +27,7 @@ const capabilitiesAndBenefits = [
   'Multi-currency and multi-warehouse Purchase Order support.',
   'Strict 3-way matching (PO, GRN, Invoice) to prevent overbilling.',
   'Real-time spend analytics and departmental budget tracking.',
-  'Seamless integration with Inventory, Accounting, and GST modules.',
+  'Seamless integration with Accounting, and GST modules.',
   'Reduced manual data entry and accelerated procurement cycles.',
   'Complete audit trail for all procurement activities and approvals.',
 ];
