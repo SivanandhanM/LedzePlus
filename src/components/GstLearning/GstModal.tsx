@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, LayoutGroup } from 'framer-motion';
 import type { GstModuleData } from '../../data/gstLearningData';
