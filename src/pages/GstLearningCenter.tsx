@@ -4,7 +4,7 @@ import { gstLearningData } from '../data/gstLearningData';
 import type { GstModuleData, GstCategory } from '../data/gstLearningData';
 import GstGridCard from '../components/GstLearning/GstGridCard';
 import GstModal from '../components/GstLearning/GstModal';
-import { BookOpen, FileText, Receipt, Truck, ShieldCheck, Layers, Zap, Building2, Calculator, RefreshCw, Activity, ClipboardCheck, Users, Monitor, Briefcase, Shield, FileSearch, ArrowRight } from 'lucide-react';
+import { BookOpen, FileText, Receipt, Truck, ShieldCheck, Layers, Zap, Building2, Calculator, RefreshCw, Activity, ClipboardCheck, Users, Monitor, Briefcase, Shield, FileSearch } from 'lucide-react';
 
 const GstLearningCenter: React.FC = () => {
   const [selectedModule, setSelectedModule] = useState<GstModuleData | null>(null);

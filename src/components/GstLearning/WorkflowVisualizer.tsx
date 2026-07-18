@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { PanInfo } from 'framer-motion';
 import type { WorkflowStep } from '../../data/gstLearningData';
 import { 
   Target, Cpu, User, FileOutput, 

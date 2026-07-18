@@ -63,7 +63,6 @@ const GstModal: React.FC<GstModalProps> = ({ data, onClose, onNavigate }) => {
   const bgColor = bgColors[data.themeColor] || bgColors['blue'];
   const modalRef = useRef<HTMLDivElement>(null);
   
-  const [activeScenarioStep, setActiveScenarioStep] = useState(0);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';

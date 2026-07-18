@@ -2,7 +2,6 @@ import { useScrollToContent } from '../../hooks/useScrollToContent';
 import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
-import CoreCapabilityItem from '../../components/CoreCapabilityItem/CoreCapabilityItem';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import Table from '../../components/Table/Table';
 import AnimatedWorkflowPreview from '../../components/WorkflowPreview/AnimatedWorkflowPreview';
