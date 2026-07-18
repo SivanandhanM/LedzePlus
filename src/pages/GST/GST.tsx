@@ -45,7 +45,7 @@ export default function GST() {
   const contentRef = useScrollToContent();
 
   return (
-    <div className="pb-12">
+    <div style={{ '--color-primary': '234 88 12', '--color-primary-hex': '#EA580C' } as React.CSSProperties} className="pb-12">
       <div className="py-8">
         <Hero 
           title="LEDZE+ GST"

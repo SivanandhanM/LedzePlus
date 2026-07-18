@@ -45,7 +45,7 @@ export default function Billing() {
   const contentRef = useScrollToContent();
 
   return (
-    <div className="pb-12">
+    <div style={{ '--color-primary': '124 58 237', '--color-primary-hex': '#7C3AED' } as React.CSSProperties} className="pb-12">
       <div className="py-8">
         <Hero 
           title="LEDZE+ Billing"

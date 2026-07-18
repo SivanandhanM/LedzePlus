@@ -36,7 +36,7 @@ export default function Purchase() {
   const contentRef = useScrollToContent();
 
   return (
-    <div className="pb-12">
+    <div style={{ '--color-primary': '37 99 235', '--color-primary-hex': '#2563EB' } as React.CSSProperties} className="pb-12">
       <div className="py-8">
         <Hero
           title="LEDZE+ Purchase"

@@ -11,7 +11,7 @@ export default function Banking() {
   }, []);
 
   return (
-    <div className="relative pb-16 overflow-hidden">
+    <div style={{ '--color-primary': '29 78 216', '--color-primary-hex': '#1D4ED8' } as React.CSSProperties} className="relative pb-16 overflow-hidden">
       <div className="relative z-10">
         <Hero
           title="Banking Module"

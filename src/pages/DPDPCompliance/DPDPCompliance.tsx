@@ -13,19 +13,19 @@ export default function DPDPCompliance() {
   }, []);
 
   return (
-    <div className="relative pb-16 overflow-hidden">
+    <div style={{ '--color-primary': '217 119 6', '--color-primary-hex': '#D97706' } as React.CSSProperties} className="relative pb-16 overflow-hidden">
       {/* Background Enhancements */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <m.div
           animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-[10%] -left-1/4 w-[800px] h-[800px] bg-teal-200/40 dark:bg-teal-900/10 rounded-full blur-[120px]"
+          className="absolute top-[10%] -left-1/4 w-[800px] h-[800px] bg-amber-200/40 dark:bg-amber-900/10 rounded-full blur-[120px]"
           style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
         />
         <m.div
           animate={{ scale: [1, 1.15, 1], opacity: [0.08, 0.15, 0.08] }}
           transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 5 }}
-          className="absolute bottom-[5%] right-[-10%] w-[600px] h-[600px] bg-violet-200/30 dark:bg-violet-900/10 rounded-full blur-[100px]"
+          className="absolute bottom-[5%] right-[-10%] w-[600px] h-[600px] bg-yellow-200/30 dark:bg-yellow-900/10 rounded-full blur-[100px]"
           style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
         />
       </div>

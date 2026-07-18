@@ -42,7 +42,7 @@ function ReceiptIcon({ className }: { className?: string }) {
 const MODULE_THEMES: Record<string, DPDPTheme> = {
   inventory: {
     name: 'Inventory', cardBg: 'linear-gradient(135deg,#F3ECFF 0%,#E7D9FF 100%)',
-    accent: '#7C3AED', accentLight: '#A78BFA', accentRgb: '124,58,237',
+    accent: '#9333EA', accentLight: '#C084FC', accentRgb: '147,51,234',
     icon: <Package className="w-6 h-6" />,
   },
   purchase: {
@@ -51,42 +51,42 @@ const MODULE_THEMES: Record<string, DPDPTheme> = {
     icon: <ShoppingCartIcon className="w-6 h-6" />,
   },
   sales: {
-    name: 'Sales', cardBg: 'linear-gradient(135deg,#ECFCF5 0%,#D7F8E8 100%)',
-    accent: '#059669', accentLight: '#34D399', accentRgb: '5,150,105',
+    name: 'Sales', cardBg: 'linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%)',
+    accent: '#16A34A', accentLight: '#4ADE80', accentRgb: '22,163,74',
     icon: <TrendingUp className="w-6 h-6" />,
   },
   billing: {
-    name: 'Billing', cardBg: 'linear-gradient(135deg,#FFF0F7 0%,#FFDCEB 100%)',
-    accent: '#DB2777', accentLight: '#F472B6', accentRgb: '219,39,119',
+    name: 'Billing', cardBg: 'linear-gradient(135deg,#F5F3FF 0%,#EDE9FE 100%)',
+    accent: '#7C3AED', accentLight: '#A78BFA', accentRgb: '124,58,237',
     icon: <ReceiptIcon className="w-6 h-6" />,
   },
   gst: {
-    name: 'GST', cardBg: 'linear-gradient(135deg,#EFFFFF 0%,#DDFBFF 100%)',
-    accent: '#0891B2', accentLight: '#22D3EE', accentRgb: '8,145,178',
+    name: 'GST', cardBg: 'linear-gradient(135deg,#FFF7ED 0%,#FFEDD5 100%)',
+    accent: '#EA580C', accentLight: '#FB923C', accentRgb: '234,88,12',
     icon: <FileText className="w-6 h-6" />,
   },
   gate: {
-    name: 'Gate Movement', cardBg: 'linear-gradient(135deg,#EEF7FF 0%,#D9EEFF 100%)',
-    accent: '#0284C7', accentLight: '#38BDF8', accentRgb: '2,132,199',
+    name: 'Gate Movement', cardBg: 'linear-gradient(135deg,#EEF2FF 0%,#E0E7FF 100%)',
+    accent: '#4F46E5', accentLight: '#818CF8', accentRgb: '79,70,229',
     icon: <CarIcon className="w-6 h-6" />,
   },
   payroll: {
-    name: 'Payroll', cardBg: 'linear-gradient(135deg,#FFF2E8 0%,#FFE4CF 100%)',
-    accent: '#EA580C', accentLight: '#FB923C', accentRgb: '234,88,12',
+    name: 'Payroll', cardBg: 'linear-gradient(135deg,#FFF1F2 0%,#FFE4E6 100%)',
+    accent: '#E11D48', accentLight: '#FB7185', accentRgb: '225,29,72',
     icon: <Users className="w-6 h-6" />,
   },
   accounting: {
-    name: 'Accounting', cardBg: 'linear-gradient(135deg,#EEF3FF 0%,#DCE7FF 100%)',
-    accent: '#4F46E5', accentLight: '#818CF8', accentRgb: '79,70,229',
+    name: 'Accounting', cardBg: 'linear-gradient(135deg,#FFF7ED 0%,#FFEDD5 100%)',
+    accent: '#EA580C', accentLight: '#FB923C', accentRgb: '234,88,12',
     icon: <BarChart3 className="w-6 h-6" />,
   },
   banking: {
-    name: 'Banking', cardBg: 'linear-gradient(135deg,#ECFAEF 0%,#D8F4E0 100%)',
-    accent: '#16A34A', accentLight: '#4ADE80', accentRgb: '22,163,74',
+    name: 'Banking', cardBg: 'linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 100%)',
+    accent: '#1D4ED8', accentLight: '#60A5FA', accentRgb: '29,78,216',
     icon: <Building2 className="w-6 h-6" />,
   },
   compliance: {
-    name: 'Compliance', cardBg: 'linear-gradient(135deg,#FFF8E8 0%,#FFEFC8 100%)',
+    name: 'Compliance', cardBg: 'linear-gradient(135deg,#FFFBEB 0%,#FEF3C7 100%)',
     accent: '#D97706', accentLight: '#FBBF24', accentRgb: '217,119,6',
     icon: <ShieldCheck className="w-6 h-6" />,
   },

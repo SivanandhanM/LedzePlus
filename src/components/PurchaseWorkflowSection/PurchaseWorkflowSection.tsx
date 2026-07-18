@@ -294,8 +294,8 @@ function HConnector({ color }: { color: string }) {
           r={3}
           cy={40}
           fill={c.particle}
-          initial={{ cx: 2 }}
-          animate={{ cx: [2, 38, 2] }}
+          cx={2}
+          animate={{ x: [0, 36, 0] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: 'linear' }}
           style={{ filter: `drop-shadow(0 0 4px ${c.particle})` }}
         />
@@ -335,10 +335,12 @@ function TurnConnector({ color }: { color: string }) {
         />
         {/* Particle travelling along bezier — approximate with simple motion */}
         <m.circle
+          cx={0}
+          cy={40}
           r={3}
           fill={c.particle}
           style={{ filter: `drop-shadow(0 0 5px ${c.particle})` }}
-          animate={{ cx: [0, 30, 30], cy: [40, 70, 120] }}
+          animate={{ x: [0, 30, 30], y: [0, 30, 80] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         />
       </svg>
@@ -379,8 +381,9 @@ function VConnector({ color }: { color: string }) {
       <m.circle
         r={3}
         cx={16}
+        cy={2}
         fill={c.particle}
-        animate={{ cy: [2, 38, 2] }}
+        animate={{ y: [0, 36, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
         style={{ filter: `drop-shadow(0 0 4px ${c.particle})` }}
       />

@@ -45,7 +45,7 @@ export default function GateManagement() {
   const contentRef = useScrollToContent();
 
   return (
-    <div className="pb-12">
+    <div style={{ '--color-primary': '79 70 229', '--color-primary-hex': '#4F46E5' } as React.CSSProperties} className="pb-12">
       <div className="py-8">
         <Hero 
           title="LEDZE+ Gate Management"

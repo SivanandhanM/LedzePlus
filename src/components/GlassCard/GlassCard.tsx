@@ -42,8 +42,9 @@ const GlassCard = memo(function GlassCard({
       onMouseLeave={() => setHovered(false)}
       onMouseMove={handleMouseMove}
       style={{
-        willChange: 'transform',
-        contain: 'layout paint style',
+        willChange: 'transform, backdrop-filter, box-shadow',
+        contain: 'content',
+        transform: 'translateZ(0)',
         boxShadow: hovered
           ? '0 24px 48px rgba(var(--color-primary-hex) / 0.12), 0 8px 16px rgba(0,0,0,0.06)'
           : '0 4px 16px rgba(0,0,0,0.04)',

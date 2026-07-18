@@ -37,7 +37,7 @@ const modulePatterns: Record<string, string[]> = {
   '/billing': ['purple', 'fuchsia', 'pink', 'rose', 'violet', 'indigo'],
   '/payroll': ['pink', 'rose', 'fuchsia', 'purple', 'violet', 'indigo'],
   '/gate-management': ['sky', 'blue', 'indigo', 'violet', 'purple', 'cyan'],
-  '/gst-knowledge-center': ['orange', 'rose', 'pink', 'fuchsia', 'purple', 'amber'],
+  '/gst-learning': ['orange', 'rose', 'pink', 'fuchsia', 'purple', 'amber'],
 };
 
 const fallbackPattern = ['blue', 'indigo', 'emerald', 'orange', 'cyan', 'purple'];

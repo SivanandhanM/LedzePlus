@@ -43,7 +43,7 @@ export default function Inventory() {
   const contentRef = useScrollToContent();
 
   return (
-    <div className="pb-12">
+    <div style={{ '--color-primary': '147 51 234', '--color-primary-hex': '#9333EA' } as React.CSSProperties} className="pb-12">
       <div className="py-8">
         <Hero
           title="LEDZE+ Inventory"

@@ -90,7 +90,7 @@ export default function Home() {
             description="Access GST rules, tax rates, HSN/SAC codes, e-Way Bills, and statutory compliance resources."
             badge="INDIRECT TAX"
             icon={<Book className="w-6 h-6" />}
-            path="/gst-knowledge-center"
+            path="/gst-learning"
             accentColor="#F5BE83"
             delay={0.2}
           />

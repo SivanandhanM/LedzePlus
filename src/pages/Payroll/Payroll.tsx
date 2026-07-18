@@ -45,7 +45,7 @@ export default function Payroll() {
   const contentRef = useScrollToContent();
 
   return (
-    <div className="pb-12">
+    <div style={{ '--color-primary': '225 29 72', '--color-primary-hex': '#E11D48' } as React.CSSProperties} className="pb-12">
       <div className="py-8">
         <Hero 
           title="LEDZE+ Payroll"

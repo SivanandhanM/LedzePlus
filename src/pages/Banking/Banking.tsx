@@ -42,7 +42,7 @@ export default function Banking() {
   const contentRef = useScrollToContent();
 
   return (
-    <div className="pb-12">
+    <div style={{ '--color-primary': '29 78 216', '--color-primary-hex': '#1D4ED8' } as React.CSSProperties} className="pb-12">
       <div className="py-8">
         <Hero 
           title="LEDZE+ Banking"

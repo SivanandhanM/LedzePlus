@@ -3,11 +3,12 @@ import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import FeatureCard from '../../components/FeatureCard/FeatureCard';
 import CoreCapabilityItem from '../../components/CoreCapabilityItem/CoreCapabilityItem';
+import GlassCard from '../../components/GlassCard/GlassCard';
 import Table from '../../components/Table/Table';
 import AnimatedWorkflowPreview from '../../components/WorkflowPreview/AnimatedWorkflowPreview';
 import ModuleWorkflowSection from '../../components/ModuleWorkflowSection/ModuleWorkflowSection';
 import { salesWorkflow, salesWorkflowConfig } from '../../workflows/salesWorkflow';
-import { TrendingUp, Truck, FileSpreadsheet, BadgePercent, AlertTriangle, ListChecks, Server, Database } from 'lucide-react';
+import { TrendingUp, Truck, FileSpreadsheet, BadgePercent, AlertTriangle, ListChecks, Server, Database, CheckCircle2 } from 'lucide-react';
 import { m } from 'framer-motion';
 
 const features = [
@@ -44,7 +45,7 @@ export default function Sales() {
   const contentRef = useScrollToContent();
 
   return (
-    <div className="relative pb-12 overflow-hidden">
+    <div style={{ '--color-primary': '22 163 74', '--color-primary-hex': '#16A34A' } as React.CSSProperties} className="relative pb-12 overflow-hidden">
 
       {/* Enterprise Background Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -91,7 +92,12 @@ export default function Sales() {
             <Section title="Core Capabilities">
               <div className="space-y-4">
                 {capabilities.map((rule, idx) => (
-                  <CoreCapabilityItem key={idx} text={rule} delay={idx * 0.1} />
+                  <GlassCard key={idx} delay={idx * 0.1} className="flex items-start gap-4 p-5 border-emerald-500/30">
+                    <div className="mt-0.5 w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-4 h-4" />
+                    </div>
+                    <span className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">{rule}</span>
+                  </GlassCard>
                 ))}
               </div>
             </Section>
